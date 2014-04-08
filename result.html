@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="bower_components/foundation/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">
+
+    <script src="bower_components/modernizr/modernizr.js"></script>
+
+    <style>
+      table {
+        width: 100%;
+      }
+
+      .button {
+        margin-bottom: 0;
+      }
+
+      .status {
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 auto;
+      }
+
+      .status-free {
+        background: #3ecf17;
+      }
+
+      .status-reserved {
+        background: orange;
+      }
+
+      .status-in-use {
+        background: red;
+      }
+
+      .status-container {
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+
+  <header>
+    <div class="row">
+      <div class="small-12 columns">
+        <a href="index.html">
+          <h1>Props</h1>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-form">
+    <form action="result.html">
+      <div class="row">
+        <div class="small-9 columns">
+          <input type="search" placeholder="Søg efter rekvisitter eller forestillinger">
+        </div>
+
+        <div class="small-3 columns">
+          <input type="submit" class="button radius" value="Søg" style="width: 100%;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="medium-12 columns">
+          <a href="#" class="right" style="margin-top: 1em;">Avanceret søgning</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="new-stuff">
+    <div class="row">
+      <div class="medium-6 columns">
+        <h2>Forestillinger</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Titel</th>
+              <th>Køreliste/Opstillingsliste</th>
+              <th>(status)</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td>
+                  <a href="#">1000-2014</a>
+                </td>
+                <td>Don Juan</td>
+                <td>
+                  <ul class="button-group right radius">
+                    <li><a href="#" class="button tiny right">K</a></li>
+                    <li><a href="#" class="button tiny right">O</a></li>
+                  </ul>
+                </td>
+                <td>
+                  <span class="status status-container" title="Ledig"></span>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="medium-6 columns">
+        <h2>Rekvisitter</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Genstand</th>
+              <th>Forestilling</th>
+              <th>Tilføjet den</th>
+              <th></th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-free" title="Ledig"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-in-use" title="Ledig"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-in-use" title="Ledig"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-free" title="Ledig"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-free" title="Ledig"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-reserved" title="Ledig"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-in-use" title="Ledig"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="#">1337</a>
+              </td>
+              <td>Stol</td>
+              <td>Don Juan</td>
+              <td>06-08-1990</td>
+              <td><img src="http://placehold.it/40x40"></td>
+              <td>
+                <span class="status status-container" title="Ledig"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+  <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+  <script src="bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="bower_components/foundation/js/foundation.min.js"></script>
+  </body>
+</html>
