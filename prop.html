@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="bower_components/foundation/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">
+
+    <script src="bower_components/modernizr/modernizr.js"></script>
+
+    <style>
+      table {
+        width: 100%;
+      }
+
+      .button {
+        margin-bottom: 0;
+      }
+
+      .status {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 auto;
+      }
+
+      dl .status {
+        margin-left: .5em;
+      }
+
+      .status-free {
+        background: #3ecf17;
+      }
+
+      .status-reserved {
+        background: orange;
+      }
+
+      .status-in-use {
+        background: red;
+      }
+
+      .status-container {
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+
+  <header>
+    <div class="row">
+      <div class="medium-6 columns">
+        <a href="index.html">
+          <h1>Props</h1>
+        </a>
+      </div>
+
+      <div class="medium-6 columns" style="padding-top: 1em;">
+        <div class="right">
+          <ul class="button-group radius">
+            <li><a href="#" class="button secondary tiny">Tilføj rekvisit</a></li>
+            <li><a href="#" class="button secondary tiny">Tilføj forestilling</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-form">
+    <form action="result.html">
+      <div class="row">
+        <div class="small-9 columns">
+          <input type="search" placeholder="Søg efter rekvisitter eller forestillinger">
+        </div>
+
+        <div class="small-3 columns">
+          <input type="submit" class="button radius" value="Søg" style="width: 100%;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="medium-12 columns">
+          <a href="#" class="right" style="margin-top: 1em;">Avanceret søgning</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <h1>Stol</h1>
+
+      <div class="row">
+        <div class="medium-6 columns">
+          <dl>
+            <dt>Nr</dt>
+            <dd>1337</dd>
+
+            <dt>Sektion</dt>
+            <dd>Møbel</dd>
+
+            <dt>Status</dt>
+            <dd>Ledig <span class="status status-free"></span></dd>
+
+            <dt>Købt til</dt>
+            <dd>Don Juan</dd>
+
+            <dt>Brugt i</dt>
+            <dd>
+              <select>
+                <option>Don Juan (1337-2014)</option>
+                <option>Don Juan (1337-2014)</option>
+                <option>Don Juan (1337-2014)</option>
+              </select>
+            </dd>
+
+            <dt>Størrelse</dt>
+            <dd>1m x 1m x 1m</dd>
+
+            <dt>Stilart</dt>
+            <dd>Rokoko</dd>
+          </dl>
+        </div>
+
+        <div class="medium-6 columns">
+          <img src="http://placehold.it/300x300">
+        </div>
+      </div>
+
+      <p>
+      Skydevåben.<br>
+      Flintelåspistol M1748, endvidere mærket med samlingsnummer 21.
+      </p>
+
+      <div class="right" style="margin-bottom: 20px;">
+        <a class="button secondary small radius" href="#">Rediger</a>
+        <a class="button secondary small radius" href="#">Slet</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+  <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+  <script src="bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="bower_components/foundation/js/foundation.min.js"></script>
+  </body>
+</html>
