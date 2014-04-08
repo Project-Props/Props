@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="bower_components/foundation/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">
+
+    <script src="bower_components/modernizr/modernizr.js"></script>
+
+    <style>
+      select {
+        margin-bottom: 0;
+      }
+      a.disabled {
+        opacity: .25;
+      }
+
+      table.prop tr td:first-child {
+        font-weight: bold;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      .button {
+        margin-bottom: 0;
+      }
+
+      .status {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 auto;
+      }
+
+      dl .status {
+        margin-left: .5em;
+      }
+
+      .status-free {
+        background: #3ecf17;
+      }
+
+      .status-reserved {
+        background: orange;
+      }
+
+      .status-in-use {
+        background: red;
+      }
+
+      .status-container {
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+
+  <div style="background: #eee; padding-bottom: 1em; margin-bottom: .5em;">
+    <header>
+      <div class="row">
+        <div class="medium-6 columns">
+          <a href="index.html">
+            <h1>Props</h1>
+          </a>
+        </div>
+
+        <div class="medium-6 columns" style="padding-top: 1em;">
+          <div class="right">
+            <a href="#" class="button secondary tiny radius">Tilføj rekvisit</a>
+            <a href="#" class="button secondary tiny radius">Tilføj forestilling</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-form">
+      <form action="result.html">
+        <div class="row">
+          <div class="small-9 columns">
+            <input type="search" placeholder="Søg efter rekvisitter eller forestillinger">
+          </div>
+
+          <div class="small-3 columns">
+            <input type="submit" class="button radius" value="Søg" style="width: 100%;">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="medium-12 columns">
+            <div class="row">
+              <div class="medium-3 columns hide advanced">
+                <select>
+                  <option>Købt til</option>
+                  <option>Don Juan (1337-2013)</option>
+                  <option>Don Juan (1337-2013)</option>
+                  <option>Don Juan (1337-2013)</option>
+                  <option>Don Juan (1337-2013)</option>
+                </select>
+              </div>
+
+              <div class="medium-3 columns hide advanced">
+                <select>
+                  <option>Brugt i</option>
+                  <option>Don Juan (1337-2013)</option>
+                  <option>Don Juan (1337-2013)</option>
+                  <option>Don Juan (1337-2013)</option>
+                </select>
+              </div>
+
+              <div class="medium-3 columns hide advanced">
+                <select>
+                  <option>Stilart</option>
+                  <option>Rokoko</option>
+                  <option>Rokoko</option>
+                  <option>Rokoko</option>
+                  <option>Rokoko</option>
+                </select>
+              </div>
+
+              <div class="medium-3 columns">
+                <a href="#" class="right advanced-search" style="margin-top: 1em; margin-bottom: 5px;">Avanceret søgning</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <h1>Stol</h1>
+
+      <div class="row">
+        <div class="medium-8 columns">
+          <table style="border: none;" class="prop">
+            <tr>
+              <td>
+                Nr.:
+              </td>
+              <td>1337</td>
+            </tr>
+
+            <tr>
+              <td>Sektion:</td>
+              <td>Møbel</td>
+            </tr>
+
+            <tr>
+              <td>Status:</td>
+              <td>
+                Ledig <span class="status status-free"></span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Købt til:</td>
+              <td>
+                Don Juan
+              </td>
+            </tr>
+
+            <tr>
+              <td>Brugt i:</td>
+              <td>
+                <select style="margin-bottom: 0;">
+                  <option>Don Juan (1337-2014)</option>
+                  <option>Don Juan (1337-2014)</option>
+                  <option>Don Juan (1337-2014)</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Størrelse:</td>
+              <td>1m x 1m x 1m</td>
+            </tr>
+
+            <tr>
+              <td>Stilart:</td>
+              <td>Rokoko</td>
+            </tr>
+          </table>
+
+        </div>
+
+        <div class="medium-4 columns">
+          <img src="http://placehold.it/300x300" style="width: 100%;">
+        </div>
+      </div>
+
+      <h3>Beskrivelse:</h3>
+      <p>
+      Skydevåben.<br>
+      Flintelåspistol M1748, endvidere mærket med samlingsnummer 21.
+      </p>
+
+      <div class="right" style="margin-bottom: 20px;">
+        <a class="button secondary small radius" href="#">Rediger</a>
+        <a class="button secondary small radius" onclick="javascript:confirm('Sikker?');" href="#">Slet</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+  <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+  <script src="bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="bower_components/foundation/js/foundation.min.js"></script>
+
+  <script>
+    $(function() {
+      $(".advanced-search").on("click", function() {
+        $(".advanced").toggleClass("hide");
+        $(this).toggleClass("disabled");
+      });
+    });
+  </script>
+  </body>
+</html>
