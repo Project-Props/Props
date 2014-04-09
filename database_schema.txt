@@ -1,0 +1,73 @@
+Props
+=====
+id -> int, primery key
+section_id -> int, foreign key (Section)
+description -> char
+comments -> text
+date_added -> datetime
+date_updated -> datetime
+supplier_id -> int, foreign key (Suppliers)
+price -> float
+bought_for -> int, foreign key (Productions)
+status_id -> int, foreign key (Prop_statuses)
+size -> char
+period_id -> id, foreign key (Periods)
+deleted -> boolean
+creditor_id -> int, foreign key (Users)
+maintenance_time -> float
+
+if creditor_id is null then the prop has been payed for
+
+Productions
+===========
+id -> int, primery key
+title -> char
+status -> int, foreign key (Production_statuses)
+
+Sections
+========
+id -> int, primery key
+name -> char
+
+Suppliers
+=========
+id -> int, primery key
+name -> char
+email -> char
+web_page -> char
+phone -> char
+street -> char
+city -> char
+zip_code -> char
+country -> char
+comments -> text
+
+Prop_statuses
+=============
+id -> int, primery key
+name -> char
+color -> text
+
+Production_statuses
+===================
+id -> int, primery key
+name -> char
+color -> text
+
+color is useful for setting the inline style of the actual status element in the html
+
+Periods
+=======
+id -> int, primery key
+name -> char
+
+Users
+=====
+id -> int, primery key
+name -> char
+email -> char
+
+Used_in
+=======
+prop_id -> foreign key (Props)
+production_id -> foreign key (Productions)
