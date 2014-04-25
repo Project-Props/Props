@@ -10,8 +10,12 @@ require_once("router.php");
 
 $router = Router::instance();
 
+$router->define_route("/prop", function() use ($router) {
+  $router->redirect_to("/");
+});
+
 $router->define_route("/", function() {
-  echo "Hi there";
+  echo "home";
 });
 
 $router->process_request(Request::instance());
