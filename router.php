@@ -1,5 +1,28 @@
 <?php
 
+class Request {
+  private static $instance;
+
+  public static function instance() {
+    if (!self::$instance) {
+      self::$instance = new Request();
+    }
+
+    return self::$instance;
+  }
+
+  private function __construct() {}
+
+  public function uri() {
+    return explode("?", $_SERVER["REQUEST_URI"])[0];
+  }
+
+  public function params($param) {
+    $all_params = $_POST + $_GET;
+    return $all_params[$param];
+  }
+}
+
 class NoRouteMatches extends Exception {}
 
 class Route {
@@ -11,20 +34,29 @@ class Route {
     $this->fun = $fun;
   }
 
-  public function matches($path) {
-    return $this->path == $path;
-  }
-
   public function run() {
     $fun = $this->fun;
     $fun();
+  }
+
+  public function matches($request) {
+    return $request->uri() == $this->path;
   }
 }
 
 class Router {
   private $routes;
+  private static $instance;
 
-  public function __construct() {
+  public static function instance() {
+    if (!self::$instance) {
+      self::$instance = new Router();
+    }
+
+    return self::$instance;
+  }
+
+  private function __construct() {
     $this->routes = [];
   }
 
@@ -32,19 +64,19 @@ class Router {
     $this->routes[$path] = new Route($path, $fun);
   }
 
-  public function process_request($path) {
-    $this->process_matching_route($path);
+  public function process_request($request) {
+    $this->process_matching_route($request);
   }
 
-  private function process_matching_route($path) {
+  private function process_matching_route($request) {
     foreach ($this->routes as $route){
-      if ($route->matches($path)) {
+      if ($route->matches($request)) {
         $route->run();
         return;
       }
     }
 
-    throw new NoRouteMatches("No route matches '" . $path . "'");
+    throw new NoRouteMatches("No route matches '" . $request->uri() . "'");
   }
 }
 
