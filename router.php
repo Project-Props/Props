@@ -68,6 +68,11 @@ class Router {
     $this->process_matching_route($request);
   }
 
+  public function redirect_to($path) {
+    header("Location: " . $path);
+    exit();
+  }
+
   private function process_matching_route($request) {
     foreach ($this->routes as $route){
       if ($route->matches($request)) {
