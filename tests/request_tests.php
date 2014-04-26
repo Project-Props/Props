@@ -33,8 +33,8 @@ class RequestTests extends PHPUnit_Framework_TestCase {
     $_GET = ["id" => $id];
     $_POST = ["name" => $name];
 
-    $this->assertEquals($id, $request->params("id"));
-    $this->assertEquals($name, $request->params("name"));
+    $this->assertEquals($id, $request->param("id"));
+    $this->assertEquals($name, $request->param("name"));
   }
 
   public function test_it_knows_if_it_has_a_certain_param() {
