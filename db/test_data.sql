@@ -16,10 +16,10 @@ INSERT INTO Prop_statuses VALUES ('i brug', 'rød');
 INSERT INTO Prop_statuses VALUES ('pakket ned', 'orange'); -- skal self. ændres!
 
 -- Production_statuses(id, name, color) id = auto
-INSERT INTO Production_statuses VALUES ('Skilt', 'rød');
+INSERT INTO Production_statuses VALUES ('Skilt', 'red');
 INSERT INTO Production_statuses VALUES ('I repertoire', 'orange'); -- i container 
-INSERT INTO Production_statuses VALUES ('Udlånt', 'blå');
-INSERT INTO Production_statuses VALUES ('I sæson', 'grøn');
+INSERT INTO Production_statuses VALUES ('Udlånt', 'blue');
+INSERT INTO Production_statuses VALUES ('I sæson', 'green');
 
 -- Periods(id, name) id = auto
 INSERT INTO Periods VALUES ('Barok');
