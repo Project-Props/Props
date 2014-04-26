@@ -1,6 +1,6 @@
 <?php
 
-require_once("router.php");
+require_once("lib/request.php");
 
 class RequestTests extends PHPUnit_Framework_TestCase {
   public function test_that_it_is_a_singleton() {
