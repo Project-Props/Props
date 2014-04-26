@@ -18,8 +18,15 @@ class Request {
   }
 
   public function params($param) {
-    $all_params = $_POST + $_GET;
-    return $all_params[$param];
+    return $this->all_params()[$param];
+  }
+
+  public function has_param($param) {
+    return array_key_exists($param, $this->all_params());
+  }
+
+  private function all_params() {
+    return $_POST + $_GET;
   }
 }
 
