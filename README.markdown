@@ -6,7 +6,7 @@ Installing dependencies
 
 3rd party dependencies are managed with [Composer](https://getcomposer.org).
 
-Once you have installed Composer dependencies can be installed with `composer install`.
+Once you have installed Composer, dependencies can be installed with `composer install`.
 
 If you've added some new dependencies install them with `composer update`.
 
