@@ -39,6 +39,14 @@ class RequestTests extends PHPUnit_Framework_TestCase {
 
   public function test_it_knows_if_it_has_a_certain_param() {
     $request = Request::instance();
+    $name = "name";
+    $_GET = ["name" => $name];
+
+    $this->assertEquals(true, $request->has_param("name"));
+  }
+
+  public function test_it_knows_if_it_doesnt_have_a_certain_param() {
+    $request = Request::instance();
 
     $this->assertEquals(false, $request->has_param("missing_param"));
   }
