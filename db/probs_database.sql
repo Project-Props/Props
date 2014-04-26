@@ -6,27 +6,27 @@ CREATE DATABASE IF NOT EXISTS Props_2;
 -- Undersøg om det giver mening med : DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 
 CREATE TABLE IF NOT EXISTS Sections(
-    id INT NOT NULL
+    id INT NOT NULL AUTO_INCREMENT
   , name VARCHAR(128) NOT NULL
   , PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Prop_statuses(
-    id INT NOT NULL
+    id INT NOT NULL AUTO_INCREMENT
   , name VARCHAR(128) NOT NULL
   , color VARCHAR(128) NOT NULL
   , PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Productions_statuses(
-    id INT NOT NULL
+    id INT NOT NULL AUTO_INCREMENT
   , name VARCHAR(128) NOT NULL
   , color VARCHAR(128) NOT NULL
   , PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS Periods(
-    id INT NOT NULL
+    id INT NOT NULL AUTO_INCREMENT
   , name VARCHAR(128) NOT NULL
   , PRIMARY KEY (id)
 );
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Users(
 );
 
 CREATE TABLE IF NOT EXISTS Suppliers (
-    id INT NOT NULL
+    id INT NOT NULL AUTO_INCREMENT
   , name VARCHAR(128) NOT NULL
   , email VARCHAR(128) 
   , web_page VARCHAR(128)
@@ -53,7 +53,8 @@ CREATE TABLE IF NOT EXISTS Suppliers (
 );
 
 CREATE TABLE IF NOT EXISTS Props(
-    id INT NOT NULL
+    id INT NOT NULL AUTO_INCREMENT
+  , prop_nr INT NOT NULL
   , section_id INT NOT NULL
   , description VARCHAR(128)
   , comment TEXT
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Props(
   , date_updated DATETIME NOT NULL
   , supplier_id INT
   , price REAL
-  , bought_for_id INT
+  , bought_for_id VARCHAR(9)
   , status_id INT NOT NULL
   , size VARCHAR(128)
   , period_id INT
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS Props(
 );
 
 CREATE TABLE IF NOT EXISTS Productions (
-    id INT NOT NULL
+    id VARCHAR(9) NOT NULL -- production number, on the form xxxx-yyyy
   , title VARCHAR(128) NOT NULL
   , status_id INT NOT NULL
   , premiere_date DATE
@@ -96,7 +97,7 @@ CREATE TABLE IF NOT EXISTS Productions (
 
 CREATE TABLE IF NOT EXISTS Used_in (
     prop_id INT NOT NULL
-  , production_id INT NOT NULL
+  , production_id VARCHAR(9) NOT NULL
   , PRIMARY KEY (prop_id, production_id)
   , FOREIGN KEY (prop_id) REFERENCES Props(id)
   , FOREIGN KEY (production_id) REFERENCES Productions(id)
