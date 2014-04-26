@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Prop_statuses(
   , PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS Productions_statuses(
+CREATE TABLE IF NOT EXISTS Production_statuses(
     id INT NOT NULL AUTO_INCREMENT
   , name VARCHAR(128) NOT NULL
   , color VARCHAR(128) NOT NULL
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Suppliers (
   , city VARCHAR(128)
   , zip_code VARCHAR(128)
   , country VARCHAR(128)
-  , comments TEXT
+  , comment TEXT
   , PRIMARY KEY (id)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS Productions (
   , choreographer VARCHAR(128)
   , stage_manager VARCHAR(128)
   , storage VARCHAR(128)
-  , comments TEXT
+  , comment TEXT
   , date_added DATETIME NOT NULL 
   , PRIMARY KEY (id)
   , FOREIGN KEY (status_id) REFERENCES Production_statuses(id)
