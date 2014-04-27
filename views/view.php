@@ -13,7 +13,7 @@ class View {
     include("views/layout.php");
   }
 
-  public function include_template() {
+  private function include_template() {
     foreach ($this->env as $key => $value) {
       ${$key} = $value;
     }
