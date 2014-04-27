@@ -10,6 +10,10 @@ class View {
   }
 
   public function render() {
+    include("views/layout.php");
+  }
+
+  public function include_template() {
     foreach ($this->env as $key => $value) {
       ${$key} = $value;
     }
