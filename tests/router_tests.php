@@ -19,20 +19,20 @@ class RouterTests extends PHPUnit_Framework_TestCase {
   public function test_throws_exception_when_route_not_defined() {
     $this->setExpectedException("NoRouteMatches", "No route matches '/props'");
 
-    $request = fake_request_with_uri("/props");
+    $request = fake_request_with_url("/props");
 
     $router = Router::instance();
     $router->process_request($request);
   }
 
   public function test_processes_request() {
-    $request = fake_request_with_uri("/props");
+    $request = fake_request_with_url("/props");
 
     $after = "after";
     global $thing_changed_by_callback;
     $thing_changed_by_callback = "";
 
-    $request = fake_request_with_uri("/props");
+    $request = fake_request_with_url("/props");
 
     $router = Router::instance();
     $router->define_route("/props", function() use ($after) {
@@ -50,13 +50,13 @@ class RouterTests extends PHPUnit_Framework_TestCase {
   }
 
   public function test_overrides_routes() {
-    $request = fake_request_with_uri("/props");
+    $request = fake_request_with_url("/props");
 
     $after = "after";
     global $thing_changed_by_callback;
     $thing_changed_by_callback = "";
 
-    $request = fake_request_with_uri("/props");
+    $request = fake_request_with_url("/props");
 
     $router = Router::instance();
 
@@ -75,8 +75,8 @@ class RouterTests extends PHPUnit_Framework_TestCase {
   }
 }
 
-function fake_request_with_uri($uri) {
+function fake_request_with_url($url) {
   $request = Mockery::mock("request");
-  $request->shouldReceive("uri")->andReturn($uri);
+  $request->shouldReceive("url")->andReturn($url);
   return $request;
 }

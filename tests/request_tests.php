@@ -10,11 +10,11 @@ class RequestTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals(spl_object_hash($one), spl_object_hash($two));
   }
 
-  public function test_that_it_knows_the_requested_uri() {
+  public function test_that_it_knows_the_requested_url() {
     $url = "http://some-url.com";
     $_SERVER["REQUEST_URI"] = $url;
 
-    $this->assertEquals($url, Request::instance()->uri());
+    $this->assertEquals($url, Request::instance()->url());
   }
 
   public function test_it_ignore_get_params_in_the_url() {
@@ -23,7 +23,7 @@ class RequestTests extends PHPUnit_Framework_TestCase {
     $params = "?id=10";
     $_SERVER["REQUEST_URI"] = $url . $params;
 
-    $this->assertEquals($url, $request->uri());
+    $this->assertEquals($url, $request->url());
   }
 
   public function test_it_knows_the_params_in_both_get_and_post() {

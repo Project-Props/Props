@@ -28,14 +28,14 @@ class Request {
   private function __construct() {}
 
   /**
-   * Get the request uri.
+   * Get the request url.
    *
-   * This will return the uri without URL (GET) parameters.
-   * So if the requested URI is `http://props.com/props?id=10`. Then this would return `/props`.
+   * This will return the url without URL (GET) parameters.
+   * So if the requested url is `http://props.com/props?id=10`. Then this would return `/props`.
    *
-   * @return mixed the requested URI.
+   * @return mixed the requested url.
    */
-  public function uri() {
+  public function url() {
     return explode("?", $_SERVER["REQUEST_URI"])[0];
   }
 

@@ -45,6 +45,6 @@ class Route {
    * @return boolean if there is match.
    */
   public function matches($request) {
-    return $request->uri() == $this->path;
+    return $request->url() == $this->path;
   }
 }

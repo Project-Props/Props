@@ -87,7 +87,7 @@ class Router {
       }
     }
 
-    throw new NoRouteMatches("No route matches '" . $request->uri() . "'");
+    throw new NoRouteMatches("No route matches '" . $request->url() . "'");
   }
 
   /**

@@ -25,7 +25,7 @@ class RouteTests extends PHPUnit_Framework_TestCase {
   public function test_matches() {
     $path = "/props";
     $request = Mockery::mock('Request');
-    $request->shouldReceive('uri')->andReturn($path);
+    $request->shouldReceive('url')->andReturn($path);
 
     $route = new Route($path, function() {});
 
@@ -34,7 +34,7 @@ class RouteTests extends PHPUnit_Framework_TestCase {
 
   public function test_not_matches() {
     $request = Mockery::mock('Request');
-    $request->shouldReceive('uri')->andReturn("/props");
+    $request->shouldReceive('url')->andReturn("/props");
 
     $route = new Route("/productions", function() {});
 
