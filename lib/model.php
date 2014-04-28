@@ -1,12 +1,16 @@
 <?php
 
 abstract class Model {
+  const DATABASE_NAME = "Props_2";
+  const DATABASE_USERNAME = "root";
+  const DATABASE_PASSWORD = "root";
+
   private static $connection;
 
   private static function connection() {
     if (!self::$connection) {
       try {
-        self::$connection = new PDO("mysql:host=localhost;dbname=Props_2", 'root', 'root');
+        self::$connection = new PDO("mysql:host=localhost;dbname=" . self::DATABASE_NAME, self::DATABASE_USERNAME, self::DATABASE_PASSWORD);
       } catch (PDOException $e) {
         echo 'Error: ' . $e;
       }
