@@ -4,13 +4,15 @@ class View {
   private $file_path;
   private $env;
 
+  const VIEW_DIR = "views";
+
   public function __construct($file_path, $env = []) {
     $this->env = $env;
-    $this->file_path = $file_path;
+    $this->file_path = self::VIEW_DIR . "/" . $file_path;
   }
 
   public function render() {
-    include("views/layout.php");
+    include(self::VIEW_DIR . "/layout.php");
   }
 
   private function include_template() {
