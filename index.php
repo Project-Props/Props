@@ -14,7 +14,8 @@ $router->define_route("/prop", function() use ($router) {
 });
 
 $router->define_route("/", function() {
-  echo "Hello World";
+  $view = new View("props/show.php");
+  $view->render();
 });
 
 $router->process_request(Request::instance());
