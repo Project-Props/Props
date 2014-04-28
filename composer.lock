@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a9295f6f17433fe6831f56c204330214",
+    "hash": "2535ea54ac5ced82000156a7655b8a87",
     "packages": [
 
     ],
@@ -307,35 +307,25 @@
         },
         {
             "name": "behat/mink-goutte-driver",
-            "version": "v1.0.6",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkGoutteDriver.git",
-                "reference": "f0a850b9b4e123896a5878b1ed360b40c2c4a768"
+                "reference": "c628f8ca4518f09f71983c3b6b824f85900d596f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkGoutteDriver/zipball/f0a850b9b4e123896a5878b1ed360b40c2c4a768",
-                "reference": "f0a850b9b4e123896a5878b1ed360b40c2c4a768",
+                "url": "https://api.github.com/repos/Behat/MinkGoutteDriver/zipball/c628f8ca4518f09f71983c3b6b824f85900d596f",
+                "reference": "c628f8ca4518f09f71983c3b6b824f85900d596f",
                 "shasum": ""
             },
             "require": {
-                "behat/mink": ">=1.4,<1.5.0-dev",
-                "behat/mink-browserkit-driver": "1.0.*",
-                "fabpot/goutte": "1.0.*@dev",
-                "php": ">=5.3.1",
-                "symfony/browser-kit": ">=2.1,<2.4-dev",
-                "symfony/css-selector": ">=2.1,<2.4-dev",
-                "symfony/dom-crawler": ">=2.1,<2.4-dev",
-                "symfony/finder": ">=2.1,<2.4-dev",
-                "symfony/process": ">=2.1,<2.4-dev"
+                "behat/mink": ">=1.4.0,<1.5.0-dev",
+                "behat/mink-browserkit-driver": "*",
+                "fabpot/goutte": "1.0.*",
+                "php": ">=5.3.1"
             },
             "type": "mink-driver",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "Behat\\Mink\\Driver": "src/"
@@ -360,7 +350,7 @@
                 "headless",
                 "testing"
             ],
-            "time": "2013-03-02 16:09:32"
+            "time": "2012-05-29 23:28:38"
         },
         {
             "name": "cilex/cilex",
@@ -3015,17 +3005,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.3.13",
+            "version": "v2.4.4",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "8912ae3039bd0f79c8bef3d04063d52b35b290b1"
+                "reference": "8721f1476d5d38a43c7d6ccb6435b351cf8f3bb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/8912ae3039bd0f79c8bef3d04063d52b35b290b1",
-                "reference": "8912ae3039bd0f79c8bef3d04063d52b35b290b1",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/8721f1476d5d38a43c7d6ccb6435b351cf8f3bb7",
+                "reference": "8721f1476d5d38a43c7d6ccb6435b351cf8f3bb7",
                 "shasum": ""
             },
             "require": {
@@ -3034,7 +3024,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -3060,7 +3050,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-24 13:28:08"
+            "time": "2014-04-27 13:34:57"
         },
         {
             "name": "symfony/property-access",
