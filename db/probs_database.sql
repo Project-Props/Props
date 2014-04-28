@@ -4,6 +4,7 @@
 
 CREATE DATABASE IF NOT EXISTS Props_2;
 -- Undersøg om det giver mening med : DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE Props_2;
 
 CREATE TABLE IF NOT EXISTS Sections(
     id INT NOT NULL AUTO_INCREMENT
@@ -52,6 +53,23 @@ CREATE TABLE IF NOT EXISTS Suppliers (
   , PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS Productions (
+    id VARCHAR(9) NOT NULL -- production number, on the form xxxx-yyyy
+  , title VARCHAR(128) NOT NULL
+  , status_id INT NOT NULL
+  , premiere_date DATE
+  , venue VARCHAR(128)
+  , instructor VARCHAR(128)
+  , scenographer VARCHAR(128)
+  , choreographer VARCHAR(128)
+  , stage_manager VARCHAR(128)
+  , storage VARCHAR(128)
+  , comment TEXT
+  , date_added DATETIME NOT NULL 
+  , PRIMARY KEY (id)
+  , FOREIGN KEY (status_id) REFERENCES Production_statuses(id)
+);
+
 CREATE TABLE IF NOT EXISTS Props(
     id INT NOT NULL AUTO_INCREMENT
   , prop_nr INT NOT NULL
@@ -76,23 +94,6 @@ CREATE TABLE IF NOT EXISTS Props(
   , FOREIGN KEY (status_id) REFERENCES Prop_statuses(id)
   , FOREIGN KEY (period_id) REFERENCES Periods(id)
   , FOREIGN KEY (creditor_id) REFERENCES Users(id)
-);
-
-CREATE TABLE IF NOT EXISTS Productions (
-    id VARCHAR(9) NOT NULL -- production number, on the form xxxx-yyyy
-  , title VARCHAR(128) NOT NULL
-  , status_id INT NOT NULL
-  , premiere_date DATE
-  , venue VARCHAR(128)
-  , instructor VARCHAR(128)
-  , scenographer VARCHAR(128)
-  , choreographer VARCHAR(128)
-  , stage_manager VARCHAR(128)
-  , storage VARCHAR(128)
-  , comment TEXT
-  , date_added DATETIME NOT NULL 
-  , PRIMARY KEY (id)
-  , FOREIGN KEY (status_id) REFERENCES Production_statuses(id)
 );
 
 CREATE TABLE IF NOT EXISTS Used_in (
