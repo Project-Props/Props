@@ -41,3 +41,4 @@ INSERT INTO Suppliers(name, email, comments) VALUES ('Fakta', 'fakta@fakta.dk', 
 
 -- Props(id, prop_nr, section_id, desription, comment, date_added, date_updated, supplier_id, price,
 --		 bought_for_id, status_id, size, period_id, deleted, creditor_id, maintenance_time)
+INSERT INTO Props VALUES (26, 1, 'en dejlig stol', 'hej hej', 2014-04-28, 2014-04-28, 1, 13.37, 0000-2014, 1, 'størrelse', 1, 0, 1, 13.37);
