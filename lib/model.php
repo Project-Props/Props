@@ -1,14 +1,18 @@
 <?php
 
 abstract class Model {
+  private static $connection;
+
   private static function connection() {
-    try {
-      $con = new PDO("mysql:host=localhost;dbname=Props_2", 'root', 'root');
-    } catch (PDOException $e) {
-      echo 'Error: ' . $e;
+    if (!self::$connection) {
+      try {
+        self::$connection = new PDO("mysql:host=localhost;dbname=Props_2", 'root', 'root');
+      } catch (PDOException $e) {
+        echo 'Error: ' . $e;
+      }
     }
 
-    return $con;
+    return self::$connection;
   }
 
   public static function find($id) {
