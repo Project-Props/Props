@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+check() {
+  echo "✓" $1
+}
+
+##
+## Composer
+##
+if (which composer > /dev/null); then
+  check "Composer"
+else
+  echo "Composer not installed"
+  exit 2
+fi
+
+##
+## 3rd party php dependencies
+##
+composer install
+composer update
+check "3rd party php dependencies"
+
+##
+## Behat and Mink setup
+##
+if [ ! -f behat.yml ]; then
+  cp behat.yml.sample behat.yml
+  echo "Configure base_url in behat.yml"
+  exit 2
+fi
+check "Behat and mink config"

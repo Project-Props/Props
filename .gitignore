@@ -2,3 +2,6 @@
 tags
 
 /vendor/
+doc
+output
+behat.yml
