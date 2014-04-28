@@ -29,6 +29,8 @@ Feature tests are written using [Behat](http://behat.org) with [Mink](http://min
 
 Write feature tests in `tests/features`. Run them with `vendor/bin/behat`.
 
+**Remember** to copy `behat.yml.sample` to `behat.yml` and then configure `base_url`.
+
 Building the documentation
 --------------------------
 
