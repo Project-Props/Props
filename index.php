@@ -14,7 +14,7 @@ $router->define_route("/prop", function() use ($router) {
 });
 
 $router->define_route("/", function() {
-  echo "home";
+  echo "Hello World";
 });
 
 $router->process_request(Request::instance());
