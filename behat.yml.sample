@@ -4,4 +4,5 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       goutte: ~
+      # EDIT THIS!!
       base_url: http://props.dev:8888
