@@ -58,12 +58,12 @@ CREATE TABLE IF NOT EXISTS Productions (
   , title VARCHAR(128) NOT NULL
   , status_id INT NOT NULL
   , premiere_date DATE
-  , venue VARCHAR(128)
+  , venue VARCHAR(128) -- spillested
   , instructor VARCHAR(128)
   , scenographer VARCHAR(128)
   , choreographer VARCHAR(128)
   , stage_manager VARCHAR(128)
-  , storage VARCHAR(128)
+  , storage VARCHAR(128) -- opbevaringssted
   , comment TEXT
   , date_added DATETIME NOT NULL 
   , PRIMARY KEY (id)
