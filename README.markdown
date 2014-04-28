@@ -13,13 +13,21 @@ If you've added some new dependencies install them with `composer update`.
 Running the tests
 -----------------
 
-Tests are written using [PHPUnit](http://phpunit.de). See their website for documentation on how to write them.
+Make sure to run `composer install` to install the required testing frameworks.
+
+### Unit tests
+
+Unit tests are written using [PHPUnit](http://phpunit.de). See their website for documentation on how to write them.
 
 Test doubles and mocks are made using [Mockery](https://github.com/padraic/mockery).
 
-Both PHPUnit and Mockery will be installed when you run `composer install`.
+To run all the unit tests run `vendor/bin/phpunit --colors tests/*`.
 
-To run all the tests run `vendor/bin/phpunit --colors tests/*`.
+### Feature tests
+
+Feature tests are written using [Behat](http://behat.org) with [Mink](http://mink.behat.org).
+
+Write feature tests in `tests/features`. Run them with `vendor/bin/behat`.
 
 Building the documentation
 --------------------------
