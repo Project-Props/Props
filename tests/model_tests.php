@@ -28,8 +28,6 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prop = Prop::find(1);
     $this->assertEquals($prop->id, 1);
   }
-
-  
 }
 
 ?>
