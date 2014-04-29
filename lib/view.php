@@ -8,11 +8,11 @@ class View {
 
   public function __construct($file_path, $env = []) {
     $this->env = $env;
-    $this->file_path = self::VIEW_DIR . "/" . $file_path;
+    $this->file_path = static::VIEW_DIR . "/" . $file_path;
   }
 
   public function render() {
-    include(self::VIEW_DIR . "/layout.php");
+    include(static::VIEW_DIR . "/layout.php");
   }
 
   private function include_template() {

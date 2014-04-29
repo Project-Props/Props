@@ -5,23 +5,23 @@ abstract class Model {
   const DATABASE_USERNAME = "root";
   const DATABASE_PASSWORD = "root";
 
-  private static $connection;
+  protected static $connection;
 
   private static function connection() {
-    if (!self::$connection) {
+    if (!static::$connection) {
       try {
-        self::$connection = new PDO("mysql:host=localhost;dbname=" . self::DATABASE_NAME, self::DATABASE_USERNAME, self::DATABASE_PASSWORD);
+        static::$connection = new PDO("mysql:host=localhost;dbname=" . static::DATABASE_NAME, static::DATABASE_USERNAME, static::DATABASE_PASSWORD);
       } catch (PDOException $e) {
         echo 'Error: ' . $e;
       }
     }
 
-    return self::$connection;
+    return static::$connection;
   }
 
   public static function find($id) {
     $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
-    $record = self::connection()->query($sql)->fetch();
+    $record = static::connection()->query($sql)->fetch();
     $instance = new static;
 
     foreach ($record as $key => $value) {

@@ -18,11 +18,11 @@ class Request {
    * @return object the instance.
    */
   public static function instance() {
-    if (!self::$instance) {
-      self::$instance = new Request();
+    if (!static::$instance) {
+      static::$instance = new Request();
     }
 
-    return self::$instance;
+    return static::$instance;
   }
 
   private function __construct() {}

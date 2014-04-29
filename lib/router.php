@@ -44,11 +44,11 @@ class Router {
    * @return object the instance.
    */
   public static function instance() {
-    if (!self::$instance) {
-      self::$instance = new Router();
+    if (!static::$instance) {
+      static::$instance = new Router();
     }
 
-    return self::$instance;
+    return static::$instance;
   }
 
   /**
