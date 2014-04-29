@@ -1,2 +1,11 @@
-<phpunit bootstrap="tests/bootstrap.php">
+<phpunit
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    bootstrap="tests/bootstrap.php"
+    syntaxCheck="false">
+  <testsuites>
+    <testsuite name="tests">
+      <directory suffix="_tests.php">tests</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
