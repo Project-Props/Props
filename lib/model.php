@@ -72,6 +72,19 @@ abstract class Model {
     $this->throw_undefined_method($method);
   }
 
+  private function has_association($method) {
+    return array_key_exists($method, $this->has_one());
+  }
+
+  private function throw_undefined_method($method) {
+    $class = get_class($this);
+    $trace = debug_backtrace();
+    $file = $trace[0]['file'];
+    $line = $trace[0]['line'];
+    trigger_error("Call to undefined method $class::$method() in $file on line $line",
+      E_USER_ERROR);
+  }
+
   protected function has_one() {}
 
   public function save() {
