@@ -83,6 +83,28 @@ abstract class Model {
   }
 
   protected function has_one() {}
+
+  public function save() {
+    $vars = (array)$this;
+    
+    if ($this->id) {
+      $sql = 'UPDATE ' . static::TABLE_NAME . ' SET ';
+
+      foreach ($vars as $key => $value) {
+        if (!is_numeric($key)) {
+          if (is_numeric($value)) {
+            $sql .= $key . ' = ' . $value . ', ';
+          } else {
+            $sql .= $key . " = '" . $value . "', ";
+          }
+        }
+      }
+      $sql .= 'WHERE id = ' . $this->id;
+      $sql = str_replace(', WHERE', ' WHERE', $sql);
+    }
+
+    static::connection()->query($sql);
+  }
 }
 
 ?>

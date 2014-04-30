@@ -7,7 +7,15 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prop = Prop::find(1);
 
     $this->assertEquals($prop->id, 1);
-    $this->assertEquals($prop->description, "en dejlig stol");
+    $this->assertEquals($prop->description, "foo");
+  }
+
+  public function test_save_a_record() {
+    $prop = Prop::find(1);
+    $prop->description = "bar";
+    $prop->save();
+
+    $this->assertEquals("bar", Prop::find(1)->description);
   }
 
   public function test_finds_record_where_id_is_string() {
