@@ -9,7 +9,9 @@ abstract class Model {
 
   private static function connection() {
     if (!static::$connection) {
-      static::$connection = new PDO("mysql:host=localhost;dbname=" . static::DATABASE_NAME, static::DATABASE_USERNAME, static::DATABASE_PASSWORD);
+      static::$connection = new PDO("mysql:host=localhost;dbname=" . static::DATABASE_NAME,
+                                    static::DATABASE_USERNAME,
+                                    static::DATABASE_PASSWORD);
     }
 
     return static::$connection;
