@@ -23,6 +23,12 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     Prop::find($id);
   }
 
+  public function test_find_without_id() {
+    $this->setExpectedException("RecordNotFound", "Cannot find record without id");
+
+    Prop::find(null);
+  }
+
   public function test_update_a_record() {
     $prop = Prop::find(1);
     $prop->description = "bar";
