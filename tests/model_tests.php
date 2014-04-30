@@ -10,18 +10,25 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals($prop->description, "en dejlig stol");
   }
 
+  public function test_finds_record_where_id_is_string() {
+    $production = Production::find("0000-2014");
+
+    $this->assertEquals($production->title, "en dejlig forestilling");
+  }
+
+  public function test_find_when_id_does_not_exist() {
+    $id = 999999999;
+    $this->setExpectedException("RecordNotFound", "Record with id = $id does not exist");
+
+    Prop::find($id);
+  }
+
   public function test_update_a_record() {
     $prop = Prop::find(1);
     $prop->description = "bar";
     $prop->save();
 
     $this->assertEquals("bar", Prop::find(1)->description);
-  }
-
-  public function test_finds_record_where_id_is_string() {
-    $production = Production::find("0000-2014");
-
-    $this->assertEquals($production->title, "en dejlig forestilling");
   }
 
   public function test_save_new_record() {
@@ -45,13 +52,6 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prod->save();
 
     $this->assertEquals("det spiller", Production::find('0002-2014')->title);
-  }
-
-  public function test_find_when_id_does_not_exist() {
-    $id = 999999999;
-    $this->setExpectedException("RecordNotFound", "Record with id = $id does not exist");
-
-    Prop::find($id);
   }
 
   public function test_find_all() {
