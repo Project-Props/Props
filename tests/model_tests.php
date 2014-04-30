@@ -10,6 +10,12 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals($prop->description, "en dejlig stol");
   }
 
+  public function test_finds_record_where_id_is_string() {
+    $production = Production::find("0000-2014");
+
+    $this->assertEquals($production->title, "en dejlig forestilling");
+  }
+
   public function test_find_when_id_does_not_exist() {
     $id = 999999999;
     $this->setExpectedException("RecordNotFound", "Record with id = $id does not exist");

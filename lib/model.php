@@ -20,7 +20,13 @@ abstract class Model {
   }
 
   public static function find($id) {
-    $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
+    $sql = "";
+
+    if (is_string($id)) {
+      $sql .= "SELECT * FROM " . static::TABLE_NAME . " WHERE id = '" . $id . "'";
+    } else {
+      $sql .= 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
+    }
     $record = static::connection()->query($sql)->fetch();
 
     if ($record) {
