@@ -28,10 +28,6 @@ abstract class Model {
 
     return $instance;
   }
-
-  public function save() {}
-
-  public function delete() {}
 }
 
 ?>
