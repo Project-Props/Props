@@ -20,6 +20,8 @@ abstract class Model {
   }
 
   public static function find($id) {
+    if (!$id) throw new RecordNotFound("Cannot find record without id");
+
     $sql = "";
 
     if (is_string($id)) {
@@ -27,6 +29,8 @@ abstract class Model {
     } else {
       $sql .= 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
     }
+
+    $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
     $record = static::connection()->query($sql)->fetch();
 
     if ($record) {
@@ -86,8 +90,10 @@ abstract class Model {
 
   public function save() {
     $vars = (array)$this;
-    
-    if ($this->id) {
+
+    try {
+      static::find($this->id);
+
       $sql = 'UPDATE ' . static::TABLE_NAME . ' SET ';
 
       foreach ($vars as $key => $value) {
@@ -99,12 +105,38 @@ abstract class Model {
           }
         }
       }
+
       $sql .= 'WHERE id = ' . $this->id;
       $sql = str_replace(', WHERE', ' WHERE', $sql);
+    } catch (RecordNotFound $e) {
+      $sql = 'INSERT INTO ' . static::TABLE_NAME . '(id';
+
+      foreach ($vars as $key => $value) {
+        if ($key != "id" && $value) {
+          $sql .= ', ' . $key;
+        }
+      }
+
+      $sql .= ') VALUES (' . $this->new_record_id();
+
+      foreach ($vars as $key => $value) {
+        if ($key != "id" && $value) {
+          $sql .= ', ' . $value;
+        } 
+      }
+
+      $sql .= ')';
+      $this->id = mysql_insert_id();
     }
 
     static::connection()->query($sql);
   }
+
+  private function new_record_id() {
+    return 'NULL';
+  } 
 }
+
+
 
 ?>

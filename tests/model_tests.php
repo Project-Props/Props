@@ -7,10 +7,10 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prop = Prop::find(1);
 
     $this->assertEquals($prop->id, 1);
-    $this->assertEquals($prop->description, "foo");
+    $this->assertEquals($prop->description, "en dejlig stol");
   }
 
-  public function test_save_a_record() {
+  public function test_update_a_record() {
     $prop = Prop::find(1);
     $prop->description = "bar";
     $prop->save();
@@ -22,6 +22,18 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $production = Production::find("0000-2014");
 
     $this->assertEquals($production->title, "en dejlig forestilling");
+  }
+
+  public function test_save_new_record() {
+    $prop = new Prop();
+    $prop->prop_nr = 28;
+    $prop->section_id = 1;
+    $prop->date_added = '2014-04-30 12:12:12';
+    $prop->date_updated = '2014-04-30 12:12:12';
+    $prop->status_id = 1;
+    $prop->save();
+
+    $this->assertNotNull($prop->id);
   }
 
   public function test_find_when_id_does_not_exist() {
