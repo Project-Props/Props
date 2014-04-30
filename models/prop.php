@@ -60,6 +60,11 @@ class Production extends Model {
         ,$storage
         ,$comment
         ,$date_added;
+
+  protected function new_record_id() {
+    return "'" . $this->id . "'";
+  }
+
 }
 
 ?>

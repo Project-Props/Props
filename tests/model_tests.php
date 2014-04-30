@@ -10,13 +10,13 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals($prop->description, "en dejlig stol");
   }
 
-  public function test_update_a_record() {
-    $prop = Prop::find(1);
-    $prop->description = "bar";
-    $prop->save();
+  // public function test_update_a_record() {
+  //   $prop = Prop::find(1);
+  //   $prop->description = "bar";
+  //   $prop->save();
 
-    $this->assertEquals("bar", Prop::find(1)->description);
-  }
+  //   $this->assertEquals("bar", Prop::find(1)->description);
+  // }
 
   public function test_finds_record_where_id_is_string() {
     $production = Production::find("0000-2014");
@@ -24,16 +24,27 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals($production->title, "en dejlig forestilling");
   }
 
-  public function test_save_new_record() {
-    $prop = new Prop();
-    $prop->prop_nr = 28;
-    $prop->section_id = 1;
-    $prop->date_added = '2014-04-30 12:12:12';
-    $prop->date_updated = '2014-04-30 12:12:12';
-    $prop->status_id = 1;
-    $prop->save();
+  // public function test_save_new_record() {
+  //   $prop = new Prop();
+  //   $prop->prop_nr = 28;
+  //   $prop->section_id = 1;
+  //   $prop->date_added = '2014-04-30 12:12:12';
+  //   $prop->date_updated = '2014-04-30 12:12:12';
+  //   $prop->status_id = 1;
+  //   $prop->save();
 
-    $this->assertNotNull($prop->id);
+  //   $this->assertNotNull($prop->id);
+  // }
+
+  public function test_save_new_production() {
+    $prod = new Production();
+    $prod->id = '0002-2014';
+    $prod->title = "det spiller";
+    $prod->status_id = 1;
+    $prod->date_added = '2014-04-30 12:12:12';
+    $prod->save();
+
+    $this->assertEquals("det spiller", Production::find('0002-2014')->title);
   }
 
   public function test_find_when_id_does_not_exist() {

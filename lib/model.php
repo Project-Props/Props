@@ -120,18 +120,22 @@ abstract class Model {
 
       foreach ($vars as $key => $value) {
         if ($key != "id" && $value) {
-          $sql .= ', ' . $value;
+          if (is_numeric($value)) {
+            $sql .= ', ' . $value;
+          } else {
+            $sql .= ", '" . $value . "'";
+          }
         } 
       }
 
       $sql .= ')';
       $this->id = mysql_insert_id();
     }
-
+    var_dump($sql);
     static::connection()->query($sql);
   }
 
-  private function new_record_id() {
+  protected function new_record_id() {
     return 'NULL';
   } 
 }
