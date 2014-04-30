@@ -9,16 +9,6 @@ abstract class Model {
 
   protected static $connection;
 
-  private static function connection() {
-    if (!static::$connection) {
-      static::$connection = new PDO("mysql:host=localhost;dbname=" . static::DATABASE_NAME,
-                                    static::DATABASE_USERNAME,
-                                    static::DATABASE_PASSWORD);
-    }
-
-    return static::$connection;
-  }
-
   public static function find($id) {
     if (!$id) throw new RecordNotFound("Cannot find record without id");
 
@@ -53,16 +43,6 @@ abstract class Model {
     return $instances;
   }
 
-  private static function new_with_assoc_array_as_attributes($record) {
-    $instance = new static;
-
-    foreach ($record as $key => $value) {
-      $instance->{$key} = $value;
-    }
-
-    return $instance;
-  }
-
   public function __call($method, $args) {
     if ($this->has_association($method)) {
       $class = $this->has_one()[$method];
@@ -71,21 +51,6 @@ abstract class Model {
 
     $this->throw_undefined_method($method);
   }
-
-  private function has_association($method) {
-    return array_key_exists($method, $this->has_one());
-  }
-
-  private function throw_undefined_method($method) {
-    $class = get_class($this);
-    $trace = debug_backtrace();
-    $file = $trace[0]['file'];
-    $line = $trace[0]['line'];
-    trigger_error("Call to undefined method $class::$method() in $file on line $line",
-      E_USER_ERROR);
-  }
-
-  protected function has_one() {}
 
   public function save() {
     $vars = (array)$this;
@@ -135,11 +100,44 @@ abstract class Model {
     static::connection()->query($sql);
   }
 
+  protected function has_one() {}
+
   protected function new_record_id() {
     return 'NULL';
   }
+
+  private function has_association($method) {
+    return array_key_exists($method, $this->has_one());
+  }
+
+  private function throw_undefined_method($method) {
+    $class = get_class($this);
+    $trace = debug_backtrace();
+    $file = $trace[0]['file'];
+    $line = $trace[0]['line'];
+    trigger_error("Call to undefined method $class::$method() in $file on line $line",
+      E_USER_ERROR);
+  }
+
+  private static function connection() {
+    if (!static::$connection) {
+      static::$connection = new PDO("mysql:host=localhost;dbname=" . static::DATABASE_NAME,
+                                    static::DATABASE_USERNAME,
+                                    static::DATABASE_PASSWORD);
+    }
+
+    return static::$connection;
+  }
+
+  private static function new_with_assoc_array_as_attributes($record) {
+    $instance = new static;
+
+    foreach ($record as $key => $value) {
+      $instance->{$key} = $value;
+    }
+
+    return $instance;
+  }
 }
-
-
 
 ?>
