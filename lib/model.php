@@ -1,5 +1,7 @@
 <?php
 
+class RecordNotFound extends Exception {}
+
 abstract class Model {
   const DATABASE_NAME = "Props_2";
   const DATABASE_USERNAME = "root";
@@ -20,9 +22,13 @@ abstract class Model {
   public static function find($id) {
     $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
     $record = static::connection()->query($sql)->fetch();
-    $instance = static::new_with_assoc_array_as_attributes($record);
 
-    return $instance;
+    if ($record) {
+      $instance = static::new_with_assoc_array_as_attributes($record);
+      return $instance;
+    } else {
+      throw new RecordNotFound("Record with id = $id does not exist");
+    }
   }
 
   public static function all() {
