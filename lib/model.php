@@ -131,7 +131,7 @@ abstract class Model {
       $sql .= ')';
       $this->id = mysql_insert_id();
     }
-    var_dump($sql);
+
     static::connection()->query($sql);
   }
 
