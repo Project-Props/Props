@@ -20,6 +20,25 @@ abstract class Model {
   public static function find($id) {
     $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
     $record = static::connection()->query($sql)->fetch();
+    $instance = static::new_with_assoc_array_as_attributes($record);
+
+    return $instance;
+  }
+
+  public static function all() {
+    $sql = "SELECT * FROM " . static::TABLE_NAME;
+    $records = static::connection()->query($sql)->fetchAll();
+    $instances = [];
+
+    foreach ($records as $record) {
+      $instance = static::new_with_assoc_array_as_attributes($record);
+      array_push($instances, $instance);
+    }
+
+    return $instances;
+  }
+
+  private static function new_with_assoc_array_as_attributes($record) {
     $instance = new static;
 
     foreach ($record as $key => $value) {
