@@ -63,7 +63,7 @@ abstract class Model {
     return $instance;
   }
 
-  private function __call($method, $args) {
+  public function __call($method, $args) {
     if ($this->has_association($method)) {
       $class = $this->has_one()[$method];
       return $class::find($this->{$method . "_id"});
