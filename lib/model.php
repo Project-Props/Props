@@ -30,7 +30,6 @@ abstract class Model {
       $sql .= 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
     }
 
-    $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
     $record = static::connection()->query($sql)->fetch();
 
     if ($record) {
