@@ -1,5 +1,7 @@
 <?php
 
+require_once("lib/quoter.php");
+
 class RecordNotFound extends Exception {}
 
 abstract class Model {
@@ -12,14 +14,7 @@ abstract class Model {
   public static function find($id) {
     if (!$id) throw new RecordNotFound("Cannot find record without id");
 
-    $sql = "";
-
-    if (is_string($id)) {
-      $sql .= "SELECT * FROM " . static::TABLE_NAME . " WHERE id = '" . $id . "'";
-    } else {
-      $sql .= 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . $id;
-    }
-
+    $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . Quoter::quote_if_string($id);
     $record = static::connection()->query($sql)->fetch();
 
     if ($record) {
@@ -62,11 +57,7 @@ abstract class Model {
 
       foreach ($vars as $key => $value) {
         if (!is_numeric($key)) {
-          if (is_numeric($value)) {
-            $sql .= $key . ' = ' . $value . ', ';
-          } else {
-            $sql .= $key . " = '" . $value . "', ";
-          }
+          $sql .= $key . ' = ' . Quoter::quote_if_string($value) . ', ';
         }
       }
 
@@ -85,11 +76,7 @@ abstract class Model {
 
       foreach ($vars as $key => $value) {
         if ($key != "id" && $value) {
-          if (is_numeric($value)) {
-            $sql .= ', ' . $value;
-          } else {
-            $sql .= ", '" . $value . "'";
-          }
+          $sql .= ', ' . Quoter::quote_if_string($value);
         }
       }
 
