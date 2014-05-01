@@ -1,6 +1,7 @@
 <?php
 
 require_once("lib/quoter.php");
+require_once("lib/database.php");
 
 class RecordNotFound extends Exception {}
 
@@ -9,25 +10,25 @@ abstract class Model {
   const DATABASE_USERNAME = "root";
   const DATABASE_PASSWORD = "root";
 
-  protected static $connection;
+  protected static $db;
 
   public static function find($id) {
     if (!$id) throw new RecordNotFound("Cannot find record without id");
 
     $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . Quoter::quote_if_string($id);
-    $record = static::connection()->query($sql)->fetch();
+    $records = static::db()->query($sql);
 
-    if ($record) {
-      $instance = static::new_with_assoc_array_as_attributes($record);
-      return $instance;
-    } else {
+    if ($records == []) {
       throw new RecordNotFound("Record with id = $id does not exist");
+    } else {
+      $instance = static::new_with_assoc_array_as_attributes($records[0]);
+      return $instance;
     }
   }
 
   public static function all() {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
-    $records = static::connection()->query($sql)->fetchAll();
+    $records = static::db()->query($sql);
     $instances = [];
 
     foreach ($records as $record) {
@@ -84,7 +85,11 @@ abstract class Model {
       $this->id = mysql_insert_id();
     }
 
-    static::connection()->query($sql);
+    static::db()->query($sql);
+  }
+
+  public static function database_connection() {
+    return new LocalDatabaseConnection();
   }
 
   protected function has_one() {
@@ -108,14 +113,12 @@ abstract class Model {
       E_USER_ERROR);
   }
 
-  private static function connection() {
-    if (!static::$connection) {
-      static::$connection = new PDO("mysql:host=localhost;dbname=" . static::DATABASE_NAME,
-                                    static::DATABASE_USERNAME,
-                                    static::DATABASE_PASSWORD);
+  private static function db() {
+    if (!static::$db) {
+      static::$db = new Database(static::database_connection());
     }
 
-    return static::$connection;
+    return static::$db;
   }
 
   private static function new_with_assoc_array_as_attributes($record) {
