@@ -87,7 +87,9 @@ abstract class Model {
     static::connection()->query($sql);
   }
 
-  protected function has_one() {}
+  protected function has_one() {
+    return [];
+  }
 
   protected function new_record_id() {
     return 'NULL';
