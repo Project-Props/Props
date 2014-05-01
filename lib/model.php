@@ -40,9 +40,10 @@ abstract class Model {
   }
 
   public function __call($method, $args) {
-    if ($this->has_association($method)) {
-      $class = $this->has_one()[$method];
-      return $class::find($this->{$method . "_id"});
+    $name_of_association = $method;
+
+    if ($this->has_association($name_of_association)) {
+      return $this->associated_object($name_of_association);
     }
 
     $this->throw_undefined_method($method);
@@ -98,6 +99,11 @@ abstract class Model {
 
   protected function new_record_id() {
     return 'NULL';
+  }
+
+  private function associated_object($name) {
+    $class = $this->has_one()[$name];
+    return $class::find($this->{$name . "_id"});
   }
 
   private function has_association($method) {
