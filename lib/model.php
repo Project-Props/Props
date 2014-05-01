@@ -90,7 +90,7 @@ abstract class Model {
           } else {
             $sql .= ", '" . $value . "'";
           }
-        } 
+        }
       }
 
       $sql .= ')';
