@@ -6,10 +6,6 @@ require_once("lib/database.php");
 class RecordNotFound extends Exception {}
 
 abstract class Model {
-  const DATABASE_NAME = "Props_2";
-  const DATABASE_USERNAME = "root";
-  const DATABASE_PASSWORD = "root";
-
   protected static $db;
 
   public static function find($id) {
