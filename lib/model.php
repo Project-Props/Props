@@ -93,6 +93,11 @@ abstract class Model {
     return [];
   }
 
+  protected static function next_insert_id() {
+    $sql = "SELECT id FROM " . static::TABLE_NAME . " ORDER BY id DESC LIMIT 1";
+    return static::db()->query($sql)[0]["id"] + 1;
+  }
+
   protected function new_record_id() {
     return 'NULL';
   }
@@ -131,11 +136,6 @@ abstract class Model {
     }
 
     return $instance;
-  }
-
-  private static function next_insert_id() {
-    $sql = "SELECT id FROM " . static::TABLE_NAME . " ORDER BY id DESC LIMIT 1";
-    return static::db()->query($sql)[0]["id"] + 1;
   }
 }
 
