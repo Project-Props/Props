@@ -45,6 +45,8 @@ class Supplier extends Model {
         ,$comment;
 }
 
+class ProductionCannotGenerateIds extends Exception {}
+
 class Production extends Model {
   const TABLE_NAME = 'Productions';
 
@@ -65,6 +67,10 @@ class Production extends Model {
     return "'" . $this->id . "'";
   }
 
+  protected function next_insert_id() {
+    if (is_null($this->id)) throw new ProductionCannotGenerateIds();
+    return $this->id;
+  }
 }
 
 ?>

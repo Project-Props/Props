@@ -69,7 +69,19 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prod->date_added = '2014-04-30 12:12:12';
     $prod->save();
 
+    $this->assertEquals("0002-2014", $prod->id);
     $this->assertEquals("det spiller", Production::find('0002-2014')->title);
+
+  }
+
+  public function test_production_cannot_generate_their_ids() {
+    $this->setExpectedException("ProductionCannotGenerateIds");
+
+    $prod_2 = new Production();
+    $prod_2->title = "det spiller";
+    $prod_2->status_id = 1;
+    $prod_2->date_added = '2014-04-30 12:12:12';
+    $prod_2->save();
   }
 
   public function test_find_all() {
