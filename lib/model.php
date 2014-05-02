@@ -134,7 +134,7 @@ abstract class Model {
   }
 
   private static function next_insert_id() {
-    $sql = "select id from " . static::TABLE_NAME . " order by id desc limit 1";
+    $sql = "SELECT id FROM " . static::TABLE_NAME . " ORDER BY id DESC LIMIT 1";
     return static::db()->query($sql)[0]["id"] + 1;
   }
 }
