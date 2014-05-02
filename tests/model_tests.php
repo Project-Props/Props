@@ -45,8 +45,11 @@ class ModelTests extends PHPUnit_Framework_TestCase {
   }
 
   public function test_save_new_record() {
+    $number_of_props_before = sizeof(Prop::all());
+
     $prop = new Prop();
     $prop->prop_nr = 28;
+    $prop->description = "!!!!!!A NEW PROP!!!!!!!";
     $prop->section_id = 1;
     $prop->date_added = '2014-04-30 12:12:12';
     $prop->date_updated = '2014-04-30 12:12:12';
@@ -54,6 +57,8 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prop->save();
 
     $this->assertNotNull($prop->id);
+    $this->assertEquals(sizeof(Prop::all()), $number_of_props_before + 1);
+    $this->assertEquals(1, Prop::find($prop->id)->status_id);
   }
 
   public function test_save_new_production() {

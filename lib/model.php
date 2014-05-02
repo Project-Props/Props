@@ -79,7 +79,7 @@ abstract class Model {
       }
 
       $sql .= ')';
-      $this->id = mysql_insert_id();
+      $this->id = static::next_insert_id();
     }
 
     static::db()->query($sql);
@@ -131,6 +131,11 @@ abstract class Model {
     }
 
     return $instance;
+  }
+
+  private static function next_insert_id() {
+    $sql = "select id from " . static::TABLE_NAME . " order by id desc limit 1";
+    return static::db()->query($sql)[0]["id"] + 1;
   }
 }
 
