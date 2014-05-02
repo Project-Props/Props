@@ -1,7 +1,8 @@
 <?php
 
-require_once("lib/request.php");
-require_once("lib/route.php");
-require_once("lib/router.php");
-require_once("lib/controller.php");
-require_once("lib/view.php");
+foreach (scandir(dirname(__FILE__)) as $filename) {
+  $path = dirname(__FILE__) . '/' . $filename;
+  if (is_file($path)) {
+    require_once $path;
+  }
+}
