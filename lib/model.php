@@ -85,10 +85,6 @@ abstract class Model {
     static::db()->query($sql);
   }
 
-  public static function database_connection() {
-    return new LocalDatabaseConnection();
-  }
-
   protected function has_one() {
     return [];
   }
@@ -101,6 +97,10 @@ abstract class Model {
 
   protected function new_record_id() {
     return 'NULL';
+  }
+
+  protected static function database_connection() {
+    return new LocalDatabaseConnection();
   }
 
   private function associated_object($name) {
