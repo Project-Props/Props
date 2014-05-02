@@ -9,7 +9,7 @@ abstract class Model {
   protected static $db;
 
   public static function find($id) {
-    if (!$id) throw new RecordNotFound("Cannot find record without id");
+    if (is_null($id)) throw new RecordNotFound("Cannot find record without id");
 
     $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . Quoter::quote_if_string($id);
     $records = static::db()->query($sql);
