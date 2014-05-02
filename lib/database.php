@@ -34,6 +34,8 @@ class LocalDatabaseConnection implements DatabaseConnection {
   }
 }
 
+class InvalidQuery extends Exception {}
+
 class Database {
   private $connection;
 
@@ -42,10 +44,13 @@ class Database {
   }
 
   public function query($sql) {
-    return $this->connection
+    $query_response = $this->connection
       ->database_connection()
-      ->query($sql)
-      ->fetchAll();
+      ->query($sql);
+
+    if (!$query_response) throw new InvalidQuery("The query \"$sql\" is invalid");
+
+    return $query_response->fetchAll();
   }
 
   public function drop_database() {
