@@ -10,12 +10,12 @@ require_once("controllers/props_controller.php");
 $router = Router::instance();
 
 $router->define_route("/prop", function() use ($router) {
-  $router->redirect_to("/");
+  $view = new View("props/show.php");
+  $view->render();
 });
 
 $router->define_route("/", function() {
-  $view = new View("props/show.php");
-  $view->render();
+  echo "Hello World";
 });
 
 $router->process_request(Request::instance());
