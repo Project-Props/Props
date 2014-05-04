@@ -22,10 +22,16 @@ class Prop extends Model {
         ,$creditor_id
         ,$maintenance_time;
 
+  public function delete() {
+    $this->deleted = true;
+    $this->save();
+  }
+
   protected function has_one() {
     return [
       "supplier" => "Supplier"
      ,"bought_for" => "Production"
+     ,"section" => "Section"
     ];
   }
 
@@ -36,6 +42,10 @@ class Prop extends Model {
         "table" => "Used_in"
       ]
     ];
+  }
+
+  protected static function default_scope() {
+    return "deleted = 0";
   }
 }
 
@@ -52,6 +62,12 @@ class Supplier extends Model {
         ,$zip_code
         ,$country
         ,$comment;
+}
+
+class Section extends Model {
+  const TABLE_NAME = 'Sections';
+
+  public $id, $name;
 }
 
 class ProductionCannotGenerateIds extends Exception {}
