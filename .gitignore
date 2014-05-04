@@ -5,3 +5,4 @@ tags
 doc
 output
 behat.yml
+log/log.log

@@ -5,27 +5,36 @@ require_once("lib/model.php");
 class Prop extends Model {
   const TABLE_NAME = 'Props';
 
-  public $id,
-         $prop_nr,
-         $section_id,
-         $description,
-         $comment,
-         $date_added,
-         $date_updated,
-         $supplier_id,
-         $price,
-         $bought_for_id,
-         $status_id,
-         $size,
-         $period_id,
-         $deleted,
-         $creditor_id,
-         $maintenance_time;
+  public $id
+        ,$prop_nr
+        ,$section_id
+        ,$description
+        ,$comment
+        ,$date_added
+        ,$date_updated
+        ,$supplier_id
+        ,$price
+        ,$bought_for_id
+        ,$status_id
+        ,$size
+        ,$period_id
+        ,$deleted
+        ,$creditor_id
+        ,$maintenance_time;
 
   protected function has_one() {
     return [
       "supplier" => "Supplier"
      ,"bought_for" => "Production"
+    ];
+  }
+
+  protected function has_many() {
+    return [
+      "used_in" => [
+        "class" => "Production",
+        "table" => "Used_in"
+      ]
     ];
   }
 }
@@ -45,6 +54,8 @@ class Supplier extends Model {
         ,$comment;
 }
 
+class ProductionCannotGenerateIds extends Exception {}
+
 class Production extends Model {
   const TABLE_NAME = 'Productions';
 
@@ -60,6 +71,24 @@ class Production extends Model {
         ,$storage
         ,$comment
         ,$date_added;
+
+  protected function has_many() {
+    return [
+      "props" => [
+        "class" => "Prop",
+        "table" => "Used_in"
+      ]
+    ];
+  }
+
+  protected function new_record_id() {
+    return "'" . $this->id . "'";
+  }
+
+  protected function next_insert_id() {
+    if (is_null($this->id)) throw new ProductionCannotGenerateIds();
+    return $this->id;
+  }
 }
 
 ?>
