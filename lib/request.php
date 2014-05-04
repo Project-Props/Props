@@ -60,6 +60,8 @@ class Request {
         return (int) $param;
       }
     }
+
+    return $param;
   }
 
   /**
