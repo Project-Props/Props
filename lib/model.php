@@ -23,6 +23,7 @@ abstract class Model {
   public static function all() {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
     $records = static::db()->query($sql);
+
     $instances = [];
 
     foreach ($records as $record) {
