@@ -100,6 +100,22 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals("Netto", $supplier->name);
     $this->assertEquals("en dejlig forestilling", $bought_for_production->title);
   }
+
+  public function test_finds_has_many_relationships() {
+    $prod = Production::find("0000-2014");
+    $props = $prod->props();
+
+    $this->assertEquals(sizeof($props), 2);
+    $this->assertEquals($props[0]->comment, "hej hej");
+    $this->assertEquals($props[1]->comment, "hej hej hej");
+
+    $prop = Prop::find(1);
+    $prods = $prop->used_in();
+
+    $this->assertEquals(sizeof($prods), 2);
+    $this->assertEquals($prods[0]->title, "en dejlig forestilling");
+    $this->assertEquals($prods[1]->title, "en mindre dejlig forestilling");
+  }
 }
 
 ?>

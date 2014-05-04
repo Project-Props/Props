@@ -38,11 +38,37 @@ abstract class Model {
   public function __call($method, $args) {
     $name_of_association = $method;
 
-    if ($this->has_association($name_of_association)) {
+    if ($this->has_has_one_association($name_of_association)) {
       return $this->associated_object($name_of_association);
+    } else if ($this->has_has_many_association($name_of_association)) {
+      $data = $this->has_many()[$name_of_association];
+      $this_id_column = strtolower(get_class($this)) ."_id";
+      $sql = "SELECT ". strtolower($data["class"]) ."_id"
+        ." FROM ". $data["table"]
+        ." WHERE ". $this_id_column ." = ". Quoter::quote_if_string($this->id);
+
+      $ids = static::db()->query($sql);
+
+      $things = [];
+      for ($i = 0; $i < sizeof($ids); $i++) {
+        $class = $data["class"];
+        $obj = $class::find($ids[$i][0]);
+
+        array_push($things, $obj);
+      }
+
+      return $things;
     }
 
     $this->throw_undefined_method($method);
+  }
+
+  protected function has_many() {
+    return [];
+  }
+
+  private function has_has_many_association($name) {
+    return array_key_exists($name, $this->has_many());
   }
 
   public function save() {
@@ -108,7 +134,7 @@ abstract class Model {
     return $class::find($this->{$name . "_id"});
   }
 
-  private function has_association($method) {
+  private function has_has_one_association($method) {
     return array_key_exists($method, $this->has_one());
   }
 

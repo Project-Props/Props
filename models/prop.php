@@ -28,6 +28,15 @@ class Prop extends Model {
      ,"bought_for" => "Production"
     ];
   }
+
+  protected function has_many() {
+    return [
+      "used_in" => [
+        "class" => "Production",
+        "table" => "Used_in"
+      ]
+    ];
+  }
 }
 
 class Supplier extends Model {
@@ -62,6 +71,15 @@ class Production extends Model {
         ,$storage
         ,$comment
         ,$date_added;
+
+  protected function has_many() {
+    return [
+      "props" => [
+        "class" => "Prop",
+        "table" => "Used_in"
+      ]
+    ];
+  }
 
   protected function new_record_id() {
     return "'" . $this->id . "'";
