@@ -82,7 +82,21 @@ class Router {
    * @param string $path the URL of the route.
    * @param function $fun the function to be executed when the URL gets hit.
    */
-  public function define_route($path, $fun) {
+  public function define_route($path, $lambda_or_method_path) {
+    $fun;
+
+    if (is_string($lambda_or_method_path)) {
+      $controller = explode("#", $lambda_or_method_path)[0] . "Controller";
+      $method = explode("#", $lambda_or_method_path)[1];
+
+      $fun = function() use ($controller, $method) {
+        $c = new $controller;
+        $c->{$method}();
+      };
+    } else {
+      $fun = $lambda_or_method_path;
+    }
+
     $this->routes[$path] = new Route($path, $fun);
   }
 
