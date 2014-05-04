@@ -44,8 +44,6 @@ class Database {
   }
 
   public function query($sql) {
-    Logger::log("Performing SQL query \"$sql\"");
-
     $query_response = $this->connection
       ->database_connection()
       ->query($sql);
