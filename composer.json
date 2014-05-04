@@ -16,7 +16,6 @@
     }
   ],
   "require": {
-    "monolog/monolog": "1.9.*"
   },
   "require-dev": {
     "phpunit/phpunit": "3.7.*"
