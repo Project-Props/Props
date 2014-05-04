@@ -48,7 +48,18 @@ class Request {
    * @return mixed the parameter.
    */
   public function param($param) {
-    return $this->all_params()[$param];
+    $param = $this->all_params()[$param];
+
+    if ($param == "false") return false;
+    if ($param == "true") return true;
+
+    if (is_numeric($param)) {
+      if (preg_match("/\./", $param)) {
+        return (float) $param;
+      } else {
+        return (int) $param;
+      }
+    }
   }
 
   /**
