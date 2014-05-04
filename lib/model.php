@@ -11,14 +11,12 @@ abstract class Model {
   public static function find($id) {
     if (is_null($id)) throw new RecordNotFound("Cannot find record without id");
 
-    $sql = 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . Quoter::quote_if_string($id);
-    $records = static::db()->query($sql);
+    $records = static::db()->query(static::find_sql_for_id($id));
 
     if ($records == []) {
       throw new RecordNotFound("Record with id = $id does not exist");
     } else {
-      $instance = static::new_with_assoc_array_as_attributes($records[0]);
-      return $instance;
+      return static::new_with_assoc_array_as_attributes($records[0]);
     }
   }
 
@@ -41,34 +39,10 @@ abstract class Model {
     if ($this->has_has_one_association($name_of_association)) {
       return $this->associated_object($name_of_association);
     } else if ($this->has_has_many_association($name_of_association)) {
-      $data = $this->has_many()[$name_of_association];
-      $this_id_column = strtolower(get_class($this)) ."_id";
-      $sql = "SELECT ". strtolower($data["class"]) ."_id"
-        ." FROM ". $data["table"]
-        ." WHERE ". $this_id_column ." = ". Quoter::quote_if_string($this->id);
-
-      $ids = static::db()->query($sql);
-
-      $things = [];
-      for ($i = 0; $i < sizeof($ids); $i++) {
-        $class = $data["class"];
-        $obj = $class::find($ids[$i][0]);
-
-        array_push($things, $obj);
-      }
-
-      return $things;
+      return $this->all_associated_objects($name_of_association);
     }
 
     $this->throw_undefined_method($method);
-  }
-
-  protected function has_many() {
-    return [];
-  }
-
-  private function has_has_many_association($name) {
-    return array_key_exists($name, $this->has_many());
   }
 
   public function save() {
@@ -125,6 +99,10 @@ abstract class Model {
     return 'NULL';
   }
 
+  protected function has_many() {
+    return [];
+  }
+
   protected static function database_connection() {
     return new LocalDatabaseConnection();
   }
@@ -155,6 +133,31 @@ abstract class Model {
     return static::$db;
   }
 
+  private function all_associated_objects($name) {
+    $data = $this->has_many()[$name];
+    $id_column = strtolower(get_class($this)) ."_id";
+    $ids_sql = "SELECT ". strtolower($data["class"]) ."_id"
+      ." FROM ". $data["table"]
+      ." WHERE ". $id_column ." = ". Quoter::quote_if_string($this->id);
+
+    $related_ids_sql = "SELECT * FROM ". $data["class"]::TABLE_NAME ." WHERE id IN (". $ids_sql .")";
+
+    $records = static::db()->query($related_ids_sql);
+
+    $instances = [];
+    foreach ($records as $record) {
+      $instance = new $data["class"];
+
+      foreach ($record as $key => $value) {
+        $instance->{$key} = $value;
+      }
+
+      array_push($instances, $instance);
+    }
+
+    return $instances;
+  }
+
   private static function new_with_assoc_array_as_attributes($record) {
     $instance = new static;
 
@@ -163,6 +166,14 @@ abstract class Model {
     }
 
     return $instance;
+  }
+
+  private function has_has_many_association($name) {
+    return array_key_exists($name, $this->has_many());
+  }
+
+  private static function find_sql_for_id($id) {
+    return 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . Quoter::quote_if_string($id);
   }
 }
 
