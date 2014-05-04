@@ -20,8 +20,13 @@ abstract class Model {
     }
   }
 
-  public static function all() {
+  public static function all($options = ["ignore_scope" => false]) {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
+
+    if (!is_null(static::default_scope()) && !$options["ignore_scope"]) {
+      $sql .= " WHERE " . static::default_scope();
+    }
+
     $records = static::db()->query($sql);
 
     $instances = [];
@@ -32,6 +37,10 @@ abstract class Model {
     }
 
     return $instances;
+  }
+
+  protected static function default_scope() {
+    return NULL;
   }
 
   public function __call($method, $args) {
