@@ -47,6 +47,7 @@ class Request {
    * @param string $param the name of the parameter.
    * @return mixed the parameter.
    */
+  /* TODO: test for conversion of params */
   public function param($param) {
     $param = $this->all_params()[$param];
 

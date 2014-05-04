@@ -20,6 +20,7 @@ abstract class Model {
     }
   }
 
+  // TODO: test for default scope and that it can be disabled
   public static function all($options = ["ignore_scope" => false]) {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
 
@@ -55,6 +56,7 @@ abstract class Model {
     $this->throw_undefined_method($method);
   }
 
+  // TODO: refactor this
   public function save() {
     $vars = (array)$this;
 
