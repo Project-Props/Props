@@ -3,9 +3,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-require_once("lib/all.php");
-
-require_once("controllers/props_controller.php");
+require_once("lib/require_all.php");
+require_all_in("lib");
+require_all_in("controllers");
+require_all_in("models");
 
 $router = Router::instance();
 
