@@ -147,6 +147,8 @@ abstract class Model {
 
     $instances = [];
     foreach ($records as $record) {
+      // this process is basically a sligtly changed version of new_with_assoc_array_as_attributes
+      // the difference is that we are creating objects of another class and not our own class
       $instance = new $data["class"];
 
       foreach ($record as $key => $value) {
