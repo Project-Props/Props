@@ -82,6 +82,7 @@ class Router {
    * @param string $path the URL of the route.
    * @param function $fun the function to be executed when the URL gets hit.
    */
+  // TODO: write tests for new method signature and method path stuff
   public function define_route($path, $lambda_or_method_path) {
     $fun;
 
