@@ -14,6 +14,5 @@
 
     <?php $this->include_template(); ?>
 
-
   </body>
 </html>

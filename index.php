@@ -10,14 +10,7 @@ require_all_in("models");
 
 $router = Router::instance();
 
-$router->define_route("/prop", function() use ($router) {
-  $view = new View("props/show.php");
-  $view->render();
-});
-
-$router->define_route("/", function() {
-  echo "Hello World";
-});
+$router->define_route("/", "Home#index");
 
 $router->process_request(Request::instance());
 
