@@ -3,19 +3,20 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-require_once("lib/all.php");
-
-require_once("controllers/props_controller.php");
+require_once("lib/require_all.php");
+require_all_in("lib");
+require_all_in("controllers");
+require_all_in("models");
 
 $router = Router::instance();
 
 $router->define_route("/prop", function() use ($router) {
-  $router->redirect_to("/");
+  $view = new View("props/show.php");
+  $view->render();
 });
 
 $router->define_route("/", function() {
-  $view = new View("props/show.php");
-  $view->render();
+  echo "Hello World";
 });
 
 $router->process_request(Request::instance());

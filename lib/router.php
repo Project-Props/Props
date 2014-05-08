@@ -23,7 +23,23 @@ class Redirecter {
 /**
  * A route that maps requested URLs to code.
  *
- * This is a singleton.
+ * This is a singleton. Use `Router::instance()` to get to the instance.
+ *
+ * Here is an example of how to use it:
+ *
+ * <pre>
+ * // get the instance
+ * $router = Router::instance();
+ *
+ * // define a new route
+ * // when the URL "/" is hit, the router will run the callback
+ * $router->define_route("/", function() {
+ *   // instantiate controller, render view, whatever...
+ * });
+ *
+ * // tell the router to process the incoming request
+ * $router->process_request(Request::instance());
+ * </pre>
  */
 class Router {
   /**
@@ -66,7 +82,22 @@ class Router {
    * @param string $path the URL of the route.
    * @param function $fun the function to be executed when the URL gets hit.
    */
-  public function define_route($path, $fun) {
+  // TODO: write tests for new method signature and method path stuff
+  public function define_route($path, $lambda_or_method_path) {
+    $fun;
+
+    if (is_string($lambda_or_method_path)) {
+      $controller = explode("#", $lambda_or_method_path)[0] . "Controller";
+      $method = explode("#", $lambda_or_method_path)[1];
+
+      $fun = function() use ($controller, $method) {
+        $c = new $controller;
+        $c->{$method}();
+      };
+    } else {
+      $fun = $lambda_or_method_path;
+    }
+
     $this->routes[$path] = new Route($path, $fun);
   }
 
