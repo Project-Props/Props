@@ -32,12 +32,6 @@ CREATE TABLE IF NOT EXISTS Periods(
   , PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS Users(
-    id INT NOT NULL
-  , name VARCHAR(128) NOT NULL
-  , email VARCHAR(128)
-  , PRIMARY KEY (id)
-);
 
 CREATE TABLE IF NOT EXISTS Suppliers (
     id INT NOT NULL AUTO_INCREMENT
@@ -83,6 +77,8 @@ CREATE TABLE IF NOT EXISTS Props(
   , bought_for_id VARCHAR(9)
   , status_id INT NOT NULL
   , size VARCHAR(128)
+  , category VARCHAR(128)
+  , subcategory VARCHAR(128)
   , period_id INT
   , deleted BOOLEAN NOT NULL DEFAULT 0
   , creditor_id INT
