@@ -66,55 +66,72 @@ abstract class Model {
     }
   }
 
-  public function save() {
-    $vars = (array) $this;
+  private function update_sql() {
     $date = $this->datetime();
+    $vars = (array) $this;
+
+    if (array_key_exists('date_updated', $vars)) {
+      $sql = 'UPDATE ' . static::TABLE_NAME . " SET date_updated = '" . $date . "', ";
+      $this->date_updated = $date;
+    } else {
+      $sql = 'UPDATE ' . static::TABLE_NAME . ' SET ';
+    }
+
+    foreach ($vars as $key => $value) {
+      if (!is_numeric($key) && $key != "date_updated") {
+        $sql .= $key . ' = ' . Quoter::quote_if_string($value) . ', ';
+      }
+    }
+
+    $sql .= 'WHERE id = ' . $this->id;
+    $sql = str_replace(', WHERE', ' WHERE', $sql);
+
+    return $sql;
+  }
+
+  private function insert_sql() {
+    $date = $this->datetime();
+    $vars = (array) $this;
+
+    if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
+      $sql = 'INSERT INTO ' . static::TABLE_NAME . '(date_added, date_updated, id';
+      $this->date_added = $date;
+      $this->date_updated = $date;
+    } else {
+      $sql = 'INSERT INTO ' . static::TABLE_NAME . '(id';
+    }
+
+    foreach ($vars as $key => $value) {
+      if ($key != "id" && $value) {
+        $sql .= ', ' . $key;
+      }
+    }
+
+    if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
+      $sql .= ") VALUES ('" . $date . "', '" . $date . "', " . $this->new_record_id();
+    } else {
+      $sql .= ') VALUES (' . $this->new_record_id();
+    }
+
+    foreach ($vars as $key => $value) {
+      if ($key != "id" && $value) {
+        $sql .= ', ' . Quoter::quote_if_string($value);
+      }
+    }
+
+    $sql .= ')';
+    $this->id = $this->next_insert_id();
+
+    return $sql;
+  }
+
+  public function save() {
+    $sql = NULL;
 
     if ($this->new_record()) {
-      if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
-        $sql = 'INSERT INTO ' . static::TABLE_NAME . '(date_added, date_updated, id';
-        $this->date_added = $date;
-        $this->date_updated = $date;
-      } else {
-        $sql = 'INSERT INTO ' . static::TABLE_NAME . '(id';
-      }
-
-      foreach ($vars as $key => $value) {
-        if ($key != "id" && $value) {
-          $sql .= ', ' . $key;
-        }
-      }
-
-      if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
-        $sql .= ") VALUES ('" . $date . "', '" . $date . "', " . $this->new_record_id();
-      } else {
-        $sql .= ') VALUES (' . $this->new_record_id();
-      }
-
-      foreach ($vars as $key => $value) {
-        if ($key != "id" && $value) {
-          $sql .= ', ' . Quoter::quote_if_string($value);
-        }
-      }
-
-      $sql .= ')';
-      $this->id = $this->next_insert_id();
+      $sql .= $this->insert_sql();
     } else {
-      if (array_key_exists('date_updated', $vars)) {
-        $sql = 'UPDATE ' . static::TABLE_NAME . " SET date_updated = '" . $date . "', ";
-        $this->date_updated = $date;
-      } else {
-        $sql = 'UPDATE ' . static::TABLE_NAME . ' SET ';
-      }
-
-      foreach ($vars as $key => $value) {
-        if (!is_numeric($key) && $key != "date_updated") {
-          $sql .= $key . ' = ' . Quoter::quote_if_string($value) . ', ';
-        }
-      }
-
-      $sql .= 'WHERE id = ' . $this->id;
-      $sql = str_replace(', WHERE', ' WHERE', $sql);
+      $sql .= $this->update_sql();
     }
 
     static::db()->query($sql);
