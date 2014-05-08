@@ -59,14 +59,20 @@ abstract class Model {
   // TODO: refactor this
   public function save() {
     $vars = (array)$this;
+    $date = $this->datetime();
 
     try {
       static::find($this->id);
 
-      $sql = 'UPDATE ' . static::TABLE_NAME . ' SET ';
+      if (array_key_exists('date_updated', $vars)) {
+        $sql = 'UPDATE ' . static::TABLE_NAME . " SET date_updated = '" . $date . "', ";
+        $this->date_updated = $date;
+      } else {
+        $sql = 'UPDATE ' . static::TABLE_NAME . ' SET ';
+      }
 
       foreach ($vars as $key => $value) {
-        if (!is_numeric($key)) {
+        if (!is_numeric($key) && $key != "date_updated") {
           $sql .= $key . ' = ' . Quoter::quote_if_string($value) . ', ';
         }
       }
@@ -74,7 +80,13 @@ abstract class Model {
       $sql .= 'WHERE id = ' . $this->id;
       $sql = str_replace(', WHERE', ' WHERE', $sql);
     } catch (RecordNotFound $e) {
-      $sql = 'INSERT INTO ' . static::TABLE_NAME . '(id';
+      if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
+        $sql = 'INSERT INTO ' . static::TABLE_NAME . '(date_added, date_updated, id';
+        $this->date_added = $date;
+        $this->date_updated = $date;
+      } else {
+        $sql = 'INSERT INTO ' . static::TABLE_NAME . '(id';
+      }
 
       foreach ($vars as $key => $value) {
         if ($key != "id" && $value) {
@@ -82,7 +94,11 @@ abstract class Model {
         }
       }
 
-      $sql .= ') VALUES (' . $this->new_record_id();
+      if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
+        $sql .= ") VALUES ('" . $date . "', '" . $date . "', " . $this->new_record_id();
+      } else {
+        $sql .= ') VALUES (' . $this->new_record_id();
+      }
 
       foreach ($vars as $key => $value) {
         if ($key != "id" && $value) {
@@ -93,8 +109,14 @@ abstract class Model {
       $sql .= ')';
       $this->id = $this->next_insert_id();
     }
-
+    var_dump($sql);
     static::db()->query($sql);
+  }
+  private function datetime() {
+    $dateTime = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
+    $mysqldate = $dateTime->format("Y-m-d H:i:s");
+
+    return $mysqldate;
   }
 
   protected function has_one() {

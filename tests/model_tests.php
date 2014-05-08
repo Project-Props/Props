@@ -39,9 +39,11 @@ class ModelTests extends PHPUnit_Framework_TestCase {
   public function test_update_a_record() {
     $prop = Prop::find(1);
     $prop->description = "bar";
+    $date = $prop->date_updated;
     $prop->save();
 
     $this->assertEquals("bar", Prop::find(1)->description);
+    $this->assertNotEquals($date, $prop->date_updated);
   }
 
   public function test_save_new_record() {
@@ -51,8 +53,8 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prop->prop_nr = 28;
     $prop->description = "!!!!!!A NEW PROP!!!!!!!";
     $prop->section_id = 1;
-    $prop->date_added = '2014-04-30 12:12:12';
-    $prop->date_updated = '2014-04-30 12:12:12';
+    // $prop->date_added = '2014-04-30 12:12:12';
+    // $prop->date_updated = '2014-04-30 12:12:12';
     $prop->status_id = 1;
     $prop->save();
 
@@ -66,7 +68,7 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prod->id = '0002-2014';
     $prod->title = "det spiller";
     $prod->status_id = 1;
-    $prod->date_added = '2014-04-30 12:12:12';
+    // $prod->date_added = '2014-04-30 12:12:12';
     $prod->save();
 
     $this->assertEquals("0002-2014", $prod->id);
@@ -80,7 +82,7 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $prod_2 = new Production();
     $prod_2->title = "det spiller";
     $prod_2->status_id = 1;
-    $prod_2->date_added = '2014-04-30 12:12:12';
+    // $prod_2->date_added = '2014-04-30 12:12:12';
     $prod_2->save();
   }
 
