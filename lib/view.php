@@ -3,6 +3,7 @@
 class View {
   private $file_path;
   private $env;
+  private $title;
 
   const VIEW_DIR = "views";
 
@@ -22,6 +23,18 @@ class View {
 
     include($this->file_path);
   }
+
+  private function title() {
+    if ($this->title) {
+      return $this->title . " | Props 2.0";
+    } else {
+      return "Props 2.0";
+    }
+  }
+
+  public function set_title($title) {
+    $this->title = $title;
+  } 
 }
 
 ?>
