@@ -66,9 +66,22 @@ abstract class Model {
     }
   }
 
+  private function instance_vars() {
+    $vars = (array) $this;
+    $acc = [];
+
+    foreach ($vars as $key => $value) {
+      if (!is_numeric($key)) {
+        $acc[$key] = $value;
+      }
+    }
+
+    return $acc;
+  }
+
   private function update_sql() {
     $date = $this->datetime();
-    $vars = (array) $this;
+    $vars = $this->instance_vars();
 
     if (array_key_exists('date_updated', $vars)) {
       $sql = 'UPDATE ' . static::TABLE_NAME . " SET date_updated = '" . $date . "', ";
@@ -78,7 +91,7 @@ abstract class Model {
     }
 
     foreach ($vars as $key => $value) {
-      if (!is_numeric($key) && $key != "date_updated") {
+      if ($key != "date_updated") {
         $sql .= $key . ' = ' . Quoter::quote_if_string($value) . ', ';
       }
     }
@@ -91,7 +104,7 @@ abstract class Model {
 
   private function insert_sql() {
     $date = $this->datetime();
-    $vars = (array) $this;
+    $vars = $this->instance_vars();
 
     if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
       $sql = 'INSERT INTO ' . static::TABLE_NAME . '(date_added, date_updated, id';
