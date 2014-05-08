@@ -42,10 +42,12 @@ class View {
   }
 
   private function title() {
+    $default_title = "Props 2.0";
+
     if ($this->title) {
-      return $this->title . " | Props 2.0";
+      return $this->title . " | " . $default_title;
     } else {
-      return "Props 2.0";
+      return $default_title;
     }
   }
 
