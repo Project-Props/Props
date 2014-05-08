@@ -2,6 +2,8 @@
  * Creating the Props 2.0 database and tables. 
  */
 
+DROP DATABASE IF EXISTS Props_2;
+
 CREATE DATABASE IF NOT EXISTS Props_2;
 -- Undersøg om det giver mening med : DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE Props_2;
@@ -67,6 +69,7 @@ CREATE TABLE IF NOT EXISTS Productions (
 CREATE TABLE IF NOT EXISTS Props(
     id INT NOT NULL AUTO_INCREMENT
   , prop_nr INT NOT NULL
+  , old_prop_nr INT
   , section_id INT NOT NULL
   , description VARCHAR(128)
   , comment TEXT
@@ -81,7 +84,7 @@ CREATE TABLE IF NOT EXISTS Props(
   , subcategory VARCHAR(128)
   , period_id INT
   , deleted BOOLEAN NOT NULL DEFAULT 0
-  , creditor_id INT
+  , creditor VARCHAR(128)
   , maintenance_time REAL
   , PRIMARY KEY (id)
   , FOREIGN KEY (section_id) REFERENCES Sections(id)
@@ -89,7 +92,6 @@ CREATE TABLE IF NOT EXISTS Props(
   , FOREIGN KEY (bought_for_id) REFERENCES Productions(id)
   , FOREIGN KEY (status_id) REFERENCES Prop_statuses(id)
   , FOREIGN KEY (period_id) REFERENCES Periods(id)
-  , FOREIGN KEY (creditor_id) REFERENCES Users(id)
 );
 
 CREATE TABLE IF NOT EXISTS Used_in (

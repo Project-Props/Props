@@ -109,7 +109,6 @@ abstract class Model {
       $sql .= ')';
       $this->id = $this->next_insert_id();
     }
-    var_dump($sql);
     static::db()->query($sql);
   }
   private function datetime() {

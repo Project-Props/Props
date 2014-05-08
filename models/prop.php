@@ -7,6 +7,7 @@ class Prop extends Model {
 
   public $id
         ,$prop_nr
+        ,$old_prop_nr
         ,$section_id
         ,$description
         ,$comment
@@ -17,9 +18,11 @@ class Prop extends Model {
         ,$bought_for_id
         ,$status_id
         ,$size
+        ,$category
+        ,$subcategory
         ,$period_id
         ,$deleted
-        ,$creditor_id
+        ,$creditor
         ,$maintenance_time;
 
   public function delete() {
