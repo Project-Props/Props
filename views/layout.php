@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Props 2.0</title>
+    <title> <?php echo $this->title(); ?> </title>
 
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/script.js"></script>
@@ -10,6 +10,7 @@
   <body>
 
     <?php $this->include_template(); ?>
+
 
   </body>
 </html>
