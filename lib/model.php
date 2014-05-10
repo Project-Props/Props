@@ -40,10 +40,6 @@ abstract class Model {
     return $instances;
   }
 
-  protected static function default_scope() {
-    return NULL;
-  }
-
   public function __call($method, $args) {
     $name_of_association = $method;
 
@@ -54,36 +50,6 @@ abstract class Model {
     }
 
     $this->throw_undefined_method($method);
-  }
-
-  private function new_record() {
-    try {
-      static::find($this->id);
-
-      return false;
-    } catch (RecordNotFound $e) {
-      return true;
-    }
-  }
-
-  private function instance_vars() {
-    $vars = (array) $this;
-    $acc = [];
-
-    foreach ($vars as $key => $value) {
-      if (!is_numeric($key)) {
-        $acc[$key] = $value;
-      }
-    }
-
-    return $acc;
-  }
-
-  private function has_timestamps() {
-    $vars = $this->instance_vars();
-
-    return array_key_exists('date_added', $vars) &&
-           array_key_exists('date_updated', $vars);
   }
 
   public function save() {
@@ -118,11 +84,8 @@ abstract class Model {
     static::db()->query($sql);
   }
 
-  private function datetime() {
-    $dateTime = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
-    $mysqldate = $dateTime->format("Y-m-d H:i:s");
-
-    return $mysqldate;
+  protected static function default_scope() {
+    return NULL;
   }
 
   protected function has_one() {
@@ -230,6 +193,47 @@ abstract class Model {
 
   private static function find_sql_for_id($id) {
     return 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . Quoter::quote_if_string($id);
+  }
+
+  private function new_record() {
+    try {
+      static::find($this->id);
+
+      return false;
+    } catch (RecordNotFound $e) {
+      return true;
+    }
+  }
+
+  private function datetime() {
+    $dateTime = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
+    $mysqldate = $dateTime->format("Y-m-d H:i:s");
+
+    return $mysqldate;
+  }
+
+  private function has_timestamps() {
+    $vars = $this->instance_vars();
+
+    return array_key_exists('date_added', $vars) &&
+           array_key_exists('date_updated', $vars);
+  }
+
+  private function instance_vars() {
+    $vars = (array) $this;
+    $acc = [];
+
+    foreach ($vars as $key => $value) {
+      if (!is_numeric($key)) {
+        $acc[$key] = $value;
+      }
+    }
+
+    return $acc;
+  }
+
+  private static function should_be_scoped($options) {
+    return !is_null(static::default_scope()) && !$options["ignore_scope"];
   }
 }
 
