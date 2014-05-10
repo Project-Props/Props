@@ -32,9 +32,9 @@ INSERT INTO Suppliers VALUES (NULL, 'Netto', 'netto@netto.dk', 'www.netto.dk', '
 INSERT INTO Suppliers(name, email, comment) VALUES ('Fakta', 'fakta@fakta.dk', 'Fakta er lort! Gå i Netto næste gang!');
 
 -- Productions(id, title, status_id, premiere_date, venue, instructor, scenographer, choreographer, stage_manager,
---			   storage, comment, date_added)
-INSERT INTO Productions VALUES ('0000-2014', 'en dejlig forestilling', 4, '2014-05-05', 'spillested', 'Hans Hansen', 'Jens Jensen', 'Charlotte', 'Mikkel', 'opbevaringssted', 'Hans er en lort', 2014-04-28);
-INSERT INTO Productions VALUES ('0001-2014', 'en mindre dejlig forestilling', 4, '2014-01-02', 'spillested', 'Hans Hansen', 'Jens Jensen', 'Charlotte', 'Mikkel', 'opbevaringssted', 'Hans er en lort', 2014-04-28);
+--			   storage, comment, date_added, date_updated)
+INSERT INTO Productions VALUES ('0000-2014', 'en dejlig forestilling', 4, '2014-05-05', 'spillested', 'Hans Hansen', 'Jens Jensen', 'Charlotte', 'Mikkel', 'opbevaringssted', 'Hans er en lort', '2014-04-28 12:12:12', '2014-04-28 12:12:12');
+INSERT INTO Productions VALUES ('0001-2014', 'en mindre dejlig forestilling', 4, '2014-01-02', 'spillested', 'Hans Hansen', 'Jens Jensen', 'Charlotte', 'Mikkel', 'opbevaringssted', 'Hans er en lort', '2014-04-28 12:12:12', '2014-04-28 12:12:12');
 
 -- Props(id, prop_nr, old_prop_nr, section_id, desription, comment, date_added, date_updated, supplier_id, price,
 --		 bought_for_id, status_id, size, category, subcategory, period_id, deleted, creditor, maintenance_time)

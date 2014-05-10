@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS Productions (
   , storage VARCHAR(128) -- opbevaringssted
   , comment TEXT
   , date_added DATETIME NOT NULL 
+  , date_updated DATETIME NOT NULL 
   , PRIMARY KEY (id)
   , FOREIGN KEY (status_id) REFERENCES Production_statuses(id)
 );

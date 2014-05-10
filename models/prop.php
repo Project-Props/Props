@@ -25,6 +25,10 @@ class Prop extends Model {
         ,$creditor
         ,$maintenance_time;
 
+  public function __construct() {
+    $this->deleted = 0;
+  }
+
   public function delete() {
     $this->deleted = true;
     $this->save();
@@ -89,7 +93,8 @@ class Production extends Model {
         ,$stage_manager
         ,$storage
         ,$comment
-        ,$date_added;
+        ,$date_added
+        ,$date_updated;
 
   protected function has_many() {
     return [
