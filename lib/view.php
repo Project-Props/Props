@@ -37,6 +37,11 @@ class View {
     $this->title = $title;
   }
 
+  public function render_partial($file_path, $env = []) {
+    $new_view = new static($file_path, $env);
+    $new_view->render();
+  }
+
   private function include_template() {
     foreach ($this->env as $key => $value) {
       ${$key} = $value;
