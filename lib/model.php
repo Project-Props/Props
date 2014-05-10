@@ -20,11 +20,10 @@ abstract class Model {
     }
   }
 
-  // TODO: test for default scope and that it can be disabled
   public static function all($options = ["ignore_scope" => false]) {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
 
-    if (!is_null(static::default_scope()) && !$options["ignore_scope"]) {
+    if (static::should_be_scoped($options)) {
       $sql .= " WHERE " . static::default_scope();
     }
 
