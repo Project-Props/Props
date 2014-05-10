@@ -16,8 +16,8 @@
       <h1>Props 2.0</h1>
 
       <nav>
-        <a href="/productions/new">Tilføj forestilling</a>
         <a href="/props/new">Tilføj prop</a>
+        <a href="/productions/new">Tilføj forestilling</a>
       </nav>
 
       <form action="/search" method="GET">
