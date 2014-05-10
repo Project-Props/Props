@@ -25,6 +25,10 @@ class Prop extends Model {
         ,$creditor
         ,$maintenance_time;
 
+  public function __construct() {
+    $this->deleted = 0;
+  }
+
   public function delete() {
     $this->deleted = true;
     $this->save();
