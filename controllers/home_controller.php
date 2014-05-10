@@ -2,8 +2,11 @@
 
 class HomeController {
   public function index() {
-    $view = new View("props/all.php", ["props" => Prop::all(),
-                                       "productions" => Production::all()]);
+    $latest_props = Prop::all();
+    $latest_productions = Production::all();
+
+    $view = new View("home/index.php", ["props" => $latest_props,
+                                        "productions" => $latest_productions]);
     $view->render();
   }
 }
