@@ -33,6 +33,10 @@ class View {
     include(static::VIEW_DIR . "/layout.php");
   }
 
+  public function set_title($title) {
+    $this->title = $title;
+  }
+
   private function include_template() {
     foreach ($this->env as $key => $value) {
       ${$key} = $value;
@@ -50,10 +54,6 @@ class View {
       return $default_title;
     }
   }
-
-  public function set_title($title) {
-    $this->title = $title;
-  } 
 }
 
 ?>
