@@ -12,7 +12,27 @@
   </head>
   <body>
 
-    <?php $this->include_template(); ?>
+    <header class="main-header">
+      <h1>Props 2.0</h1>
+
+      <nav>
+        <a href="/productions/new">Tilføj forestilling</a>
+        <a href="/props/new">Tilføj prop</a>
+      </nav>
+
+      <form action="/search" method="GET">
+        <input type="search" name="query" placeholder="Søge tekst">
+        <input type="submit" value="Søg">
+      </form>
+    </header>
+
+    <div class="main-content">
+      <?php $this->include_template(); ?>
+    </div>
+
+    <footer class="main-footer">
+      <p>Footeren er her</p>
+    </footer>
 
   </body>
 </html>
