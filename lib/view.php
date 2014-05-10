@@ -29,8 +29,12 @@ class View {
     $this->file_path = static::VIEW_DIR . "/" . $file_path;
   }
 
-  public function render() {
-    include(static::VIEW_DIR . "/layout.php");
+  public function render($options = ["layout" => true]) {
+    if ($options["layout"]) {
+      include(static::VIEW_DIR . "/layout.php");
+    } else {
+      $this->include_template();
+    }
   }
 
   public function set_title($title) {
@@ -39,7 +43,7 @@ class View {
 
   public function render_partial($file_path, $env = []) {
     $new_view = new static($file_path, $env);
-    $new_view->render();
+    $new_view->render(["layout" => false]);
   }
 
   private function include_template() {
