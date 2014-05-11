@@ -12,6 +12,13 @@
   </head>
   <body>
 
+    <? if (Flash::has_notice() || Flash::has_alert()): ?>
+      <div class="flash">
+        <?= Flash::notice(); ?>
+        <?= Flash::alert(); ?>
+      </div>
+    <? endif; ?>
+
     <header class="main-header">
       <h1>Props 2.0</h1>
 
