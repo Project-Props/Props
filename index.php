@@ -12,6 +12,9 @@ $router = Router::instance();
 
 $router->define_route("/", "Home#index");
 
+$router->define_route("/props/new", "Props#make_new");
+$router->define_route("/props/create", "Props#create");
+
 $router->process_request(Request::instance());
 
 ?>

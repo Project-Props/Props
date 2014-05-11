@@ -5,6 +5,7 @@
         <th>Nr.</th>
         <th>Beskrivelse</th>
         <th>Status</th>
+        <th>Date added</th>
       </tr>
     </thead>
 
@@ -23,6 +24,10 @@
 
           <td style="color: <?= $prop->status()->color ?>;">
             <?= $prop->status()->name ?>
+          </td>
+
+          <td>
+            <?= $prop->date_added ?>
           </td>
         </tr>
       <? endforeach; ?>
