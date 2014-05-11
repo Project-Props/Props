@@ -21,8 +21,9 @@
     "phpunit/phpunit": "3.7.*"
    ,"Mockery/Mockery": ">=0.7.2"
    ,"phpdocumentor/phpdocumentor": "2.*"
-   ,"behat/behat": "2.4.*@stable"
-   ,"behat/mink": "1.4@stable"
+
+   ,"behat/behat": "2.5.*@stable"
+   ,"behat/mink": "1.5@stable"
    ,"behat/mink-extension": "*"
    ,"behat/mink-goutte-driver": "*"
   }
