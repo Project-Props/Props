@@ -20,7 +20,7 @@
     <? endif; ?>
 
     <header class="main-header">
-      <h1>Props 2.0</h1>
+      <h1><a href="/">Props 2.0</a></h1>
 
       <nav>
         <a href="/props/new">Tilføj prop</a>
