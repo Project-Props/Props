@@ -1,7 +1,7 @@
 Feature: Creating a prop
-  In order to verirfy that Behat works
-  As a developer
-  I need to run a test
+  In order keep track of props
+  As a user
+  I need to create props
 
   Scenario: Creating a prop
     Given I am on the homepage
