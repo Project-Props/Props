@@ -13,7 +13,7 @@
   <body>
 
     <? if (Flash::has_notice() || Flash::has_alert()): ?>
-      <div class="flash">
+      <div class="flash <? if (Flash::has_alert()) { echo "flash__alert"; } else { echo "flash__notice"; } ?>">
         <?= Flash::notice(); ?>
         <?= Flash::alert(); ?>
       </div>

@@ -2,3 +2,13 @@ input[required],
 select[required] {
   border: 1px solid red;
 }
+
+.flash.flash__notice {
+  background: green;
+  color: white;
+}
+
+.flash.flash__alert {
+  background: red;
+  color: white;
+}
