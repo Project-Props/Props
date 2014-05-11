@@ -31,6 +31,8 @@ class View {
 
   public function render($options = ["layout" => true]) {
     if ($options["layout"]) {
+      Flash::prepare();
+
       include(static::VIEW_DIR . "/layout.php");
     } else {
       $this->include_template();
