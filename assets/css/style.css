@@ -1,0 +1,4 @@
+input[required],
+select[required] {
+  border: 1px solid red;
+}
