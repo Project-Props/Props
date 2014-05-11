@@ -156,6 +156,22 @@ abstract class Model {
     return $mysqldate;
   }
 
+  public static function create($params) {
+    $record = new static();
+
+    foreach ($params as $key => $value) {
+      if (is_numeric($value)) {
+        $record->{$key} = (int) $value;
+      } else {
+        $record->{$key} = $value;
+      }
+    }
+
+    $record->save();
+
+    return $record;
+  }
+
   protected function has_one() {
     return [];
   }
