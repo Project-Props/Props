@@ -156,19 +156,19 @@ abstract class Model {
     return $mysqldate;
   }
 
-  public static function create($params) {
-    $record = new static();
-
+  public function __construct($params = []) {
     foreach ($params as $key => $value) {
       if (is_numeric($value)) {
-        $record->{$key} = (int) $value;
+        $this->{$key} = (int) $value;
       } else {
-        $record->{$key} = $value;
+        $this->{$key} = $value;
       }
     }
+  }
 
+  public static function create($params) {
+    $record = new static($params);
     $record->save();
-
     return $record;
   }
 
