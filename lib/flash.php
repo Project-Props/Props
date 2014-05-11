@@ -52,6 +52,11 @@ class Flash {
     static::set_alert(NULL);
   }
 
+  public static function set_store($store) {
+    static::$prepared = false;
+    return static::$store = $store;
+  }
+
   private static function get_notice() {
     if (static::has_flash("notice")) {
       return static::store()->get("flash_notice");
@@ -70,11 +75,6 @@ class Flash {
 
   private static function has_flash($type) {
     return static::store()->has_key("flash_$type");
-  }
-
-  public static function set_store($store) {
-    static::$prepared = false;
-    return static::$store = $store;
   }
 
   private static function store() {
