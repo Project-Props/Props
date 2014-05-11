@@ -16,7 +16,7 @@ class Flash {
   private static $store;
 
   /**
-   * Set a the flash to be a notice.
+   * Set the flash to be a notice.
    *
    * @param string $message the message to set as the notice.
    */
@@ -25,7 +25,7 @@ class Flash {
   }
 
   /**
-   * Set a the flash to be an alert.
+   * Set the flash to be an alert.
    *
    * @param string $message the message to set as the alert.
    */
