@@ -3,6 +3,8 @@
 class Flash {
   private static $notice;
   private static $alert;
+  private static $prepared = false;
+  private static $store;
 
   public static function set_notice($message) {
     static::store()->set("flash_notice", $message);
@@ -40,8 +42,6 @@ class Flash {
     return !is_null(static::get_alert());
   }
 
-  private static $prepared = false;
-
   public static function prepare() {
     static::$prepared = true;
 
@@ -76,8 +76,6 @@ class Flash {
     static::$prepared = false;
     return static::$store = $store;
   }
-
-  private static $store;
 
   private static function store() {
     if (is_null(static::$store)) {
