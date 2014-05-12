@@ -1,0 +1,44 @@
+/*
+ * Defaults
+ */
+
+html {
+  font-size: 16px;
+}
+
+body {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+/*
+ * General purpose classes
+ */
+
+.hide {
+  display: none;
+}
+
+/*
+ * Flash
+ */
+
+.flash.flash__notice {
+  background: green;
+  color: white;
+}
+
+.flash.flash__alert {
+  background: red;
+  color: white;
+}
+
+/*
+ * Forms
+ */
+
+input[required],
+select[required] {
+  border: 1px solid red;
+}
+
