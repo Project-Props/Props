@@ -156,9 +156,9 @@ abstract class Model {
     return $mysqldate;
   }
 
-  protected function has_one() {
-    return [];
-  }
+  protected static $has_one = [];
+
+  protected static $has_many = [];
 
   protected function next_insert_id() {
     $sql = "SELECT id FROM " . static::TABLE_NAME . " ORDER BY id DESC LIMIT 1";
@@ -170,21 +170,17 @@ abstract class Model {
     return 'NULL';
   }
 
-  protected function has_many() {
-    return [];
-  }
-
   protected static function database_connection() {
     return new LocalDatabaseConnection();
   }
 
   private function associated_object($name) {
-    $class = $this->has_one()[$name];
+    $class = static::$has_one[$name];
     return $class::find($this->{$name . "_id"});
   }
 
   private function has_has_one_association($method) {
-    return array_key_exists($method, $this->has_one());
+    return array_key_exists($method, static::$has_one);
   }
 
   private function throw_undefined_method($method) {
@@ -205,7 +201,7 @@ abstract class Model {
   }
 
   private function all_associated_objects($name) {
-    $data = $this->has_many()[$name];
+    $data = static::$has_many[$name];
     $id_column = strtolower(get_class($this)) ."_id";
     $ids_sql = "SELECT ". strtolower($data["class"]) ."_id"
       ." FROM ". $data["table"]
@@ -242,7 +238,7 @@ abstract class Model {
   }
 
   private function has_has_many_association($name) {
-    return array_key_exists($name, $this->has_many());
+    return array_key_exists($name, static::$has_many);
   }
 
   private static function find_sql_for_id($id) {
