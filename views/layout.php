@@ -31,9 +31,11 @@
         <div class="field">
           <input type="search" name="query" placeholder="Søge tekst">
           <input type="submit" value="Søg">
+
+          <button class="js-toggle-advanced-search" type="button">Advanceret søgning</button>
         </div> <!-- .field -->
 
-        <div class="field">
+        <div class="field advanced-search hide">
           <select name="bought_for">
             <option value="">Købt til</option>
             <? foreach (Production::all() as $production): ?>
