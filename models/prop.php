@@ -25,26 +25,22 @@ class Prop extends Model {
         ,$creditor
         ,$maintenance_time;
 
+  protected static $has_one = [
+    "supplier" => "Supplier"
+   ,"bought_for" => "Production"
+   ,"section" => "Section"
+  ];
+
+  protected static $has_many = [
+    "used_in" => [
+      "class" => "Production",
+      "table" => "Used_in"
+    ]
+  ];
+
   public function delete() {
     $this->deleted = true;
     $this->save();
-  }
-
-  protected function has_one() {
-    return [
-      "supplier" => "Supplier"
-     ,"bought_for" => "Production"
-     ,"section" => "Section"
-    ];
-  }
-
-  protected function has_many() {
-    return [
-      "used_in" => [
-        "class" => "Production",
-        "table" => "Used_in"
-      ]
-    ];
   }
 
   protected static function default_scope() {
@@ -91,14 +87,12 @@ class Production extends Model {
         ,$comment
         ,$date_added;
 
-  protected function has_many() {
-    return [
-      "props" => [
-        "class" => "Prop",
-        "table" => "Used_in"
-      ]
-    ];
-  }
+  protected static $has_many = [
+    "props" => [
+      "class" => "Prop",
+      "table" => "Used_in"
+    ]
+  ];
 
   protected function new_record_id() {
     return "'" . $this->id . "'";
