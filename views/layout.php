@@ -36,26 +36,17 @@
         </div> <!-- .field -->
 
         <div class="field advanced-search hide">
-          <select name="bought_for">
-            <option value="">Købt til</option>
-            <? foreach (Production::all() as $production): ?>
-              <option value="<?= $production-id ?>"><?= $production->title ?></option>
-            <? endforeach; ?>
-          </select>
+          <? $this->render_partial("shared/_select_production.php",
+            ["name" => "bought_for",
+             "placeholder" => "Købt til"]); ?>
 
-          <select name="used_in">
-            <option value="">Brugt i</option>
-            <? foreach (Production::all() as $production): ?>
-              <option value="<?= $production-id ?>"><?= $production->title ?></option>
-            <? endforeach; ?>
-          </select>
+          <? $this->render_partial("shared/_select_production.php",
+            ["name" => "used_in",
+             "placeholder" => "Brugt i"]); ?>
 
-          <select name="section">
-            <option value="">Sektion</option>
-            <? foreach (Section::all() as $section): ?>
-              <option value="<?= $section-id ?>"><?= $section->name ?></option>
-            <? endforeach; ?>
-          </select>
+          <? $this->render_partial("shared/_select_section.php",
+            ["name" => "section",
+             "placeholder" => "Sektion"]); ?>
         </div> <!-- .field -->
       </form>
     </header>
