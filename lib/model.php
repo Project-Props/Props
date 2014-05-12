@@ -3,6 +3,9 @@
 require_once("lib/quoter.php");
 require_once("lib/database.php");
 
+/**
+ * Exception that will be thrown when attempting to find a record that doesn't exist
+ */
 class RecordNotFound extends Exception {}
 
 abstract class Model {
