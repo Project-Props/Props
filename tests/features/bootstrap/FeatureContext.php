@@ -35,6 +35,41 @@ class FeatureContext extends MinkContext {
   }
 
   /**
+   * @Given /^I create a prop with description "([^"]*)"$/
+   */
+  public function iCreateAPropWithDescription($description) {
+    $this->clickLink("Tilføj prop");
+
+    $this->fillField("prop[category]", "stol");
+    $this->fillField("prop[comment]", "kommentar");
+    $this->fillField("prop[creditor]", "mads");
+    $this->fillField("prop[description]", $description);
+    $this->fillField("prop[maintenance_time]", "10 min");
+    $this->fillField("prop[old_prop_nr]", "42");
+    $this->fillField("prop[price]", "100 kr");
+    $this->fillField("prop[prop_nr]", "42");
+    $this->fillField("prop[size]", "100 m");
+    $this->fillField("prop[subcategory]", "stor stol");
+
+    $this->selectOption("prop[bought_for_id]", "0000-2014");
+    $this->selectOption("prop[period_id]", "1");
+    $this->selectOption("prop[section_id]", "1");
+    $this->selectOption("prop[status_id]", "1");
+    $this->selectOption("prop[supplier_id]", "1");
+
+    $this->pressButton("Tilføj");
+  }
+
+  /**
+   * @Given /^I create (\d+) props with description "([^"]*)"$/
+   */
+  public function iCreatePropsWithDescription($count, $description) {
+    for ($i = 0; $i < $count; $i++) {
+      $this->iCreateAPropWithDescription($description);
+    }
+  }
+
+  /**
    * @AfterSuite
    */
   public static function teardown($event) {
