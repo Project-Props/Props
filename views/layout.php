@@ -28,8 +28,33 @@
       </nav>
 
       <form action="/search" method="GET">
-        <input type="search" name="query" placeholder="Søge tekst">
-        <input type="submit" value="Søg">
+        <div class="field">
+          <input type="search" name="query" placeholder="Søge tekst">
+          <input type="submit" value="Søg">
+        </div> <!-- .field -->
+
+        <div class="field">
+          <select name="bought_for">
+            <option value="">Købt til</option>
+            <? foreach (Production::all() as $production): ?>
+              <option value="<?= $production-id ?>"><?= $production->title ?></option>
+            <? endforeach; ?>
+          </select>
+
+          <select name="used_in">
+            <option value="">Brugt i</option>
+            <? foreach (Production::all() as $production): ?>
+              <option value="<?= $production-id ?>"><?= $production->title ?></option>
+            <? endforeach; ?>
+          </select>
+
+          <select name="section">
+            <option value="">Sektion</option>
+            <? foreach (Section::all() as $section): ?>
+              <option value="<?= $section-id ?>"><?= $section->name ?></option>
+            <? endforeach; ?>
+          </select>
+        </div> <!-- .field -->
       </form>
     </header>
 
