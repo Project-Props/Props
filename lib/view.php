@@ -127,7 +127,52 @@ class View {
   }
 }
 
+/**
+ * Class that holds view helper methods.
+ *
+ * This class holds methods that are useful for generating the HTML in the view.
+ */
 class ViewHelpers {
+  /**
+   * This method will generate an a (anchor) tag that links to the specified object or URL.
+   * If a model object is given as second argument then it will link to a URL that looks like this:
+   *
+   * <pre>
+   * /&lt;the models table name downcased&gt;/show?id=&lt;id of model object&gt;
+   * </pre>
+   *
+   * So if you called it like this:
+   *
+   * <pre>
+   * $some_prop = Prop::find(1);
+   * $helpers->link_to("A prop", $some_prop);
+   * </pre>
+   *
+   * Then it would return:
+   *
+   * <pre>
+   * &lt;a href=&quot;/props/show?id=1&quot;&gt;A prop&lt;/a&gt;
+   * </pre>
+   *
+   * The third argument is optional but if specified then it should be an array and should
+   * contain additional HTML attributes that should be on the link. Here is a example:
+   *
+   * <pre>
+   * $some_prop = Prop::find(1);
+   * $helpers->link_to("A prop", $some_prop, ["class" => "small button"]);
+   * </pre>
+   *
+   * That would return:
+   *
+   * <pre>
+   * &lt;a href=&quot;/props/show?id=1&quot; class=&quot;small button&quot;&gt;A prop&lt;/a&gt;
+   * </pre>
+   *
+   * @param string $name the text used for the link.
+   * @param mixed $obj the object or string that should be linked to.
+   * @param array $attrs html attributes that should be on the link. This could be classes etc. Is optional.
+   * @return string the generate a tag.
+   */
   public function link_to($name, $obj, $attrs = []) {
     $path = NULL;
 
