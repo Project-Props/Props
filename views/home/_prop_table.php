@@ -13,9 +13,7 @@
       <? foreach ($props as $prop): ?>
         <tr>
           <td>
-            <a href="/props/show?id=<?= $prop->id ?>">
-              <?= $prop->prop_nr ?>
-            </a>
+            <?= $h->link_to($prop->prop_nr, $prop); ?>
           </td>
 
           <td>

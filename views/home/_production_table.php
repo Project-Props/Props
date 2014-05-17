@@ -12,9 +12,7 @@
       <? foreach ($productions as $production): ?>
         <tr>
           <td>
-            <a href="/productions/show?id=<?= $production->id ?>">
-              <?= $production->id ?>
-            </a>
+            <?= $h->link_to($production->id, $production); ?>
           </td>
 
           <td>

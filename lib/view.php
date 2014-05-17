@@ -111,6 +111,8 @@ class View {
       ${$key} = $value;
     }
 
+    $h = new ViewHelpers();
+
     include($this->file_path);
   }
 
@@ -125,4 +127,26 @@ class View {
   }
 }
 
-?>
+class ViewHelpers {
+  public function link_to($name, $obj, $attrs = []) {
+    $path = NULL;
+
+    if (is_string($obj)) {
+      $path = $obj;
+    } else {
+      $path = "/" . strtolower($obj::TABLE_NAME) . "/show?id=" . $obj->id;
+    }
+
+    return "<a href=\"$path\" " . $this->to_html_attrs($attrs) . ">$name</a>";
+  }
+
+  private function to_html_attrs($attrs) {
+    $html_attributes = "";
+
+    foreach ($attrs as $attr => $value) {
+      $html_attributes .= "$attr=\"$value\" ";
+    }
+
+    return $html_attributes;
+  }
+}
