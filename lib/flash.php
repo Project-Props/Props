@@ -107,6 +107,7 @@ class Flash {
     return static::$store = $store;
   }
 
+  /** @access private */
   private static function get_notice() {
     if (static::has_flash("notice")) {
       return static::store()->get("flash_notice");
@@ -115,6 +116,7 @@ class Flash {
     }
   }
 
+  /** @access private */
   private static function get_alert() {
     if (static::has_flash("alert")) {
       return static::store()->get("flash_alert");
@@ -123,10 +125,12 @@ class Flash {
     }
   }
 
+  /** @access private */
   private static function has_flash($type) {
     return static::store()->has_key("flash_$type");
   }
 
+  /** @access private */
   private static function store() {
     if (is_null(static::$store)) {
       static::$store = new CookieStore();
