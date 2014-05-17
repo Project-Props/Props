@@ -27,6 +27,7 @@ class Prop extends Model {
     "supplier" => "Supplier"
    ,"bought_for" => "Production"
    ,"section" => "Section"
+   ,"status" => "PropStatus"
   ];
 
   protected static $has_many = [

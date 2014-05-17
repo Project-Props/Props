@@ -1,7 +1,7 @@
 <?php
 
 class PropStatus extends Model {
-  const TABLE_NAME = 'Production_statuses';
+  const TABLE_NAME = 'Prop_statuses';
 
   public $id, $name, $color;
 }
