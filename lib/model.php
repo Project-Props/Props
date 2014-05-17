@@ -3,6 +3,9 @@
 require_once("lib/quoter.php");
 require_once("lib/database.php");
 
+/**
+ * Exception that will be thrown when attempting to find a record that doesn't exist
+ */
 class RecordNotFound extends Exception {}
 
 abstract class Model {
@@ -159,6 +162,22 @@ abstract class Model {
   protected static $has_one = [];
 
   protected static $has_many = [];
+
+  public function __construct($params = []) {
+    foreach ($params as $key => $value) {
+      if (is_numeric($value)) {
+        $this->{$key} = (int) $value;
+      } else {
+        $this->{$key} = $value;
+      }
+    }
+  }
+
+  public static function create($params) {
+    $record = new static($params);
+    $record->save();
+    return $record;
+  }
 
   protected function next_insert_id() {
     $sql = "SELECT id FROM " . static::TABLE_NAME . " ORDER BY id DESC LIMIT 1";

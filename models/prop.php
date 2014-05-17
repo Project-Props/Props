@@ -1,7 +1,5 @@
 <?php
 
-require_once("lib/model.php");
-
 class Prop extends Model {
   const TABLE_NAME = 'Props';
 
@@ -47,61 +45,3 @@ class Prop extends Model {
     return "deleted = 0";
   }
 }
-
-class Supplier extends Model {
-  const TABLE_NAME = 'Suppliers';
-
-  public $id
-        ,$name
-        ,$email
-        ,$web_page
-        ,$phone
-        ,$street
-        ,$city
-        ,$zip_code
-        ,$country
-        ,$comment;
-}
-
-class Section extends Model {
-  const TABLE_NAME = 'Sections';
-
-  public $id, $name;
-}
-
-class ProductionCannotGenerateIds extends Exception {}
-
-class Production extends Model {
-  const TABLE_NAME = 'Productions';
-
-  public $id
-        ,$title
-        ,$status_id
-        ,$premiere_date
-        ,$venue
-        ,$instructor
-        ,$scenographer
-        ,$choreographer
-        ,$stage_manager
-        ,$storage
-        ,$comment
-        ,$date_added;
-
-  protected static $has_many = [
-    "props" => [
-      "class" => "Prop",
-      "table" => "Used_in"
-    ]
-  ];
-
-  protected function new_record_id() {
-    return "'" . $this->id . "'";
-  }
-
-  protected function next_insert_id() {
-    if (is_null($this->id)) throw new ProductionCannotGenerateIds();
-    return $this->id;
-  }
-}
-
-?>
