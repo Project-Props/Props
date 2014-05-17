@@ -23,11 +23,10 @@ abstract class Model {
     }
   }
 
-  // TODO: test for default scope and that it can be disabled
   public static function all($options = ["ignore_scope" => false]) {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
 
-    if (!is_null(static::default_scope()) && !$options["ignore_scope"]) {
+    if (static::should_be_scoped($options)) {
       $sql .= " WHERE " . static::default_scope();
     }
 
@@ -43,10 +42,6 @@ abstract class Model {
     return $instances;
   }
 
-  protected static function default_scope() {
-    return NULL;
-  }
-
   public function __call($method, $args) {
     $name_of_association = $method;
 
@@ -59,104 +54,40 @@ abstract class Model {
     $this->throw_undefined_method($method);
   }
 
-  private function new_record() {
-    try {
-      static::find($this->id);
-
-      return false;
-    } catch (RecordNotFound $e) {
-      return true;
-    }
-  }
-
-  private function instance_vars() {
-    $vars = (array) $this;
-    $acc = [];
-
-    foreach ($vars as $key => $value) {
-      if (!is_numeric($key)) {
-        $acc[$key] = $value;
-      }
-    }
-
-    return $acc;
-  }
-
-  private function update_sql() {
-    $date = $this->datetime();
-    $vars = $this->instance_vars();
-
-    if (array_key_exists('date_updated', $vars)) {
-      $sql = 'UPDATE ' . static::TABLE_NAME . " SET date_updated = '" . $date . "', ";
-      $this->date_updated = $date;
-    } else {
-      $sql = 'UPDATE ' . static::TABLE_NAME . ' SET ';
-    }
-
-    foreach ($vars as $key => $value) {
-      if ($key != "date_updated") {
-        $sql .= $key . ' = ' . Quoter::quote_if_string($value) . ', ';
-      }
-    }
-
-    $sql .= 'WHERE id = ' . $this->id;
-    $sql = str_replace(', WHERE', ' WHERE', $sql);
-
-    return $sql;
-  }
-
-  private function insert_sql() {
-    $date = $this->datetime();
-    $vars = $this->instance_vars();
-
-    if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
-      $sql = 'INSERT INTO ' . static::TABLE_NAME . '(date_added, date_updated, id';
-      $this->date_added = $date;
-      $this->date_updated = $date;
-    } else {
-      $sql = 'INSERT INTO ' . static::TABLE_NAME . '(id';
-    }
-
-    foreach ($vars as $key => $value) {
-      if ($key != "id" && $value) {
-        $sql .= ', ' . $key;
-      }
-    }
-
-    if (array_key_exists('date_added', $vars) && array_key_exists('date_updated', $vars)) {
-      $sql .= ") VALUES ('" . $date . "', '" . $date . "', " . $this->new_record_id();
-    } else {
-      $sql .= ') VALUES (' . $this->new_record_id();
-    }
-
-    foreach ($vars as $key => $value) {
-      if ($key != "id" && $value) {
-        $sql .= ', ' . Quoter::quote_if_string($value);
-      }
-    }
-
-    $sql .= ')';
-    $this->id = $this->next_insert_id();
-
-    return $sql;
-  }
-
   public function save() {
     $sql = NULL;
+    $date = $this->datetime();
 
     if ($this->new_record()) {
-      $sql .= $this->insert_sql();
+      $this->id = $this->next_insert_id();
+
+      if ($this->has_timestamps()) {
+        $this->date_added = $date;
+        $this->date_updated = $date;
+      }
+
+      $columns = join(", ", array_keys($this->sql_columns_and_values()));
+      $values = join(", ", array_values($this->sql_columns_and_values()));
+      $sql = "INSERT INTO ". static::TABLE_NAME ." (". $columns .") VALUES (". $values .")";
     } else {
-      $sql .= $this->update_sql();
+      if ($this->has_timestamps()) {
+        $this->date_updated = $date;
+      }
+
+      $assigns = [];
+
+      foreach ($this->sql_columns_and_values() as $key => $value) {
+        array_push($assigns, "$key = $value");
+      }
+
+      $sql = "UPDATE ". static::TABLE_NAME ." SET ". join(", ", $assigns) ." WHERE id = " . $this->id;
     }
 
     static::db()->query($sql);
   }
-  private function datetime() {
-    $dateTime = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
-    $mysqldate = $dateTime->format("Y-m-d H:i:s");
 
-    return $mysqldate;
+  protected static function default_scope() {
+    return NULL;
   }
 
   protected static $has_one = [];
@@ -196,6 +127,20 @@ abstract class Model {
   private function associated_object($name) {
     $class = static::$has_one[$name];
     return $class::find($this->{$name . "_id"});
+  }
+
+  private function sql_columns_and_values() {
+    $acc = [];
+
+    foreach ($this->instance_vars() as $key => $value) {
+      if (is_null($value)) {
+        $acc[$key] = 'NULL';
+      } else {
+        $acc[$key] = Quoter::quote_if_string($value);
+      }
+    }
+
+    return $acc;
   }
 
   private function has_has_one_association($method) {
@@ -262,6 +207,47 @@ abstract class Model {
 
   private static function find_sql_for_id($id) {
     return 'SELECT * FROM ' . static::TABLE_NAME . ' WHERE id = ' . Quoter::quote_if_string($id);
+  }
+
+  private function new_record() {
+    try {
+      static::find($this->id);
+
+      return false;
+    } catch (RecordNotFound $e) {
+      return true;
+    }
+  }
+
+  private function datetime() {
+    $dateTime = new DateTime("now", new DateTimeZone('Europe/Copenhagen'));
+    $mysqldate = $dateTime->format("Y-m-d H:i:s");
+
+    return $mysqldate;
+  }
+
+  private function has_timestamps() {
+    $vars = $this->instance_vars();
+
+    return array_key_exists('date_added', $vars) &&
+           array_key_exists('date_updated', $vars);
+  }
+
+  private function instance_vars() {
+    $vars = (array) $this;
+    $acc = [];
+
+    foreach ($vars as $key => $value) {
+      if (!is_numeric($key)) {
+        $acc[$key] = $value;
+      }
+    }
+
+    return $acc;
+  }
+
+  private static function should_be_scoped($options) {
+    return !is_null(static::default_scope()) && !$options["ignore_scope"];
   }
 }
 

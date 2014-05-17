@@ -36,6 +36,11 @@ class Prop extends Model {
     ]
   ];
 
+  public function __construct($params = []) {
+    parent::__construct($params);
+    $this->deleted = 0;
+  }
+
   public function delete() {
     $this->deleted = true;
     $this->save();

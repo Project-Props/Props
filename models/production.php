@@ -16,7 +16,8 @@ class Production extends Model {
         ,$stage_manager
         ,$storage
         ,$comment
-        ,$date_added;
+        ,$date_added
+        ,$date_updated;
 
   protected static $has_one = [
     "status" => "ProductionStatus"

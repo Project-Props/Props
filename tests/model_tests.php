@@ -44,6 +44,17 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $this->assertNotEquals($date, $prop->date_updated);
   }
 
+  public function test_all_does_not_include_deleted() {
+    $before = sizeof(Prop::all());
+
+    $prop = Prop::find(1);
+    $prop->deleted = true;
+    $prop->save();
+
+    $this->assertEquals(true, Prop::find(1)->deleted);
+    $this->assertEquals($before - 1, sizeof(Prop::all()));
+  }
+
   public function test_save_new_record() {
     $number_of_props_before = sizeof(Prop::all());
 
