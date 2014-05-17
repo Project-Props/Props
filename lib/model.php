@@ -27,7 +27,7 @@ abstract class Model {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
 
     if (static::should_be_scoped($options)) {
-      $sql .= " WHERE " . static::default_scope();
+      $sql .= " WHERE " . static::$default_scope;
     }
 
     $records = static::db()->query($sql);
@@ -86,9 +86,7 @@ abstract class Model {
     static::db()->query($sql);
   }
 
-  protected static function default_scope() {
-    return NULL;
-  }
+  protected static $default_scope = NULL;
 
   protected static $has_one = [];
 
@@ -247,7 +245,7 @@ abstract class Model {
   }
 
   private static function should_be_scoped($options) {
-    return !is_null(static::default_scope()) && !$options["ignore_scope"];
+    return !is_null(static::$default_scope) && !$options["ignore_scope"];
   }
 }
 

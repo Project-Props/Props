@@ -37,6 +37,8 @@ class Prop extends Model {
     ]
   ];
 
+  protected static $default_scope = "deleted = 0";
+
   public function __construct($params = []) {
     parent::__construct($params);
     $this->deleted = 0;
@@ -45,9 +47,5 @@ class Prop extends Model {
   public function delete() {
     $this->deleted = true;
     $this->save();
-  }
-
-  protected static function default_scope() {
-    return "deleted = 0";
   }
 }
