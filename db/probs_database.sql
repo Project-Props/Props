@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS Props(
   , prop_nr INT NOT NULL
   , old_prop_nr INT
   , section_id INT NOT NULL
-  , description VARCHAR(128)
+  , description VARCHAR(128) NOT NULL
   , comment TEXT
   , date_added DATETIME NOT NULL
   , date_updated DATETIME NOT NULL

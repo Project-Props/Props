@@ -1,6 +1,6 @@
-<select name="<?= $name ?>"
+<select class="form-control" name="<?= $name ?>"
         id="<?= $name ?>"
-        <? if (isset($required) && $required) echo "required" ?>>
+        <? if (isset($required) && $required) echo "data-validation='required'" ?>>
   <option value=""><?= $placeholder ?></option>
 
   <? foreach (Section::all() as $section): ?>

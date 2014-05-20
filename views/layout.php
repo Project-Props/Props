@@ -4,10 +4,18 @@
     <meta charset="utf-8">
     <title> <?php echo $this->title(); ?> </title>
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- our css -->
     <link rel="stylesheet" href="/assets/css/style.css">
 
+    <!-- vendor js -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.validator.js"></script>
+
+    <!-- our css -->
     <script src="/assets/js/script.js"></script>
   </head>
   <body>
@@ -19,45 +27,36 @@
       </div>
     <? endif; ?>
 
-    <header class="main-header">
-      <h1><a href="/">Props 2.0</a></h1>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Props 2.0</a>
+        </div>
 
-      <nav>
-        <a href="/props/new">Tilføj prop</a>
-        <a href="/productions/new">Tilføj forestilling</a>
-      </nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/props/new">Tilføj prop</a></li>
+            <li><a href="/productions/new">Tilføj forestilling</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-      <form action="/search" method="GET">
-        <div class="field">
-          <input type="search" name="query" placeholder="Søge tekst">
-          <input type="submit" value="Søg">
-
-          <button class="js-toggle-advanced-search" type="button">Advanceret søgning</button>
-        </div> <!-- .field -->
-
-        <div class="field advanced-search hide">
-          <? $this->render_partial("shared/_select_production.php",
-            ["name" => "bought_for",
-             "placeholder" => "Købt til"]); ?>
-
-          <? $this->render_partial("shared/_select_production.php",
-            ["name" => "used_in",
-             "placeholder" => "Brugt i"]); ?>
-
-          <? $this->render_partial("shared/_select_section.php",
-            ["name" => "section",
-             "placeholder" => "Sektion"]); ?>
-        </div> <!-- .field -->
-      </form>
-    </header>
-
-    <div class="main-content">
+    <div class="container">
       <?php $this->include_template(); ?>
-    </div>
 
-    <footer class="main-footer">
-      <p>Footeren er her</p>
-    </footer>
+      <footer class="main-footer">
+        <p>Props (c) 2014, Props inc.</p>
+      </footer> <!-- /.main-footer -->
+    </div> <!-- /.container -->
 
   </body>
 </html>

@@ -1,22 +1,23 @@
-/*
- * Defaults
- */
-
-html {
-  font-size: 16px;
+.navbar {
+  border-radius: 0;
 }
 
-body {
-  max-width: 60rem;
-  margin: 0 auto;
+.right {
+  float: right;
 }
 
 /*
- * General purpose classes
+ * Clearfix
  */
 
-.hide {
-  display: none;
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
 }
 
 /*
@@ -34,11 +35,41 @@ body {
 }
 
 /*
- * Forms
+ * Form
  */
 
-input[required],
-select[required] {
-  border: 1px solid red;
+form {
 }
 
+@media (min-width: 768px) {
+  .label-inline {
+    padding-top: 5px;
+    display: block;
+    text-align: right;
+  }
+}
+
+.label-required:after {
+  content: "*";
+  display: inline-block;
+  margin-left: .5rem;
+  color: #843534;
+}
+
+.error-message {
+  margin-top: .5rem;
+  display: block;
+  text-align: right;
+  color: #843534;
+  font-weight: bold;
+  font-style: italic;
+}
+
+footer {
+  clear: both;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid #ccc;
+  color: #ccc;
+  text-align: center;
+}
