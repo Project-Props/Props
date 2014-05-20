@@ -94,7 +94,9 @@ abstract class Model {
 
   public function __construct($params = []) {
     foreach ($params as $key => $value) {
-      if (is_numeric($value)) {
+      if ($value == "") {
+        $this->{$key} = null;
+      } else if (is_numeric($value)) {
         $this->{$key} = (int) $value;
       } else {
         $this->{$key} = $value;
