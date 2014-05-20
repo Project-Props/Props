@@ -21,7 +21,7 @@
   <body>
 
     <? if (Flash::has_notice() || Flash::has_alert()): ?>
-      <div class="flash <? if (Flash::has_alert()) { echo "flash__alert"; } else { echo "flash__notice"; } ?>">
+      <div class="flash alert <? if (Flash::has_alert()) { echo "alert-danger"; } else { echo "alert-success"; } ?>">
         <?= Flash::notice(); ?>
         <?= Flash::alert(); ?>
       </div>
@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Props 2.0</a>
+          <a class="navbar-brand" href="/">Props 2.0</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

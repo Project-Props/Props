@@ -24,14 +24,22 @@
  * Flash
  */
 
-.flash.flash__notice {
-  background: green;
-  color: white;
+.flash {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  -webkit-animation: flash_hide .5s 2s cubic-bezier(.34,-0.6,.6,.47) forwards;
+  animation: flash_hide .5s 2s cubic-bezier(.34,-0.6,.6,.47) forwards;
 }
 
-.flash.flash__alert {
-  background: red;
-  color: white;
+@-webkit-keyframes flash_hide {
+  to { -webkit-transform: translateY(-100px); }
+}
+
+@keyframes flash_hide {
+  to { transform: translateY(-100px); }
 }
 
 /*
