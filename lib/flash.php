@@ -12,7 +12,6 @@
 class Flash {
   private static $notice;
   private static $alert;
-  private static $prepared = false;
   private static $store;
 
   /**
@@ -21,7 +20,7 @@ class Flash {
    * @param string $message the message to set as the notice.
    */
   public static function set_notice($message) {
-    static::store()->set("flash_notice", $message);
+    static::store()->set("flash", ["notice" => $message]);
   }
 
   /**
@@ -30,7 +29,7 @@ class Flash {
    * @param string $message the message to set as the alert.
    */
   public static function set_alert($message) {
-    static::store()->set("flash_alert", $message);
+    static::store()->set("flash", ["alert" => $message]);
   }
 
   /**
@@ -39,13 +38,7 @@ class Flash {
    * @return string the notice.
    */
   public static function notice() {
-    if (!static::$prepared) {
-      static::prepare();
-    }
-
-    $notice = static::$notice;
-    static::$notice = NULL;
-    return $notice;
+    return static::store()->get("flash")["notice"];
   }
 
   /**
@@ -54,13 +47,7 @@ class Flash {
    * @return string the alert.
    */
   public static function alert() {
-    if (!static::$prepared) {
-      static::prepare();
-    }
-
-    $alert = static::$alert;
-    static::$alert = NULL;
-    return $alert;
+    return static::store()->get("flash")["alert"];
   }
 
   /**
@@ -87,14 +74,8 @@ class Flash {
    * This method should be called before any HTML is rendered.
    * Would make sense to do this before the view is rendered.
    */
-  public static function prepare() {
-    static::$prepared = true;
-
-    static::$notice = static::get_notice();
-    static::$alert = static::get_alert();
-
-    static::set_notice(NULL);
-    static::set_alert(NULL);
+  public static function clear() {
+    static::store()->set("flash", []);
   }
 
   /**
@@ -103,14 +84,13 @@ class Flash {
    * This defaults to using a CookieStore which will store the messages in a cookie.
    */
   public static function set_store($store) {
-    static::$prepared = false;
     return static::$store = $store;
   }
 
   /** @access private */
   private static function get_notice() {
     if (static::has_flash("notice")) {
-      return static::store()->get("flash_notice");
+      return static::store()->get("flash")["notice"];
     } else {
       return NULL;
     }
@@ -119,7 +99,7 @@ class Flash {
   /** @access private */
   private static function get_alert() {
     if (static::has_flash("alert")) {
-      return static::store()->get("flash_alert");
+      return static::store()->get("flash")["alert"];
     } else {
       return NULL;
     }
@@ -127,17 +107,24 @@ class Flash {
 
   /** @access private */
   private static function has_flash($type) {
-    return static::store()->has_key("flash_$type");
+    return static::store()->has_key("flash") &&
+           array_key_exists($type, static::store()->get("flash"));
   }
 
   /** @access private */
   private static function store() {
     if (is_null(static::$store)) {
-      static::$store = new CookieStore();
+      static::$store = new SessionStore();
     }
 
     return static::$store;
   }
+}
+
+interface KeyValueStore {
+  public function set($key, $value);
+  public function get($key);
+  public function has_key($key);
 }
 
 /**
@@ -146,7 +133,7 @@ class Flash {
  * This is used internally by Flash class
  * @access private
  */
-class CookieStore {
+class CookieStore implements KeyValueStore {
   /**
    * Set a key/value pair.
    *
@@ -178,12 +165,26 @@ class CookieStore {
   }
 }
 
+class SessionStore implements KeyValueStore {
+  public function set($key, $value) {
+    $_SESSION[$key] = $value;
+  }
+
+  public function get($key) {
+    return $_SESSION[$key];
+  }
+
+  public function has_key($key) {
+    return array_key_exists($key, $_SESSION);
+  }
+}
+
 /**
  * A key value store in memory.
  *
  * This is used for testing the Flash class.
  */
-class InMemoryStore {
+class InMemoryStore implements KeyValueStore {
   private $values;
 
   public function __construct() {

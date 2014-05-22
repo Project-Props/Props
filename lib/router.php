@@ -107,7 +107,13 @@ class Router {
    * @param Request $request the incoming request.
    */
   public function process_request($request) {
+    if (session_id() == '') {
+      session_start();
+    }
+
     $this->process_matching_route($request);
+
+    Flash::clear();
   }
 
   private function process_matching_route($request) {
