@@ -8,6 +8,8 @@ Feature: Creating a prop
     And I create a prop with description "Awesome stol"
     Then I should see "Awesome stol"
     And I should see "Prop tilføjet!"
+    When I follow "Props 2.0"
+    Then I should not see "Prop tilføjet!"
 
   Scenario: Creating an invalid prop
     Given I am on the homepage
