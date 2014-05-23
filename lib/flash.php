@@ -121,86 +121,23 @@ class Flash {
   }
 }
 
-interface KeyValueStore {
-  public function set($key, $value);
-  public function get($key);
-  public function has_key($key);
-}
-
 /**
- * A key value store using cookies.
+ * A key value store using the session hash.
  *
  * This is used internally by Flash class
  * @access private
  */
-class CookieStore implements KeyValueStore {
+class SessionStore {
   /**
    * Set a key/value pair.
    *
    * @param mixed $key the key.
    * @param mixed $value the value.
    */
-  public function set($key, $value) {
-    setcookie($key, $value, time()+3600, "/");
-  }
-
-  /**
-   * Get a the value for the specified key.
-   *
-   * @param mixed $key the key.
-   * @return mixed the value.
-   */
-  public function get($key) {
-    return $_COOKIE[$key];
-  }
-
-  /**
-   * Check if a value exists for the specified key.
-   *
-   * @param mixed $key the key.
-   * @return boolean if its there or not.
-   */
-  public function has_key($key) {
-    return array_key_exists($key, $_COOKIE);
-  }
-}
-
-class SessionStore implements KeyValueStore {
   public function set($key, $value) {
     $_SESSION[$key] = $value;
   }
 
-  public function get($key) {
-    return $_SESSION[$key];
-  }
-
-  public function has_key($key) {
-    return array_key_exists($key, $_SESSION);
-  }
-}
-
-/**
- * A key value store in memory.
- *
- * This is used for testing the Flash class.
- */
-class InMemoryStore implements KeyValueStore {
-  private $values;
-
-  public function __construct() {
-    $this->values = [];
-  }
-
-  /**
-   * Set a key/value pair.
-   *
-   * @param mixed $key the key.
-   * @param mixed $value the value.
-   */
-  public function set($key, $value) {
-    $this->values[$key] = $value;
-  }
-
   /**
    * Get a the value for the specified key.
    *
@@ -208,7 +145,7 @@ class InMemoryStore implements KeyValueStore {
    * @return mixed the value.
    */
   public function get($key) {
-    return $this->values[$key];
+    return $_SESSION[$key];
   }
 
   /**
@@ -218,6 +155,6 @@ class InMemoryStore implements KeyValueStore {
    * @return boolean if its there or not.
    */
   public function has_key($key) {
-    return array_key_exists($key, $this->values);
+    return array_key_exists($key, $_SESSION);
   }
 }
