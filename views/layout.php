@@ -20,10 +20,11 @@
   </head>
   <body>
 
-    <? if (Flash::has_notice() || Flash::has_alert()): ?>
-      <div class="flash alert <? if (Flash::has_alert()) { echo "alert-danger"; } else { echo "alert-success"; } ?>">
-        <? if (Flash::has_notice()) echo Flash::notice(); ?>
-        <? if (Flash::has_alert()) echo Flash::alert(); ?>
+    <? if (Flash::present()): ?>
+      <div class="flash alert <? if (Flash::has_alert()) echo "alert-danger";
+                                 else echo "alert-success"; ?>">
+        <?= Flash::notice(); ?>
+        <?= Flash::alert(); ?>
       </div>
     <? endif; ?>
 

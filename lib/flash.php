@@ -38,7 +38,10 @@ class Flash {
    * @return string the notice.
    */
   public static function notice() {
-    return static::store()->get("flash")["notice"];
+    if (static::has_notice())
+      return static::store()->get("flash")["notice"];
+    else
+      return NULL;
   }
 
   /**
@@ -47,7 +50,10 @@ class Flash {
    * @return string the alert.
    */
   public static function alert() {
-    return static::store()->get("flash")["alert"];
+    if (static::has_alert())
+      return static::store()->get("flash")["alert"];
+    else
+      return NULL;
   }
 
   /**
@@ -79,12 +85,12 @@ class Flash {
   }
 
   /**
-   * Specify which kind of storage to use for storing the flash messages.
+   * Check if a flash message is present.
    *
-   * This defaults to using a CookieStore which will store the messages in a cookie.
+   * @return if a flash message is there or not.
    */
-  public static function set_store($store) {
-    return static::$store = $store;
+  public static function present() {
+    return static::has_notice() || static::has_alert();
   }
 
   /** @access private */
