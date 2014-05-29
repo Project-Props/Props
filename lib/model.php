@@ -8,9 +8,40 @@ require_once("lib/database.php");
  */
 class RecordNotFound extends Exception {}
 
+/**
+ * Model class
+ *
+ * A model class is a class that represents an entity in the application domain. This could a prop, a production, a status and so on. Model objects also have methods for persisting themselves in a database.
+ */
 abstract class Model {
+  /**
+   * A pointer to the database. This is used for caching internally.
+   */
   protected static $db;
 
+  /**
+   * The default scope. This is a "where" clause that will be included when using the ::all() method. This can be used to ignore records that matches a certain param.
+   */
+  protected static $default_scope = NULL;
+
+  /**
+   * Used to specify has one associations. See the prop class for an example.
+   */
+  protected static $has_one = [];
+
+  /**
+   * Used to specify has many associations. See the prop class for an example.
+   */
+  protected static $has_many = [];
+
+  /**
+   * Find the element with the specified id.
+   *
+   * Throws RecordNotFound if no matching record is found or id is null.
+   *
+   * @param mixed $id the id of the object to look for. This can be a numeric string on an int.
+   * @return Model the model object with the matching id.
+   */
   public static function find($id) {
     if (is_null($id)) throw new RecordNotFound("Cannot find record without id");
 
@@ -23,6 +54,12 @@ abstract class Model {
     }
   }
 
+  /**
+   * Find all objects of type.
+   *
+   * @param array $options If this associative array contains the key "ignore_scope" and that points to false then the query will ignore the default scope. This parameter is optional and will be default not ignore the default scope.
+   * @return array Array of model objects.
+   */
   public static function all($options = ["ignore_scope" => false]) {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
 
@@ -42,6 +79,9 @@ abstract class Model {
     return $instances;
   }
 
+  /**
+   * This method does magic. It makes associations work.
+   */
   public function __call($method, $args) {
     $name_of_association = $method;
 
@@ -54,6 +94,11 @@ abstract class Model {
     $this->throw_undefined_method($method);
   }
 
+  /**
+   * Save the model object to the database.
+   *
+   * Throws InvalidQuery is the save doesn't work.
+   */
   public function save() {
     $sql = NULL;
     $date = $this->datetime();
@@ -86,37 +131,61 @@ abstract class Model {
     static::db()->query($sql);
   }
 
-  protected static $default_scope = NULL;
-
-  protected static $has_one = [];
-
-  protected static $has_many = [];
-
+  /**
+   * Construct a new object and set parameters right away.
+   *
+   * @param array $params The parameters to be set on the object. This argument defaults to an empty array and is not required.
+   */
   public function __construct($params = []) {
     $this->set_attributes($params);
   }
 
+  /**
+   * Update record, then save it.
+   *
+   * @param array $params The parameters to be updated on the object. This argument defaults to an empty array and is not required.
+   */
   public function update($params = []) {
     $this->set_attributes($params);
     $this->save();
   }
 
+  /**
+   * Create a record, then save it.
+   *
+   * @param array $params The parameters to be set on the object. This argument defaults to an empty array and is not required.
+   */
   public static function create($params) {
     $record = new static($params);
     $record->save();
     return $record;
   }
 
+  /**
+   * Find the id of the next object to be inserted.
+   *
+   * @return int the id of the next object to be inserted.
+   */
   protected function next_insert_id() {
     $sql = "SELECT id FROM " . static::TABLE_NAME . " ORDER BY id DESC LIMIT 1";
     $last_id = static::db()->query($sql)[0]["id"];
     return $last_id + 1;
   }
 
+  /**
+   * Value used for new record's ids.
+   *
+   * @return string the id.
+   */
   protected function new_record_id() {
     return 'NULL';
   }
 
+  /**
+   * Get the database connection.
+   *
+   * @return LocalDatabaseConnection the database connection.
+   */
   protected static function database_connection() {
     return new LocalDatabaseConnection();
   }
