@@ -68,13 +68,6 @@
   </dd>
 
   <dt>
-    Nummer:
-  </dt>
-  <dd>
-    <?php echo $production->id; ?>
-  </dd>
-
-  <dt>
     Scenemester:
   </dt>
   <dd>
