@@ -50,6 +50,8 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/props/new">Tilføj prop</a></li>
             <li><a href="/productions/new">Tilføj forestilling</a></li>
+            <li><a href="/suppliers/new">Tilføj leverandør</a></li>
+            <li><a href="/suppliers">Alle leverandører</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

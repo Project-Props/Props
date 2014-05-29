@@ -1,4 +1,4 @@
-<div class="row prop-header">
+<div class="row header">
   <div class="col-sm-6">
     <h1>
       <?php echo $prop->description; ?>
@@ -53,7 +53,7 @@
         Leverandør:
       </dt>
       <dd>
-        <?php echo $prop->supplier()->name; ?>
+        <?php echo $h->link_to($prop->supplier()->name, $prop->supplier()); ?>
       </dd>
 
       <dt>
@@ -148,7 +148,7 @@
   </div>
 </div>
 
-<div class="prop-description">
+<div class="description">
   <p>
     <?php echo $prop->comment; ?>
   </p>

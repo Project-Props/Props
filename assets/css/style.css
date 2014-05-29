@@ -14,15 +14,15 @@ dd {
   margin-bottom: 8px;
 }
 
-.prop-header {
+.header {
   margin-bottom: 16px;
 }
 
-.prop-header a.btn {
+.header a.btn {
   margin-left: 16px;
 }
 
-.prop-header h1 {
+.header h1 {
   margin-top: 0;
 }
 

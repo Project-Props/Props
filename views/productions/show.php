@@ -1,4 +1,4 @@
-<div class="row prop-header">
+<div class="row header">
   <div class="col-sm-6">
     <h1>
       <?php echo $production->title; ?>
