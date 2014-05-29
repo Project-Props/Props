@@ -10,7 +10,7 @@
       </div>
 
       <div class="col-sm-8">
-        <input class="form-control" name="production[id]" type="text" id="production[id]" data-validation="required">
+        <input class="form-control" name="production[id]" type="text" id="production[id]" data-validation="required, format:[production_id]">
       </div>
     </div>
   </div>

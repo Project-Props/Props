@@ -10,6 +10,7 @@
 $(function() {
 
   window.validator = new FormValidator();
+  window.validator.defineValidation('production_id', /\d{4}-\d{4}/, 'Forestillings nummber ikke gyldigt');
 
   window.toSentence.and = "og";
 
