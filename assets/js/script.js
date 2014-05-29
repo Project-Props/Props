@@ -29,4 +29,6 @@ $(function() {
     window.markAsRequired(el);
   });
 
+  $("select.power-select").chosen();
+
 });

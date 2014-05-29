@@ -3,9 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title> <?php echo $this->title(); ?> </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <!-- vendor css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/chosen.min.css">
 
     <!-- our css -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -14,9 +16,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.17.0/jquery.tablesorter.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="/assets/js/chosen.jquery.min.js"></script>
     <script src="/assets/js/jquery.validator.js"></script>
 
-    <!-- our css -->
+    <!-- our js -->
     <script src="/assets/js/script.js"></script>
   </head>
   <body>
@@ -65,22 +68,32 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-sm-4">
+          <div class="row advanced-search">
+            <div class="col-xs-4">
+              <?php $this->render_partial("shared/_select_production.php",
+                [
+                  "name" => "search[bought_for_id]",
+                  "placeholder" => "Købt i"
+                ]);
+              ?>
+            </div>
+
+            <div class="col-xs-4">
+              <?php $this->render_partial("shared/_select_production.php",
+                [
+                  "name" => "search[used_in]",
+                  "placeholder" => "Brugt i"
+                ]);
+              ?>
+            </div>
+
+            <div class="col-xs-4">
               <?php $this->render_partial("shared/_select_section.php",
                 [
                   "name" => "search[section_id]",
                   "placeholder" => "Vælg en sektion"
                 ]);
               ?>
-            </div>
-
-            <div class="col-sm-4">
-              hi
-            </div>
-
-            <div class="col-sm-4">
-              hi
             </div>
           </div>
         </form>

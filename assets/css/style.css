@@ -35,7 +35,7 @@ dd {
 }
 
 table {
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .tablesorter-header {
@@ -48,7 +48,34 @@ table {
 }
 
 .search {
-  margin-bottom: 16px;
+  margin-bottom: 26px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .search {
+    margin-bottom: 13px;
+    padding-bottom: 20px;
+  }
+}
+
+.chosen-container {
+  width: 100% !important;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+@media (max-width: 768px) {
+  .advanced-search {
+    margin-top: 16px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
 }
 
 /*

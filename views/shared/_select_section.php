@@ -1,4 +1,4 @@
-<select class="form-control" name="<?php echo $name ?>"
+<select class="form-control power-select" name="<?php echo $name ?>"
         id="<?php echo $name ?>"
         <? if (isset($required) && $required) echo "data-validation='required'" ?>>
   <option value=""><?php echo $placeholder ?></option>
