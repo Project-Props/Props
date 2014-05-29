@@ -101,18 +101,6 @@ abstract class Model {
     $this->save();
   }
 
-  private function set_attributes($attrs) {
-    foreach ($attrs as $key => $value) {
-      if ($value == "") {
-        $this->{$key} = null;
-      } else if (is_numeric($value)) {
-        $this->{$key} = (int) $value;
-      } else {
-        $this->{$key} = $value;
-      }
-    }
-  }
-
   public static function create($params) {
     $record = new static($params);
     $record->save();
@@ -247,6 +235,18 @@ abstract class Model {
 
   private static function should_be_scoped($options) {
     return !is_null(static::$default_scope) && !$options["ignore_scope"];
+  }
+
+  private function set_attributes($attrs) {
+    foreach ($attrs as $key => $value) {
+      if ($value == "") {
+        $this->{$key} = null;
+      } else if (is_numeric($value)) {
+        $this->{$key} = (int) $value;
+      } else {
+        $this->{$key} = $value;
+      }
+    }
   }
 }
 
