@@ -10,9 +10,9 @@ INSERT INTO Sections VALUES (NULL, 'Våben');
 INSERT INTO Sections VALUES (NULL, 'Diverse');
 
 -- Prop_statuses(id, name, color) id NULL= auto
-INSERT INTO Prop_statuses VALUES (NULL, 'ledig', 'grøn');
-INSERT INTO Prop_statuses VALUES (NULL, 'reserveret', 'gul');
-INSERT INTO Prop_statuses VALUES (NULL, 'i brug', 'rød');
+INSERT INTO Prop_statuses VALUES (NULL, 'ledig', 'green');
+INSERT INTO Prop_statuses VALUES (NULL, 'reserveret', 'yellow');
+INSERT INTO Prop_statuses VALUES (NULL, 'i brug', 'red');
 INSERT INTO Prop_statuses VALUES (NULL, 'pakket ned', 'orange'); -- skal self. ændres!
 
 -- Production_statuses(id, name, color) id = auto
