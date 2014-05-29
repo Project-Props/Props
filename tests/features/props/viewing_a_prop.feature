@@ -5,8 +5,7 @@ Feature: Viewing a prop
 
   Scenario: Creating a prop
     Given I am on the homepage
-    And I create a prop with description "Awesome stol"
     And I create a prop with description "Another prop"
-    And I follow "Awesome stol"
+    And I create a prop with description "Awesome stol"
     Then I should see "Awesome stol"
     And I should not see "Another prop"

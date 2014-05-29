@@ -6,7 +6,6 @@ Feature: Deleting a prop
   Scenario: Creating a prop
     Given I am on the homepage
     And I create a prop with description "Awesome stol"
-    And I follow "Awesome stol"
     And I follow "Slet"
     Then I should not see "Awesome stol"
     And I should see "Prop slettet"

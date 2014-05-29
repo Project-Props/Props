@@ -23,8 +23,7 @@ class PropsController extends Controller {
 
       Flash::set_notice("Prop tilføjet!");
 
-      /* TODO: redirect to right page */
-      $this->redirect_to("/");
+      $this->redirect_to("/props/show?id=" . $prop->id);
     } catch (InvalidQuery $e) {
       Flash::set_alert("Prop ikke tilføjet!");
 
