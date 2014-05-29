@@ -3,7 +3,7 @@ Feature: Edit a prop
   As a user
   I need to be able to edit props
 
-  Scenario: Creating a prop
+  Scenario: Updating a prop
     Given I am on the homepage
     And I create a prop with description "Awesome stol"
     And I follow "Awesome stol"
