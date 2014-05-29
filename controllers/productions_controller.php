@@ -22,4 +22,15 @@ class ProductionsController extends Controller {
       $this->redirect_to("/productions/new");
     }
   }
+
+  public function show() {
+    $production = $this->get_production();
+
+    $view = new View("productions/show.php", ["production" => $production]);
+    $view->render();
+  }
+
+  private function get_production() {
+    return Production::find(Request::instance()->param("id"));
+  }
 }
