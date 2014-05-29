@@ -3,6 +3,12 @@
 require_once("lib/quoter.php");
 require_once("lib/database.php");
 
+function p($x) {
+  echo "<pre>";
+  var_dump($x);
+  echo "</pre>";
+}
+
 /**
  * Exception that will be thrown when attempting to find a record that doesn't exist
  */
@@ -125,9 +131,10 @@ abstract class Model {
         array_push($assigns, "$key = $value");
       }
 
-      $sql = "UPDATE ". static::TABLE_NAME ." SET ". join(", ", $assigns) ." WHERE id = " . $this->id;
+      $sql = "UPDATE ". static::TABLE_NAME ." SET ". join(", ", $assigns) ." WHERE id = " . Quoter::quote_if_string($this->id);
     }
 
+    /* echo $sql; */
     static::db()->query($sql);
   }
 

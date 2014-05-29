@@ -6,7 +6,7 @@
   </div>
 
   <div class="col-sm-6">
-    <a class="btn btn-primary right" href="/production/edit?id=<?php echo $production->id; ?>">Rediger</a>
+    <a class="btn btn-primary right" href="/productions/edit?id=<?php echo $production->id; ?>">Rediger</a>
   </div>
 </div>
 

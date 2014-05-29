@@ -30,6 +30,26 @@ class ProductionsController extends Controller {
     $view->render();
   }
 
+  public function edit() {
+    $production = $this->get_production();
+
+    $view = new View("productions/edit.php", ["production" => $production]);
+    $view->render();
+  }
+
+  public function update() {
+    $production = $this->get_production();
+
+    try {
+      $production->update(Request::instance()->param("production"));
+      Flash::set_notice("Forestilling redigeret");
+      $this->redirect_to("/productions/show?id=" . $production->id);
+    } catch (InvalidQuery $e) {
+      Flash::set_alert("Forestilling ikke redigeret");
+      $this->redirect_to("/productions/edit?id=" . $production->id);
+    }
+  }
+
   private function get_production() {
     return Production::find(Request::instance()->param("id"));
   }
