@@ -31,6 +31,29 @@ class PropsController extends Controller {
     }
   }
 
+  public function edit() {
+    $prop = $this->get_prop();
+
+    $view = new View("props/edit.php", ["prop" => $prop]);
+    $view->render();
+  }
+
+  public function update() {
+    $prop = $this->get_prop();
+
+    try {
+      $prop->update(Request::instance()->param("prop"));
+
+      Flash::set_notice("Prop redigeret");
+
+      $this->redirect_to("/");
+    } catch (InvalidQuery $e) {
+      Flash::set_alert("Prop ikke redigeret");
+
+      $this->redirect_to("/props/new");
+    }
+  }
+
   public function delete() {
     $prop = $this->get_prop();
     $prop->delete();

@@ -4,7 +4,10 @@
   <option value=""><?= $placeholder ?></option>
 
   <? foreach (Production::all() as $production): ?>
-    <option value="<?= $production->id ?>">
+    <option value="<?= $production->id ?>"
+      <?php if (isset($id) && $id == $production->id) {
+        echo "selected";
+      } ?>>
       <?= $production->title ?>
       (<?= $production->id ?>)
     </option>

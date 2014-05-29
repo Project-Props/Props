@@ -93,7 +93,16 @@ abstract class Model {
   protected static $has_many = [];
 
   public function __construct($params = []) {
-    foreach ($params as $key => $value) {
+    $this->set_attributes($params);
+  }
+
+  public function update($params = []) {
+    $this->set_attributes($params);
+    $this->save();
+  }
+
+  private function set_attributes($attrs) {
+    foreach ($attrs as $key => $value) {
       if ($value == "") {
         $this->{$key} = null;
       } else if (is_numeric($value)) {
@@ -177,14 +186,8 @@ abstract class Model {
 
     $instances = [];
     foreach ($records as $record) {
-      // this process is basically a sligtly changed version of new_with_assoc_array_as_attributes
-      // the difference is that we are creating objects of another class and not our own class
       $instance = new $data["class"];
-
-      foreach ($record as $key => $value) {
-        $instance->{$key} = $value;
-      }
-
+      $instance->set_attributes($record);
       array_push($instances, $instance);
     }
 
@@ -193,11 +196,7 @@ abstract class Model {
 
   private static function new_with_assoc_array_as_attributes($record) {
     $instance = new static;
-
-    foreach ($record as $key => $value) {
-      $instance->{$key} = $value;
-    }
-
+    $instance->set_attributes($record);
     return $instance;
   }
 
