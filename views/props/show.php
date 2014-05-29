@@ -74,7 +74,9 @@
         Status:
       </dt>
       <dd>
-        <?php echo $prop->status()->name; ?>
+        <span style="color: <?php echo $prop->status()->color ?>;">
+          <?php echo $prop->status()->name ?>
+        </span>
       </dd>
 
       <dt>

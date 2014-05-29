@@ -29,7 +29,9 @@
     Status:
   </dt>
   <dd>
-    <?php echo $production->status()->name; ?>
+    <span style="color: <?= $production->status()->color ?>;">
+      <?php echo $production->status()->name ?>
+    </span>
   </dd>
 
   <dt>
