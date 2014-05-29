@@ -16,7 +16,7 @@
           </td>
 
           <td>
-            <?php echo $production->title ?>
+            <?php echo $h->link_to($production->title, $production); ?>
           </td>
 
           <td style="color: <?= $production->status()->color ?>;">
