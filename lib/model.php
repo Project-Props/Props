@@ -192,7 +192,14 @@ abstract class Model {
 
   private function associated_object($name) {
     $class = static::$has_one[$name];
-    return $class::find($this->{$name . "_id"});
+    $id = $name . "_id";
+
+    try {
+      return $class::find($this->{$id});
+    } catch (RecordNotFound $e) {
+      $null_class = "Null" . $class;
+      return new $null_class;
+    }
   }
 
   private function sql_columns_and_values() {
