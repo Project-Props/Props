@@ -17,7 +17,7 @@
           </td>
 
           <td>
-            <?php echo $prop->description ?>
+            <?php echo $h->link_to($prop->description, $prop); ?>
           </td>
 
           <td style="color: <?php echo $prop->status()->color ?>;">
