@@ -31,6 +31,13 @@ class PropsController extends Controller {
     }
   }
 
+  public function delete() {
+    $prop = $this->get_prop();
+    $prop->delete();
+    Flash::set_notice("Prop slettet!");
+    $this->redirect_to("/");
+  }
+
   private function get_prop() {
     return Prop::find(Request::instance()->param("id"));
   }

@@ -15,6 +15,7 @@ $router->define_route("/", "Home#index");
 $router->define_route("/props/new", "Props#make_new");
 $router->define_route("/props/create", "Props#create");
 $router->define_route("/props/show", "Props#show");
+$router->define_route("/props/delete", "Props#delete");
 
 $router->process_request(Request::instance());
 
