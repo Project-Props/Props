@@ -108,7 +108,7 @@ class Database {
 
     if (!$query_response) throw new InvalidQuery("The query \"$sql\" is invalid");
 
-    return $query_response->fetchAll();
+    return $query_response->fetchAll(PDO::FETCH_ASSOC);
   }
 
   /**
