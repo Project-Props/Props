@@ -1,5 +1,7 @@
 <?php
 
+require_once "database_config.php";
+
 /**
  * Interface describing class that can connect to a database.
  */
@@ -45,7 +47,7 @@ class LocalDatabaseConnection implements DatabaseConnection {
    * @return string the name of the database.
    */
   public function database_name() {
-    return "Props_2";
+    return $GLOBALS["database_config"]["name"];
   }
 
   /**
@@ -56,7 +58,7 @@ class LocalDatabaseConnection implements DatabaseConnection {
    * @return string the username of the database.
    */
   public function database_username() {
-    return "root";
+    return $GLOBALS["database_config"]["username"];
   }
 
   /**
@@ -67,7 +69,7 @@ class LocalDatabaseConnection implements DatabaseConnection {
    * @return string the password of the database.
    */
   public function database_password() {
-    return "root";
+    return $GLOBALS["database_config"]["password"];
   }
 }
 

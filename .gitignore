@@ -6,3 +6,4 @@ doc
 output
 behat.yml
 log/log.log
+lib/database_config.php
