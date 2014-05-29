@@ -140,4 +140,14 @@ class Router {
 
     $redirecter->redirect_to($path);
   }
+
+  public function resource($name) {
+    $class_name = ucfirst($name);
+    $this->define_route("/$name/new", "$class_name#make_new");
+    $this->define_route("/$name/create", "$class_name#create");
+    $this->define_route("/$name/show", "$class_name#show");
+    $this->define_route("/$name/delete", "$class_name#delete");
+    $this->define_route("/$name/edit", "$class_name#edit");
+    $this->define_route("/$name/update", "$class_name#update");
+  }
 }
