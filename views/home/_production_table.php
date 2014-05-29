@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th>Nr.</th>
-        <th>Title</th>
+        <th>Titel</th>
         <th>Status</th>
       </tr>
     </thead>

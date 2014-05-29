@@ -5,7 +5,7 @@
         <th>Nr.</th>
         <th>Beskrivelse</th>
         <th>Status</th>
-        <th>Date added</th>
+        <th>Sidst opdateret</th>
       </tr>
     </thead>
 
