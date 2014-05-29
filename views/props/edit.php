@@ -71,7 +71,7 @@
       </div>
 
       <div class="col-sm-8">
-        <select class="form-control" id="prop[supplier_id]" name="prop[supplier_id]">
+        <select class="form-control power-select" id="prop[supplier_id]" name="prop[supplier_id]">
           <option value="">Vælg en leverandør</option>
 
           <?php foreach (Supplier::all() as $supplier): ?>
@@ -121,7 +121,7 @@
       </div>
 
       <div class="col-sm-8">
-        <select class="form-control" id="prop[status_id]" name="prop[status_id]" data-validation="required">
+        <select class="form-control power-select" id="prop[status_id]" name="prop[status_id]" data-validation="required">
           <option value="">Vælg en status</option>
 
           <?php foreach (PropStatus::all() as $status): ?>
@@ -179,7 +179,7 @@
       </div>
 
       <div class="col-sm-8">
-        <select class="form-control" id="prop[period_id]" name="prop[period_id]">
+        <select class="form-control power-select" id="prop[period_id]" name="prop[period_id]">
           <option value="">Vælg en periode</option>
           <?php foreach (Period::all() as $period): ?>
           <option value="<?php echo $period->id ?>"
