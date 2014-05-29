@@ -46,11 +46,11 @@ class PropsController extends Controller {
 
       Flash::set_notice("Prop redigeret");
 
-      $this->redirect_to("/");
+      $this->redirect_to("/props/show?id=" . $prop->id);
     } catch (InvalidQuery $e) {
       Flash::set_alert("Prop ikke redigeret");
 
-      $this->redirect_to("/props/new");
+      $this->redirect_to("/props/edit?id=" . $prop->id);
     }
   }
 
