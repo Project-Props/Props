@@ -1,6 +1,15 @@
-<h1 class="main-headline">
-  <?php echo $production->title; ?>
-</h1>
+<div class="row prop-header">
+  <div class="col-sm-6">
+    <h1>
+      <?php echo $production->title; ?>
+    </h1>
+  </div>
+
+  <div class="col-sm-6">
+    <a class="btn btn-danger right" href="/production/delete?id=<?php echo $production->id; ?>">Slet</a>
+    <a class="btn btn-primary right" href="/production/edit?id=<?php echo $production->id; ?>">Rediger</a>
+  </div>
+</div>
 
 <dl>
   <dt>
