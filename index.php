@@ -19,6 +19,13 @@ $router->define_route("/props/delete", "Props#delete");
 $router->define_route("/props/edit", "Props#edit");
 $router->define_route("/props/update", "Props#update");
 
+$router->define_route("/productions/new", "Productions#make_new");
+$router->define_route("/productions/create", "Productions#create");
+$router->define_route("/productions/show", "Productions#show");
+$router->define_route("/productions/delete", "Productions#delete");
+$router->define_route("/productions/edit", "Productions#edit");
+$router->define_route("/productions/update", "Productions#update");
+
 $router->process_request(Request::instance());
 
 ?>
