@@ -42,7 +42,7 @@
       </div>
 
       <div class="col-sm-8">
-        <? $this->render_partial("shared/_select_section.php",
+        <?php $this->render_partial("shared/_select_section.php",
         ["name" => "prop[section_id]",
         "placeholder" => "Vælg en sektion",
         "required" => true]); ?>
@@ -71,9 +71,9 @@
       <div class="col-sm-8">
         <select class="form-control" id="prop[supplier_id]" name="prop[supplier_id]">
           <option value="">Vælg en leverandør</option>
-          <? foreach (Supplier::all() as $supplier): ?>
-          <option value="<?= $supplier->id ?>"><?= $supplier->name ?></option>
-          <? endforeach; ?>
+          <?php foreach (Supplier::all() as $supplier): ?>
+          <option value="<?php echo $supplier->id ?>"><?php echo $supplier->name ?></option>
+          <?php endforeach; ?>
         </select>
       </div>
     </div>
@@ -98,7 +98,7 @@
       </div>
 
       <div class="col-sm-8">
-        <? $this->render_partial("shared/_select_production.php",
+        <?php $this->render_partial("shared/_select_production.php",
         ["name" => "prop[bought_for_id]",
         "placeholder" => "Brugt i"]); ?>
       </div>
@@ -114,9 +114,9 @@
       <div class="col-sm-8">
         <select class="form-control" id="prop[status_id]" name="prop[status_id]" data-validation="required">
           <option value="">Vælg en status</option>
-          <? foreach (PropStatus::all() as $status): ?>
-          <option value="<?= $status->id ?>"><?= $status->name ?></option>
-          <? endforeach; ?>
+          <?php foreach (PropStatus::all() as $status): ?>
+          <option value="<?php echo $status->id ?>"><?php echo $status->name ?></option>
+          <?php endforeach; ?>
         </select>
       </div>
     </div>
@@ -167,9 +167,9 @@
       <div class="col-sm-8">
         <select class="form-control" id="prop[period_id]" name="prop[period_id]">
           <option value="">Vælg en periode</option>
-          <? foreach (Period::all() as $period): ?>
-          <option value="<?= $period->id ?>"><?= $period->name ?></option>
-          <? endforeach; ?>
+          <?php foreach (Period::all() as $period): ?>
+          <option value="<?php echo $period->id ?>"><?php echo $period->name ?></option>
+          <?php endforeach; ?>
         </select>
       </div>
     </div>
