@@ -53,6 +53,39 @@
     </nav>
 
     <div class="container">
+      <div class="search">
+        <form action="/search" method="get">
+          <div class="row">
+            <div class="col-sm-9 form-group">
+              <input type="search" name="search[query]" class="form-control input-lg" placeholder="Søg...">
+            </div>
+
+            <div class="col-sm-3">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Søg</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <?php $this->render_partial("shared/_select_section.php",
+                [
+                  "name" => "search[section_id]",
+                  "placeholder" => "Vælg en sektion"
+                ]);
+              ?>
+            </div>
+
+            <div class="col-sm-4">
+              hi
+            </div>
+
+            <div class="col-sm-4">
+              hi
+            </div>
+          </div>
+        </form>
+      </div>
+
       <?php $this->include_template(); ?>
 
       <footer class="main-footer">
