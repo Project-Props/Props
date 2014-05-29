@@ -9,21 +9,21 @@
     </thead>
 
     <tbody>
-      <? foreach ($productions as $production): ?>
+      <?php foreach ($productions as $production): ?>
         <tr>
           <td>
-            <?= $h->link_to($production->id, $production); ?>
+            <?php echo $h->link_to($production->id, $production); ?>
           </td>
 
           <td>
-            <?= $production->title ?>
+            <?php echo $production->title ?>
           </td>
 
           <td style="color: <?= $production->status()->color ?>;">
-            <?= $production->status()->name ?>
+            <?php echo $production->status()->name ?>
           </td>
         </tr>
-      <? endforeach; ?>
+      <?php endforeach; ?>
     </tbody>
   </tbody>
 </table>

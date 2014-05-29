@@ -10,25 +10,25 @@
     </thead>
 
     <tbody>
-      <? foreach ($props as $prop): ?>
+      <?php foreach ($props as $prop): ?>
         <tr>
           <td>
-            <?= $h->link_to($prop->prop_nr, $prop); ?>
+            <?php echo $h->link_to($prop->prop_nr, $prop); ?>
           </td>
 
           <td>
-            <?= $prop->description ?>
+            <?php echo $prop->description ?>
           </td>
 
-          <td style="color: <?= $prop->status()->color ?>;">
-            <?= $prop->status()->name ?>
+          <td style="color: <?php echo $prop->status()->color ?>;">
+            <?php echo $prop->status()->name ?>
           </td>
 
           <td>
-            <?= $prop->date_added ?>
+            <?php echo $prop->date_added ?>
           </td>
         </tr>
-      <? endforeach; ?>
+      <?php endforeach; ?>
     </tbody>
   </tbody>
 </table>
