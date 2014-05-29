@@ -1,3 +1,5 @@
+<h1 class="main-headline">Lav ny prop</h1>
+
 <form class="clearfix validate" method="POST" action="/props/create">
   <div class="form-group">
     <div class="row">

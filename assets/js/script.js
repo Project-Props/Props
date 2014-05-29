@@ -23,6 +23,8 @@ $(function() {
     }
   });
 
+  $(".sortable").tablesorter();
+
   $('[data-validation*="required"]').each(function(_i, el) {
     window.markAsRequired(el);
   });

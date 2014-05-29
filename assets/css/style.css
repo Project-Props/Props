@@ -30,6 +30,23 @@ dd {
   margin-top: 16px;
 }
 
+.main-headline {
+  margin-top: 0;
+}
+
+table {
+  margin-top: 24px;
+}
+
+.tablesorter-header {
+  cursor: pointer;
+}
+
+.tablesorter-headerAsc,
+.tablesorter-headerDesc {
+  background: rgba(0,0,0,.1);
+}
+
 /*
  * Clearfix
  */
