@@ -183,6 +183,18 @@ class ViewHelpers {
     return "<a href=\"$path\" " . $this->to_html_attrs($attrs) . ">$name</a>";
   }
 
+  public function label($obj, $name, $text) {
+    $name_attr = strtolower(get_class($obj)) . "[$name]";
+
+    return "<label class='label-inline' for='$name_attr'>$text</label>";
+  }
+
+  public function input($obj, $name, $type = "text", $attrs = []) {
+    $name_attr = strtolower(get_class($obj)) . "[$name]";
+
+    return "<input id='$name_attr' value='". $obj->{$name} ."' class='form-control' name='$name_attr' type='$type' " . $this->to_html_attrs($attrs) . ">";
+  }
+
   private function to_html_attrs($attrs) {
     $html_attributes = "";
 
