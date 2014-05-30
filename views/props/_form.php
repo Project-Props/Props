@@ -42,12 +42,7 @@
     </div>
 
     <div class="col-sm-8">
-      <!-- TODO: update this -->
-      <?php $this->render_partial("shared/_select_section.php",
-      ["name" => "prop[section_id]",
-      "placeholder" => "Vælg en sektion",
-      "id" => $prop->section_id,
-      "required" => true]); ?>
+      <?php echo $h->select($prop, "section_id", ["placeholder" => "Vælg en sektion", "data-validation" => "required"]); ?>
     </div>
   </div>
 </div>
@@ -71,18 +66,7 @@
     </div>
 
     <div class="col-sm-8">
-      <select class="form-control power-select" id="prop[supplier_id]" name="prop[supplier_id]">
-        <option value="">Vælg en leverandør</option>
-
-        <?php foreach (Supplier::all() as $supplier): ?>
-          <option value="<?php echo $supplier->id ?>"
-            <?php if ($prop->supplier_id == $supplier->id) {
-              echo "selected";
-            } ?>>
-            <?php echo $supplier->name ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
+      <?php echo $h->select($prop, "supplier_id", ["placeholder" => "Vælg en leverandør"]); ?>
     </div>
   </div>
 </div>
@@ -106,10 +90,7 @@
     </div>
 
     <div class="col-sm-8">
-      <?php $this->render_partial("shared/_select_production.php",
-      ["name" => "prop[bought_for_id]",
-      "id" => $prop->bought_for_id,
-      "placeholder" => "Brugt i"]); ?>
+      <?php echo $h->select($prop, "bought_for_id", ["placeholder" => "Ingen forestilling"]); ?>
     </div>
   </div>
 </div>
@@ -121,17 +102,7 @@
     </div>
 
     <div class="col-sm-8">
-      <select class="form-control power-select" id="prop[status_id]" name="prop[status_id]" data-validation="required">
-        <option value="">Vælg en status</option>
-
-        <?php foreach (PropStatus::all() as $status): ?>
-          <option value="<?php echo $status->id ?>"
-            <?php if ($prop->status_id == $status->id) {
-              echo "selected";
-            } ?>>
-           <?php echo $status->name ?></option>
-         <?php endforeach; ?>
-      </select>
+      <?php echo $h->select($prop, "status_id", ["placeholder" => "Vælg en status"]); ?>
     </div>
   </div>
 </div>
@@ -179,16 +150,7 @@
     </div>
 
     <div class="col-sm-8">
-      <select class="form-control power-select" id="prop[period_id]" name="prop[period_id]">
-        <option value="">Vælg en periode</option>
-        <?php foreach (Period::all() as $period): ?>
-        <option value="<?php echo $period->id ?>"
-            <?php if ($prop->period_id == $period->id) {
-              echo "selected";
-            } ?>>
-          <?php echo $period->name ?></option>
-        <?php endforeach; ?>
-      </select>
+      <?php echo $h->select($prop, "period_id", ["placeholder" => "Vælg en periode"]); ?>
     </div>
   </div>
 </div>

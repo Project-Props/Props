@@ -195,6 +195,33 @@ class ViewHelpers {
     return "<input id='$name_attr' value='". $obj->{$name} ."' class='form-control' name='$name_attr' type='$type' " . $this->to_html_attrs($attrs) . ">";
   }
 
+  public function select($obj, $name, $attrs = []) {
+    $name_attr = strtolower(get_class($obj)) . "[$name]";
+    $html = "";
+    $associated_class = $obj->get_has_one_associated_class(str_replace("_id", "", $name));
+    $collection = $associated_class::all();
+
+    $html .= "<select " . $this->to_html_attrs($attrs) . " id='$name_attr' class='form-control power-select' name='$name_attr'>";
+
+    if (array_key_exists("placeholder", $attrs)) {
+      $html .= "<option value=''>". $attrs["placeholder"] ."</option>";
+    }
+
+    foreach ($collection as $thing) {
+      $html .= "<option value='" . $thing->id . "'";
+      if ($thing->id == $obj->{$name}) {
+        $html .= " selected";
+      }
+      $html .= ">";
+      $html .= (string) $thing;
+      $html .= "</option>";
+    }
+
+    $html .= "</select>";
+
+    return $html;
+  }
+
   private function to_html_attrs($attrs) {
     $html_attributes = "";
 

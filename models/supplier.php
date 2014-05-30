@@ -13,4 +13,8 @@ class Supplier extends Model {
         ,$zip_code
         ,$country
         ,$comment;
+
+  public function __toString() {
+    return $this->name;
+  }
 }

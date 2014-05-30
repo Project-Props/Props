@@ -19,6 +19,10 @@ class Production extends Model {
         ,$date_added
         ,$date_updated;
 
+  public function __toString() {
+    return $this->title . " (". $this->id .")";
+  }
+
   protected static $has_one = [
     "status" => "ProductionStatus"
   ];

@@ -23,6 +23,10 @@ class Prop extends Model {
         ,$creditor
         ,$maintenance_time;
 
+  public function __toString() {
+    return $this->description;
+  }
+
   protected static $has_one = [
     "supplier" => "Supplier"
    ,"bought_for" => "Production"

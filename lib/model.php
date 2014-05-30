@@ -168,6 +168,12 @@ abstract class Model {
     return $record;
   }
 
+  public function get_has_one_associated_class($class) {
+    return static::$has_one[strtolower($class)];
+  }
+
+  public abstract function __toString();
+
   /**
    * Find the id of the next object to be inserted.
    *
