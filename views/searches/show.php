@@ -1,7 +1,11 @@
+<h1 class="main-headline">
+  Søgning efter "<?php echo Request::instance()->param("search")["query"]; ?>"
+</h1>
+
 <div class="row">
   <div class="col-sm-6">
     <?php if (sizeof($props) == 0): ?>
-      There are no props
+      Ingen props matchede den søgning
     <?php else: ?>
       <h1 class="main-headline">Nyeste props</h1>
 
@@ -11,7 +15,7 @@
 
   <div class="col-sm-6">
     <?php if (sizeof($productions) == 0): ?>
-      There are no productions
+      Ingen forestillinger matchede den søgning
     <?php else: ?>
       <h1 class="main-headline">Forestillinger i repertoire</h1>
 

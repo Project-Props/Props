@@ -59,7 +59,7 @@
 
     <div class="container">
       <div class="search">
-        <form action="/search" method="get">
+        <form action="/search" method="GET">
           <div class="row">
             <div class="col-sm-9 form-group">
               <input type="search" name="search[query]" class="form-control input-lg" placeholder="Søg...">

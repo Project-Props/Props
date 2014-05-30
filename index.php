@@ -19,6 +19,8 @@ $router->resource("productions");
 $router->define_route("/suppliers", "Suppliers#index");
 $router->resource("suppliers");
 
+$router->define_route("/search", "Searches#show");
+
 $router->process_request(Request::instance());
 
 ?>
