@@ -102,7 +102,7 @@
     </div>
 
     <div class="col-sm-8">
-      <?php echo $h->select($prop, "status_id", ["placeholder" => "Vælg en status"]); ?>
+      <?php echo $h->select($prop, "status_id", ["placeholder" => "Vælg en status", "data-validation" => "required"]); ?>
     </div>
   </div>
 </div>
