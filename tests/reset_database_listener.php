@@ -1,7 +1,5 @@
 <?php
 
-require_once("lib/database.php");
-
 class ResetDatabaseListener implements PHPUnit_Framework_TestListener {
   public function startTest(PHPUnit_Framework_Test $test) {
     $this->reset_db();
