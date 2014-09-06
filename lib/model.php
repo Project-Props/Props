@@ -85,6 +85,16 @@ abstract class Model {
     return $instances;
   }
 
+  /**
+   * Find n objects of type.
+   *
+   * Does the same as all but a parameter that is the limit for the amount of objects it will return.
+   * This can be used for finding fx just 10 props.
+   *
+   * @param integer $limit The number of objects to find.
+   * @param array $options If this associative array contains the key "ignore_scope" and that points to false then the query will ignore the default scope. This parameter is optional and will be default not ignore the default scope.
+   * @return array Array of model objects.
+   */
   public static function all_limit($limit, $options = ["ignore_scope" => false]) {
     $sql = "SELECT * FROM " . static::TABLE_NAME;
 
