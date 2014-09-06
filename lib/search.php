@@ -22,7 +22,8 @@ class Searcher {
   }
 
   /**
-   * Add plusses before- and starts after words in a string
+   * Add plusses before words in a string
+   * Add stars after words in a string
    *
    * Formerly known as "the_plus_adder"
    *
@@ -54,7 +55,7 @@ class Searcher {
 
   private static function props_sql($query_with_plusses) {
     $props_sql = "SELECT " . static::prop_attributes() . " " .
-                  "FROM Props p
+                 "FROM Props p
                     LEFT OUTER JOIN Periods
                       ON p.period_id = Periods.id
                     LEFT OUTER JOIN Prop_statuses status
@@ -64,20 +65,19 @@ class Searcher {
                     LEFT OUTER JOIN  Suppliers
                       ON p.supplier_id = Suppliers.id
                   WHERE MATCH (p.description, p.comment, p.size, p.category, p.subcategory, p.creditor,
-                        Periods.name, status.name, Sections.name, Suppliers.name)
+                               Periods.name, status.name, Sections.name, Suppliers.name)
                         AGAINST ('$query_with_plusses' IN BOOLEAN MODE)";
     return $props_sql;
   }
 
   private static function productions_sql($query_with_plusses) {
     $productions_sql = "SELECT " . static::production_attributes() . " " .
-                        "FROM Productions p
+                       "FROM Productions p
                           LEFT OUTER JOIN Production_statuses
                             ON p.status_id = Production_statuses.id
                         WHERE MATCH (p.title, p.venue, p.instructor, p.scenographer, p.choreographer,
-                                     p.stage_manager, p.storage, p.comment)
-                              AGAINST ('$query_with_plusses' IN BOOLEAN MODE) OR
-                              MATCH (Production_statuses.name) AGAINST ('$query_with_plusses' IN BOOLEAN MODE)";
+                                     p.stage_manager, p.storage, p.comment, Production_statuses.name)
+                              AGAINST ('$query_with_plusses' IN BOOLEAN MODE)";
     return $productions_sql;
   }
 
