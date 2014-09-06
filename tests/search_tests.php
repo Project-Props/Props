@@ -14,6 +14,12 @@
 
       $this->assertEquals(27, $search_result->get_props()[0]->prop_nr);
     }
+
+    public function test_search_across_atributes() {
+      $search_result = Searcher::search("klunketiden stol");
+
+      $this->assertEquals(1, sizeof($search_result->get_props()));
+    }
   }
 
 ?>
