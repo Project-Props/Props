@@ -13,7 +13,7 @@ class Searcher {
    * @return SearchResult The results.
    */
   public static function search($text_query) {
-    $query_with_plusses_and_stars_and_stars = static::prepare_query($text_query);
+    $query_with_plusses_and_stars = static::prepare_query($text_query);
 
     $props = static::matching_props($query_with_plusses_and_stars_);
     $productions = static::matching_productions($query_with_plusses_and_stars);
