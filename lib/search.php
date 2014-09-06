@@ -18,12 +18,12 @@ class Searcher {
 
     if ($text_query == "") {
       $props = Prop::all_limit(1000);
-      $productions = Production::all_limit(1000);
+      $productions = ($filters == []) ? Production::all_limit(1000) : [];
     } else {
       $query_with_plusses_and_stars = static::prepare_query($text_query);
 
       $props = static::matching_props($query_with_plusses_and_stars);
-      $productions = static::matching_productions($query_with_plusses_and_stars);
+      $productions = ($filters == []) ? static::matching_productions($query_with_plusses_and_stars) : [];
     }
 
     $filtered_props = static::filter_props($props, $filters);
@@ -35,41 +35,48 @@ class Searcher {
     if ($filters == []) {
       return $props;
     } else {
+      $size = sizeof($props);
+
       if (array_key_exists("bought_for_id", $filters)) {
-        for ($i = 0; $i < sizeof($props); $i++) {
+        for ($i = 0; $i < $size; $i++) {
           if ($props[$i]->bought_for_id != $filters["bought_for_id"]) {
             unset($props[$i]);
           }
         }
 
         unset($filters["bought_for_id"]);
-        return static::filter_props($props, $filters);
+        return static::filter_props(array_values($props), $filters);
       }
 
       if (array_key_exists("section_id", $filters)) {
-        for ($i = 0; $i < sizeof($props); $i++) {
+        for ($i = 0; $i < $size; $i++) {
           if ($props[$i]->section_id != $filters["section_id"]) {
             unset($props[$i]);
           }
         }
 
         unset($filters["section_id"]);
-        return static::filter_props($props, $filters);
+        return static::filter_props(array_values($props), $filters);
       }
 
       if (array_key_exists("used_in", $filters)) {
-        for ($i = 0; $i < sizeof($props); $i++) {
+        for ($i = 0; $i < $size; $i++) {
           $productions_used_in = $props[$i]->used_in();
+          $match = false;
 
-          foreach ($production as $productions_used_in) {
-            if ($production->id != $filters["used_in"]) {
-              unset($props[$i]);
+          foreach ($productions_used_in as $production) {
+            if ($production->id == $filters["used_in"]) {
+              $match = true;
             }
+          }
+
+          if (!$match) {
+            unset($props[$i]);
           }
         }
 
         unset($filters["used_in"]);
-        return static::filter_props($props, $filters);
+        return static::filter_props(array_values($props), $filters);
       }
     }
   }
