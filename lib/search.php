@@ -60,12 +60,9 @@ class Searcher {
                       ON p.section_id = Sections.id
                     LEFT OUTER JOIN  Suppliers
                       ON p.supplier_id = Suppliers.id
-                  WHERE MATCH (p.description, p.comment, p.size, p.category, p.subcategory, p.creditor)
-                        AGAINST ('$query_with_plusses' IN BOOLEAN MODE) OR
-                        MATCH (Periods.name) AGAINST ('$query_with_plusses' IN BOOLEAN MODE) OR
-                        MATCH (status.name) AGAINST ('$query_with_plusses' IN BOOLEAN MODE) OR
-                        MATCH (Sections.name) AGAINST ('$query_with_plusses' IN BOOLEAN MODE) OR
-                        MATCH (Suppliers.name) AGAINST ('$query_with_plusses' IN BOOLEAN MODE)";
+                  WHERE MATCH (p.description, p.comment, p.size, p.category, p.subcategory, p.creditor,
+                        Periods.name, status.name, Sections.name, Suppliers.name)
+                        AGAINST ('$query_with_plusses' IN BOOLEAN MODE)";
     return $props_sql;
   }
 
