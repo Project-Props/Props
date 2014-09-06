@@ -15,7 +15,7 @@ class Searcher {
   public static function search($text_query) {
     $query_with_plusses_and_stars = static::prepare_query($text_query);
 
-    $props = static::matching_props($query_with_plusses_and_stars_);
+    $props = static::matching_props($query_with_plusses_and_stars);
     $productions = static::matching_productions($query_with_plusses_and_stars);
 
     return new SearchResult($props, $productions);
