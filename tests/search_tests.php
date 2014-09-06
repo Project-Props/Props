@@ -20,6 +20,11 @@
 
       $this->assertEquals(1, sizeof($search_result->get_props()));
     }
+    public function test_search_less_than_four_chars(){
+      $search_result = Searcher::search("s");
+
+      $this->assertEquals(2, sizeof($search_result->get_props()));
+    }
   }
 
 ?>
