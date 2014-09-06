@@ -99,7 +99,7 @@
   <div class="form-group">
     <div class="row">
       <div class="col-sm-4">
-        <label class="label-inline" for="production[choreographer]">Chorekograf</label>
+        <label class="label-inline" for="production[choreographer]">Koreograf</label>
       </div>
 
       <div class="col-sm-8">
@@ -135,7 +135,7 @@
   <div class="form-group">
     <div class="row">
       <div class="col-sm-4">
-        <label class="label-inline" for="production[comment]">Kommatrer</label>
+        <label class="label-inline" for="production[comment]">Kommentarer</label>
       </div>
 
       <div class="col-sm-8">
