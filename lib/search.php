@@ -13,10 +13,10 @@ class Searcher {
    * @return SearchResult The results.
    */
   public static function search($text_query) {
-    $query_with_plusses = static::prepare_query($text_query);
+    $query_with_plusses_and_stars_and_stars = static::prepare_query($text_query);
 
-    $props = static::matching_props($query_with_plusses);
-    $productions = static::matching_productions($query_with_plusses);
+    $props = static::matching_props($query_with_plusses_and_stars_);
+    $productions = static::matching_productions($query_with_plusses_and_stars);
 
     return new SearchResult($props, $productions);
   }
@@ -30,14 +30,14 @@ class Searcher {
    * @return string The string with plusses.
    */
   private static function prepare_query($string) {
-    $string_with_plusses = "";
+    $string_with_plusses_and_stars = "";
     $exploded_string = explode(" ", $string);
 
     foreach ($exploded_string as $word) {
-      $string_with_plusses .= '+' . $word . "*" . " ";
+      $string_with_plusses_and_stars .= '+' . $word . "*" . " ";
     }
 
-    return $string_with_plusses;
+    return $string_with_plusses_and_stars;
   }
 
   private static function prop_attributes() {
@@ -52,7 +52,7 @@ class Searcher {
 
   }
 
-  private static function props_sql($query_with_plusses) {
+  private static function props_sql($query_with_plusses_and_stars) {
     $props_sql = "SELECT " . static::prop_attributes() . " " .
                   "FROM Props p
                     LEFT OUTER JOIN Periods
@@ -65,26 +65,26 @@ class Searcher {
                       ON p.supplier_id = Suppliers.id
                   WHERE MATCH (p.description, p.comment, p.size, p.category, p.subcategory, p.creditor,
                         Periods.name, status.name, Sections.name, Suppliers.name)
-                        AGAINST ('$query_with_plusses' IN BOOLEAN MODE)";
+                        AGAINST ('$query_with_plusses_and_stars' IN BOOLEAN MODE)";
     return $props_sql;
   }
 
-  private static function productions_sql($query_with_plusses) {
+  private static function productions_sql($query_with_plusses_and_stars) {
     $productions_sql = "SELECT " . static::production_attributes() . " " .
                         "FROM Productions p
                           LEFT OUTER JOIN Production_statuses
                             ON p.status_id = Production_statuses.id
                         WHERE MATCH (p.title, p.venue, p.instructor, p.scenographer, p.choreographer,
                                      p.stage_manager, p.storage, p.comment)
-                              AGAINST ('$query_with_plusses' IN BOOLEAN MODE) OR
-                              MATCH (Production_statuses.name) AGAINST ('$query_with_plusses' IN BOOLEAN MODE)";
+                              AGAINST ('$query_with_plusses_and_stars' IN BOOLEAN MODE) OR
+                              MATCH (Production_statuses.name) AGAINST ('$query_with_plusses_and_stars' IN BOOLEAN MODE)";
     return $productions_sql;
   }
 
-  private static function matching_productions($query_with_plusses) {
+  private static function matching_productions($query_with_plusses_and_stars) {
     $productions = [];
 
-    foreach (static::db()->query(static::productions_sql($query_with_plusses)) as $row) {
+    foreach (static::db()->query(static::productions_sql($query_with_plusses_and_stars)) as $row) {
       $production = new Production($row);
       array_push($productions, $production);
     }
@@ -92,10 +92,10 @@ class Searcher {
     return $productions;
   }
 
-  private static function matching_props($query_with_plusses) {
+  private static function matching_props($query_with_plusses_and_stars) {
     $props = [];
 
-    foreach (static::db()->query(static::props_sql($query_with_plusses)) as $row) {
+    foreach (static::db()->query(static::props_sql($query_with_plusses_and_stars)) as $row) {
       $prop = new Prop($row);
       array_push($props, $prop);
     }
