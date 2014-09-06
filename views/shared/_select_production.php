@@ -1,15 +1,15 @@
-<select class="form-control power-select" name="<?= $name ?>"
-        id="<?= $name ?>"
+<select class="form-control power-select" name="<?php echo $name ?>"
+        id="<?php echo $name ?>"
         <? if (isset($required) && $required) echo "data-validation='required'" ?>>
-  <option value=""><?= $placeholder ?></option>
+  <option value=""><?php echo $placeholder ?></option>
 
-  <? foreach (Production::all() as $production): ?>
-    <option value="<?= $production->id ?>"
+  <?php foreach (Production::all() as $production): ?>
+    <option value="<?php echo $production->id ?>"
       <?php if (isset($id) && $id == $production->id) {
         echo "selected";
       } ?>>
-      <?= $production->title ?>
-      (<?= $production->id ?>)
+      <?php echo $production->title ?>
+      (<?php echo $production->id ?>)
     </option>
-  <? endforeach; ?>
+  <?php endforeach; ?>
 </select>
