@@ -85,6 +85,27 @@ abstract class Model {
     return $instances;
   }
 
+  public static function all_limit($limit, $options = ["ignore_scope" => false]) {
+    $sql = "SELECT * FROM " . static::TABLE_NAME;
+
+    if (static::should_be_scoped($options)) {
+      $sql .= " WHERE " . static::$default_scope;
+    }
+
+    $sql .= " LIMIT " . $limit;
+
+    $records = static::db()->query($sql);
+
+    $instances = [];
+
+    foreach ($records as $record) {
+      $instance = static::new_with_assoc_array_as_attributes($record);
+      array_push($instances, $instance);
+    }
+
+    return $instances;
+  }
+
   /**
    * This method does magic. It makes associations work.
    */

@@ -55,6 +55,22 @@ class ModelTests extends PHPUnit_Framework_TestCase {
     $this->assertEquals($before - 1, sizeof(Prop::all()));
   }
 
+  public function test_all_limit() {
+    $props = sizeof(Prop::all_limit(1));
+    $this->assertEquals(1, $props);
+  }
+
+  public function test_all_limit_does_not_include_deleted() {
+    $before = sizeof(Prop::all_limit(2));
+
+    $prop = Prop::find(1);
+    $prop->deleted = true;
+    $prop->save();
+
+    $this->assertEquals(true, Prop::find(1)->deleted);
+    $this->assertEquals($before - 1, sizeof(Prop::all_limit(2)));
+  }
+
   public function test_save_new_record() {
     $number_of_props_before = sizeof(Prop::all());
 
