@@ -13,7 +13,7 @@ class Searcher {
    * @return SearchResult The results.
    */
   public static function search($text_query) {
-    $query_with_plusses = static::add_plusses_between_words($text_query);
+    $query_with_plusses = static::prepare_query($text_query);
 
     $props = static::matching_props($query_with_plusses);
     $productions = static::matching_productions($query_with_plusses);
@@ -22,19 +22,19 @@ class Searcher {
   }
 
   /**
-   * Add plusses in between words in a string
+   * Add plusses before- and starts after words in a string
    *
    * Formerly known as "the_plus_adder"
    *
    * @param string $string The string to add plusses to.
    * @return string The string with plusses.
    */
-  private static function add_plusses_between_words($string) {
+  private static function prepare_query($string) {
     $string_with_plusses = "";
     $exploded_string = explode(" ", $string);
 
     foreach ($exploded_string as $word) {
-      $string_with_plusses .= '+' . $word . " ";
+      $string_with_plusses .= '+' . $word . "*" . " ";
     }
 
     return $string_with_plusses;
