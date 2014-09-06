@@ -24,13 +24,13 @@
   </head>
   <body>
 
-    <? if (Flash::present()): ?>
-      <div class="flash alert <? if (Flash::has_alert()) echo "alert-danger";
+    <?php if (Flash::present()): ?>
+      <div class="flash alert <?php if (Flash::has_alert()) echo "alert-danger";
                                  else echo "alert-success"; ?>">
         <?php echo Flash::notice(); ?>
         <?php echo Flash::alert(); ?>
       </div>
-    <? endif; ?>
+    <?php endif; ?>
 
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">

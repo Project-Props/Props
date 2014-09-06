@@ -1,6 +1,6 @@
 <select class="form-control power-select" name="<?php echo $name ?>"
         id="<?php echo $name ?>"
-        <? if (isset($required) && $required) echo "data-validation='required'" ?>>
+        <?php if (isset($required) && $required) echo "data-validation='required'" ?>>
   <option value=""><?php echo $placeholder ?></option>
 
   <?php foreach (Production::all() as $production): ?>
