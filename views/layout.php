@@ -27,8 +27,8 @@
     <? if (Flash::present()): ?>
       <div class="flash alert <? if (Flash::has_alert()) echo "alert-danger";
                                  else echo "alert-success"; ?>">
-        <?= Flash::notice(); ?>
-        <?= Flash::alert(); ?>
+        <?php echo Flash::notice(); ?>
+        <?php echo Flash::alert(); ?>
       </div>
     <? endif; ?>
 

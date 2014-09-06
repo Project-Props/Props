@@ -29,7 +29,7 @@
     Status:
   </dt>
   <dd>
-    <span style="color: <?= $production->status()->color ?>;">
+    <span style="color: <?php echo $production->status()->color ?>;">
       <?php echo $production->status()->name ?>
     </span>
   </dd>
