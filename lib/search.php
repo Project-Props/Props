@@ -22,7 +22,8 @@ class Searcher {
   }
 
   /**
-   * Add plusses before- and starts after words in a string
+   * Add plusses before words in a string
+   * Add stars after words in a string
    *
    * Formerly known as "the_plus_adder"
    *
@@ -54,7 +55,7 @@ class Searcher {
 
   private static function props_sql($query_with_plusses_and_stars) {
     $props_sql = "SELECT " . static::prop_attributes() . " " .
-                  "FROM Props p
+                 "FROM Props p
                     LEFT OUTER JOIN Periods
                       ON p.period_id = Periods.id
                     LEFT OUTER JOIN Prop_statuses status
@@ -71,7 +72,7 @@ class Searcher {
 
   private static function productions_sql($query_with_plusses_and_stars) {
     $productions_sql = "SELECT " . static::production_attributes() . " " .
-                        "FROM Productions p
+                       "FROM Productions p
                           LEFT OUTER JOIN Production_statuses
                             ON p.status_id = Production_statuses.id
                         WHERE MATCH (p.title, p.venue, p.instructor, p.scenographer, p.choreographer,
