@@ -75,7 +75,7 @@
               <?php $this->render_partial("shared/_select_production.php",
                 [
                   "name" => "search[bought_for_id]",
-                  "placeholder" => "Købt i"
+                  "placeholder" => "Købt til"
                 ]);
               ?>
             </div>
