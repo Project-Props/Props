@@ -3,6 +3,13 @@
 /* TODO: add feature tests */
 
 class ProductionsController extends Controller {
+  public function index() {
+    $productions = Production::all();
+
+    $view = new View("/productions/index.php", ["productions" => $productions]);
+    $view->render();
+  }
+
   public function make_new() {
     $production = new Production();
 

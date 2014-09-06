@@ -71,6 +71,20 @@
       </dd>
 
       <dt>
+        Brugt i:
+      </dt>
+      <dd>
+        <?php
+          $used_in_productions = $prop->used_in();
+          echo "<select>";
+          foreach ($used_in_productions as $production) {
+            echo "<option>".$production->title."</option>";
+          }
+          echo "</select>";
+        ?>
+      </dd>
+
+      <dt>
         Status:
       </dt>
       <dd>

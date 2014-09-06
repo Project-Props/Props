@@ -34,6 +34,10 @@ dd {
   margin-top: 0;
 }
 
+.secondary-headline {
+  margin-bottom: 2em;
+}
+
 table {
   margin-top: 16px;
 }

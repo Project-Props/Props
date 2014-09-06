@@ -14,6 +14,8 @@ $router = Router::instance();
 $router->define_route("/", "Home#index");
 
 $router->resource("props");
+
+$router->define_route("/productions", "Productions#index");
 $router->resource("productions");
 
 $router->define_route("/suppliers", "Suppliers#index");

@@ -20,7 +20,8 @@ class SearchesController extends Controller {
     $productions = $results->get_productions();
 
     $view = new View("searches/show.php", ["props" => $props,
-                                           "productions" => $productions]);
+                                           "productions" => $productions,
+                                           "filters" => $filters]);
     $view->render();
   }
 }

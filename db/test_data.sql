@@ -5,7 +5,7 @@
 -- Sections(id, name) id NULL = auto
 INSERT INTO Sections VALUES (NULL, 'Møbler');
 INSERT INTO Sections VALUES (NULL, 'Rekvisitter');
-INSERT INTO Sections VALUES (NULL, 'Forestillinger'); -- TODO: REMOVE THIS!!
+-- INSERT INTO Sections VALUES (NULL, 'Forestillinger'); -- TODO: REMOVE THIS!!
 INSERT INTO Sections VALUES (NULL, 'Våben');
 INSERT INTO Sections VALUES (NULL, 'Diverse');
 

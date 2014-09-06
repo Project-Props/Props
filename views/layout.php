@@ -52,6 +52,7 @@
             <li><a href="/productions/new">Tilføj forestilling</a></li>
             <li><a href="/suppliers/new">Tilføj leverandør</a></li>
             <li><a href="/suppliers">Alle leverandører</a></li>
+            <li><a href="/productions">Alle forestillinger</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

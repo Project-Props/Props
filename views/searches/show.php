@@ -2,6 +2,25 @@
   Søgning efter "<?php echo Request::instance()->param("search")["query"]; ?>"
 </h1>
 
+<h4 class="secondary-headline">
+  <?php
+  $info = [];
+  if (array_key_exists("bought_for_id", $filters)) {
+    array_push($info, "købt til \"" . Production::find($filters["bought_for_id"])->title . "\"");
+  }
+
+  if (array_key_exists("used_in", $filters)) {
+    array_push($info, "brugt i \"" . Production::find($filters["used_in"])->title . "\"");
+  }
+
+  if (array_key_exists("section_id", $filters)) {
+    array_push($info, "i sektionen \"" . Section::find($filters["section_id"])->name . "\"");
+  }
+
+  echo join($info, ", ");
+  ?>
+</h4>
+
 <div class="row">
   <div class="col-sm-6">
     <?php if (sizeof($props) == 0): ?>
