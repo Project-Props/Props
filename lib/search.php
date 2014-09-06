@@ -12,7 +12,7 @@ class Searcher {
    * @param string $text_query The query to search for.
    * @return SearchResult The results.
    */
-  public static function search($text_query) {
+  public static function search($text_query, $filters) {
     $query_with_plusses_and_stars = static::prepare_query($text_query);
 
     $props = static::matching_props($query_with_plusses_and_stars);
